@@ -30,11 +30,24 @@ enum bonusType{
 	GRENADE,HELMET,CLOCK,SHOVEL,TANK,STAR,GUN,BOAT
 }
 
-
+#信号
 signal baseDestroyed
 
+
+
 func _ready():
-	pass # Replace with function body.
+	printFont()
 
 
 
+#打印提示信息
+func printFont():
+	print(""" 
+ ____    ____  ______  ______  _        ___         __  ____  ______  __ __ 
+|    \\  /    ||      ||      || |      /   ]       /  ]|    ||      ||  |  |
+|  o  )|  o  ||      ||      || |     /  [_       /  /  |  | |      ||  |  |
+|     ||     ||_|  |_||_|  |_|| |___ |    _]     /  /   |  | |_|  |_||  ~  |
+|  O  ||  _  |  |  |    |  |  |     ||   [_     /   \\_  |  |   |  |  |___, |
+|     ||  |  |  |  |    |  |  |     ||     |    \\     | |  |   |  |  |     |
+|_____||__|__|  |__|    |__|  |_____||_____|     \\____||____|  |__|  |____/ 
+	""")

@@ -14,6 +14,7 @@ var bulletMax=1	#发射最大子弹数
 var life=1  #生命默认1
 var dir=Game.dir.UP #方向
 var lastDir=Game.dir.UP #上次的方向
+var isStop=false#是否停止
 
 onready var body=$body
 onready var radar=$radar

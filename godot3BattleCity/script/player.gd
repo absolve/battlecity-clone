@@ -37,7 +37,8 @@ func _physics_process(delta):
 		turnDirection()
 		
 	animation(dir,vec)		
-	position+=vec*delta
+	if !isStop:
+		position+=vec*delta
 
 #改变方向的时候调整位置
 func turnDirection():
@@ -77,3 +78,14 @@ func animation(dir,vec):
 		ani.play("small_run")
 	else:
 		ani.play("small")	
+
+
+func _on_radar_area_entered(area):
+	if area!=body:
+		isStop=true
+
+
+func _on_radar_area_exited(area):
+	if area!=body:
+		isStop=false
+

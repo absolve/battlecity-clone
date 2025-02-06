@@ -30,6 +30,16 @@ animations = [ {
 [node name="tank" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="body" parent="." index="0"]
+collision_mask = 0
+
 [node name="ani" parent="." index="1"]
 frames = SubResource( 1 )
 animation = "small_run"
+
+[node name="radar" parent="." index="2"]
+collision_layer = 0
+collision_mask = 15
+
+[connection signal="area_entered" from="radar" to="." method="_on_radar_area_entered"]
+[connection signal="area_exited" from="radar" to="." method="_on_radar_area_exited"]
