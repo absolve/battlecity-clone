@@ -30,12 +30,19 @@ enum bonusType{
 	GRENADE,HELMET,CLOCK,SHOVEL,TANK,STAR,GUN,BOAT
 }
 
+#子弹威力
+enum bulletPower{
+	NORMAL,FAST,SUPER
+}
+
+
 #信号
 signal baseDestroyed
 
 
 
 func _ready():
+	OS.center_window()
 	printFont()
 
 
