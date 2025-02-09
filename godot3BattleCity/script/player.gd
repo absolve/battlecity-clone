@@ -2,7 +2,8 @@ extends "res://script/tank.gd"
 
 #玩家id 用来区分按键
 var playerId=Game.playerId.p1
-
+var bullet=preload("res://scene/bullet.tscn")
+var maxBullet=1
 
 
 func _ready():
@@ -35,10 +36,26 @@ func _physics_process(delta):
 		
 	if lastDir!=dir:	#转向的需要修改位置
 		turnDirection()
-		
+	
+	if Input.is_action_pressed("p1_shoot"):
+		fire()
+	
 	animation(dir,vec)		
 	if !isStop:
 		position+=vec*delta
+
+	#调整一下位置
+	if position.x<=tankSize/2:
+		position.x=tankSize/2
+	if position.x>=mapSize.x-tankSize/2:	
+		position.x=mapSize.x-tankSize/2
+
+	if position.y<=tankSize/2:
+		position.y=tankSize/2
+	if position.y>=mapSize.y-tankSize/2:	
+		position.y=mapSize.y-tankSize/2
+
+
 
 #改变方向的时候调整位置
 func turnDirection():
@@ -54,6 +71,22 @@ func turnDirection():
 		radar.rotation_degrees=180
 	elif dir==Game.dir.RIGHT:
 		radar.rotation_degrees=0
+
+#发射子弹
+func fire():
+	if canShoot:
+		canShoot=false
+		shootTimer.start()
+		var temp=bullet.instance()
+		temp.position=position
+		temp.dir=dir
+		temp.playerId=playerId
+		temp.own=Game.objType.PLAYER
+		temp.setPower(bulletPower)
+		temp.ownId=body.get_instance_id()
+		bullets.append(temp)
+		Game.map.addBullet(temp)
+		get_instance_id()
 	
 func animation(dir,vec):
 	if dir==Game.dir.UP:

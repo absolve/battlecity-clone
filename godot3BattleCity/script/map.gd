@@ -98,3 +98,11 @@ func addPlayer(playNo:int):
 		var temp=player.instance()
 		temp.position=Vector2(9*cellSize,25*cellSize)
 		tanksNode.add_child(temp)
+
+#添加子弹
+func addBullet(obj):
+	bulletsNode.add_child(obj)
+
+#添加其他对象
+func addOther(obj):
+	otherNode.add_child(obj)

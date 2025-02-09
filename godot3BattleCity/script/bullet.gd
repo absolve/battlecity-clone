@@ -5,9 +5,15 @@ var dir=Game.dir.UP
 var power=Game.bulletPower.NORMAL
 var speed=160
 var own=Game.objType.PLAYER
+var ownId=0
 var playerId=Game.playerId.p1
 var vec=Vector2.ZERO
 
+const cellSize=16
+var mapSize=Vector2(cellSize*26,cellSize*26)
+
+
+var explode=preload("res://scene/explode.tscn")
 onready var sprite=$Sprite
 onready var shape=$shape
 
@@ -25,17 +31,34 @@ func _ready():
 		vec=Vector2(speed,0)
 		sprite.rotation_degrees=-90
 		shape.rotation_degrees=-90
+	
+	
 		
 func setPower(value):
-	if value==Game.bulletPower.normal:
+	if value==Game.bulletPower.NORMAL:
 		speed=180
-	elif value==Game.bulletPower.fast:
+	elif value==Game.bulletPower.FAST:
 		speed=380
-	elif value==Game.bulletPower.super:
+	elif value==Game.bulletPower.SUPER:
 		speed=380
 	power=value
 
 
 func _physics_process(delta):
 	position+=vec*delta
+	if position.x<0||position.x>mapSize.x:
+		addexplode()
+	if position.y<0||position.y>mapSize.y:
+		addexplode()
+	
 
+func addexplode():
+	var temp = explode.instance()
+	temp.position=position
+	Game.map.addOther(temp)
+	queue_free()
+
+func _on_bullet_area_entered(area):
+	if area.get_instance_id()==ownId:
+		return
+	addexplode()

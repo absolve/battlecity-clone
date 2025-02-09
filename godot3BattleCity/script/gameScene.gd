@@ -6,7 +6,8 @@ onready var map=$map
 
 func _ready():
 	OS.center_window()
-#	map.loadMap(mapDir+"/"+'1.json')
-#	map.addPlayer(1)
+	Game.map=map
+	map.loadMap(mapDir+"/"+'1.json')
+	map.addPlayer(1)
 
 

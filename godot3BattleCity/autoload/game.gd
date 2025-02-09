@@ -39,7 +39,7 @@ enum bulletPower{
 #信号
 signal baseDestroyed
 
-
+var map
 
 func _ready():
 	OS.center_window()
