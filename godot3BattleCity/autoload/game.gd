@@ -15,7 +15,7 @@ enum playerId{
 	p1,p2
 }
 
-#方块类型
+#方块类型 砖块 石头 水 草丛 冰块
 enum brickType{
 	WALL=0,STONE,WATER,BUSH,ICE
 }
