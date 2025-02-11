@@ -28,6 +28,7 @@ animations = [ {
 } ]
 
 [node name="tank" instance=ExtResource( 1 )]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="body" parent="." index="0"]

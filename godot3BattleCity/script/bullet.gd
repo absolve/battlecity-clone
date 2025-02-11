@@ -1,6 +1,6 @@
 extends Area2D
 
-
+var objType=Game.objType.BULLET
 var dir=Game.dir.UP
 var power=Game.bulletPower.NORMAL
 var speed=160
@@ -31,7 +31,6 @@ func _ready():
 		vec=Vector2(speed,0)
 		sprite.rotation_degrees=-90
 		shape.rotation_degrees=-90
-	
 	
 		
 func setPower(value):

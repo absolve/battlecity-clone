@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://script/map.gd" type="Script" id=1]
+[ext_resource path="res://sprite/flag.png" type="Texture" id=2]
+[ext_resource path="res://font/prstartk.tres" type="DynamicFont" id=3]
+[ext_resource path="res://sprite/lives.png" type="Texture" id=4]
 
 [node name="map" type="Node2D"]
 script = ExtResource( 1 )
@@ -38,3 +41,96 @@ margin_top = 23.0
 margin_right = 497.0
 margin_bottom = 63.0
 columns = 2
+
+[node name="vbox" type="VBoxContainer" parent="gui"]
+margin_left = 456.0
+margin_top = 373.0
+margin_right = 496.0
+margin_bottom = 425.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="gui/vbox"]
+margin_right = 40.0
+margin_bottom = 32.0
+texture = ExtResource( 2 )
+
+[node name="name" type="Label" parent="gui/vbox"]
+margin_top = 36.0
+margin_right = 40.0
+margin_bottom = 52.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "0"
+align = 2
+
+[node name="p1NUm" type="VBoxContainer" parent="gui"]
+margin_left = 456.0
+margin_top = 234.0
+margin_right = 496.0
+margin_bottom = 274.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="gui/p1NUm"]
+margin_right = 40.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "1p"
+uppercase = true
+
+[node name="hbox" type="HBoxContainer" parent="gui/p1NUm"]
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 36.0
+
+[node name="TextureRect" type="TextureRect" parent="gui/p1NUm/hbox"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="gui/p1NUm/hbox"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "0"
+
+[node name="p2Num" type="VBoxContainer" parent="gui"]
+margin_left = 456.0
+margin_top = 288.0
+margin_right = 496.0
+margin_bottom = 328.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="gui/p2Num"]
+margin_right = 40.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "2p"
+uppercase = true
+
+[node name="hbox" type="HBoxContainer" parent="gui/p2Num"]
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 36.0
+
+[node name="TextureRect" type="TextureRect" parent="gui/p2Num/hbox"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="gui/p2Num/hbox"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "0"

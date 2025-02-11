@@ -5,7 +5,7 @@ enum dir{
 	UP,DOWN,LEFT,RIGHT
 }
 
-#级别
+#坦克级别
 enum level{
 	MIN,MEDIUM,LARGE,SUPER
 }
@@ -33,6 +33,11 @@ enum bonusType{
 #子弹威力
 enum bulletPower{
 	NORMAL,FAST,SUPER
+}
+
+#坦克状态
+enum tankstate{
+	IDLE,START,DEAD
 }
 
 

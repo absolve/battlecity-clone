@@ -1,12 +1,37 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://script/tank.gd" type="Script" id=1]
+[ext_resource path="res://sprite/invincible2.png" type="Texture" id=2]
+[ext_resource path="res://sprite/invincible1.png" type="Texture" id=3]
+[ext_resource path="res://sprite/ship2.png" type="Texture" id=4]
+[ext_resource path="res://sprite/ship1.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 14 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1, 14 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "1",
+"speed": 5.0
+} ]
 
 [node name="tank" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,8 +51,19 @@ modulate = Color( 0, 0.133333, 1, 1 )
 position = Vector2( 15, 0 )
 shape = SubResource( 2 )
 
+[node name="invincible" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 3 )
+
+[node name="ship" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 4 )
+animation = "1"
+
 [node name="shootTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="invincibleTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="shootTimer" to="." method="_on_shootTimer_timeout"]

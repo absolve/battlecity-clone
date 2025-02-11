@@ -21,6 +21,8 @@ animations = [ {
 } ]
 
 [node name="base" type="Area2D"]
+collision_layer = 0
+collision_mask = 19
 script = ExtResource( 3 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
@@ -29,4 +31,4 @@ shape = SubResource( 1 )
 [node name="ani" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 
-[connection signal="body_entered" from="." to="." method="_on_base_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_base_area_entered"]

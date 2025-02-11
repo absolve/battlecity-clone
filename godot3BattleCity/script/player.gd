@@ -4,7 +4,7 @@ extends "res://script/tank.gd"
 var playerId=Game.playerId.p1
 var bullet=preload("res://scene/bullet.tscn")
 var maxBullet=1
-
+var objType=Game.objType.PLAYER
 
 func _ready():
 	if dir==Game.dir.UP:
@@ -114,11 +114,17 @@ func animation(dir,vec):
 
 
 func _on_radar_area_entered(area):
-	if area!=body:
+	if area==body: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH:
+			isStop=true
+	if area.get('objType')==Game.objType.BASE:
 		isStop=true
 
-
 func _on_radar_area_exited(area):
-	if area!=body:
+	if area==body:
+		return 
+	if area.get('objType')==Game.objType.BRICK:	
 		isStop=false
 
