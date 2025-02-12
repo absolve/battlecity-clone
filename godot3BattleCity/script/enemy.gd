@@ -3,6 +3,7 @@ extends "res://script/tank.gd"
 var objType=Game.objType.ENEMY
 var type=Game.enemyType.TYPEA
 var targetPos=Vector2(12,24)*cellSize  #基地位置
+var allDir=[Game.dir.LEFT,Game.dir.RIGHT,Game.dir.UP,Game.dir.DOWN]
 
 func _ready():
 	dir=Game.dir.DOWN
@@ -61,9 +62,30 @@ func turnDirection():
 
 #向基地出发
 func targetEagle(p):
-	
-	pass
+	var dx=position.x-targetPos.x
+	var dy=position.y-targetPos.y 
+	if abs(dx)>abs(dy):
+		if dx<0:
+			dir=Game.dir.RIGHT
+		else:
+			dir=Game.dir.LEFT
+	else:
+		if dy<0:
+			dir=Game.dir.DOWN
+		else:
+			dir=Game.dir.UP	
+	if p>0.8:
+		var temp=getNewDir(lastDir)
+		dir	= temp[randi()%temp.size()]
 
+#获取一个新方向	
+func getNewDir(dir):
+	var temp=[]
+	for i in allDir:
+		if i!=dir:
+			temp.append(i)
+	return temp
+		
 #开始初始化
 func startInit():
 	bodyShape.disabled=true

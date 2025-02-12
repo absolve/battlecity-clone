@@ -45,4 +45,3 @@ collision_mask = 15
 [connection signal="area_exited" from="body" to="." method="_on_body_area_exited"]
 [connection signal="area_entered" from="radar" to="." method="_on_radar_area_entered"]
 [connection signal="area_exited" from="radar" to="." method="_on_radar_area_exited"]
-[connection signal="timeout" from="initTimer" to="." method="_on_initTimer_timeout"]
