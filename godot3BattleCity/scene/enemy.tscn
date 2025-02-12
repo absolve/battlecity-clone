@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scene/tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://script/enemy.gd" type="Script" id=2]
+[ext_resource path="res://sprite/tank_white_1-1.png" type="Texture" id=3]
+[ext_resource path="res://sprite/tank_white_1.png" type="Texture" id=4]
+[ext_resource path="res://sprite/appear_3.png" type="Texture" id=5]
+[ext_resource path="res://sprite/appear_4.png" type="Texture" id=6]
+[ext_resource path="res://sprite/appear_2.png" type="Texture" id=7]
+[ext_resource path="res://sprite/appear_1.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "flash",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "typeA",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "typeA_run",
+"speed": 8.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "typeB",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "typeB_run",
+"speed": 8.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "typeC",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "typeC_run",
+"speed": 8.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "typeD",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "typeD_run",
+"speed": 5.0
+} ]
+
+[node name="tank" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="ani" parent="." index="1"]
+frames = SubResource( 1 )
+animation = "typeA"
+
+[node name="radar" parent="." index="2"]
+collision_mask = 15
+
+[connection signal="area_entered" from="radar" to="." method="_on_radar_area_entered"]
+[connection signal="area_exited" from="radar" to="." method="_on_radar_area_exited"]
+[connection signal="timeout" from="initTimer" to="." method="_on_initTimer_timeout"]

@@ -1,12 +1,12 @@
 extends "res://script/tank.gd"
 
-#玩家id 用来区分按键
-var playerId=Game.playerId.p1
-var bullet=preload("res://scene/bullet.tscn")
-var maxBullet=1
-var objType=Game.objType.PLAYER
+var objType=Game.objType.ENEMY
+var type=Game.enemyType.TYPEA
+var targetPos=Vector2(12,24)*cellSize  #基地位置
 
 func _ready():
+	dir=Game.dir.DOWN
+	
 	if dir==Game.dir.UP:
 		radar.rotation_degrees=-90
 	elif dir==Game.dir.DOWN:
@@ -15,34 +15,21 @@ func _ready():
 		radar.rotation_degrees=180
 	elif dir==Game.dir.RIGHT:
 		radar.rotation_degrees=0
+	
 	startInit()
 
 func _physics_process(delta):
-	
 	if state==Game.tankstate.START:
 		lastDir=dir
-		if Input.is_action_pressed("p1_down"):
-			vec=Vector2(0,speed)
-			dir=Game.dir.DOWN
-		elif Input.is_action_pressed("p1_up"):
-			vec=Vector2(0,-speed)
-			dir=Game.dir.UP
-		elif Input.is_action_pressed("p1_left"):
-			vec=Vector2(-speed,0)
-			dir=Game.dir.LEFT
-		elif Input.is_action_pressed("p1_right"):
-			vec=Vector2(speed,0)
-			dir=Game.dir.RIGHT
-		else:
-			vec=Vector2.ZERO	
-			
+		
+		
+		
+		
 		if lastDir!=dir:	#转向的需要修改位置
 			turnDirection()
-		
-		if Input.is_action_pressed("p1_shoot"):
-			fire()
-		
-		animation(dir,vec)		
+		animation(dir,vec)
+
+
 		if !isStop:
 			position+=vec*delta
 
@@ -56,9 +43,7 @@ func _physics_process(delta):
 			position.y=tankSize/2
 		if position.y>=mapSize.y-tankSize/2:	
 			position.y=mapSize.y-tankSize/2
-
-
-
+			
 #改变方向的时候调整位置
 func turnDirection():
 	if dir==Game.dir.LEFT||dir==Game.dir.RIGHT:
@@ -74,51 +59,40 @@ func turnDirection():
 	elif dir==Game.dir.RIGHT:
 		radar.rotation_degrees=0
 
-#发射子弹
-func fire():
-	if canShoot:
-		canShoot=false
-		shootTimer.start()
-		var temp=bullet.instance()
-		temp.position=position
-		temp.dir=dir
-		temp.playerId=playerId
-		temp.own=Game.objType.PLAYER
-		temp.setPower(bulletPower)
-		temp.ownId=body.get_instance_id()
-		bullets.append(temp)
-		Game.map.addBullet(temp)
-		get_instance_id()
-		
+#向基地出发
+func targetEagle(p):
+	
+	pass
+
 #开始初始化
 func startInit():
 	bodyShape.disabled=true
 	initTimer.start()
 	ani.play('flash')
-	
+
 func animation(dir,vec):
 	if dir==Game.dir.UP:
-		ani.flip_v=false
+		ani.flip_v=true
 		ani.flip_h=false
 		ani.rotation_degrees=0
 	elif dir==Game.dir.DOWN:
-		ani.flip_v=true
+		ani.flip_v=false
 		ani.flip_h=false
 		ani.rotation_degrees=0
 	elif dir==Game.dir.LEFT:
 		ani.flip_v=false
-		ani.flip_h=true
-		ani.rotation_degrees=-90
+		ani.flip_h=false
+		ani.rotation_degrees=90		
 	elif dir==Game.dir.RIGHT:	
 		ani.flip_v=false
-		ani.flip_h=false
-		ani.rotation_degrees=90
-
-			
-	if vec!=Vector2.ZERO:	
-		ani.play("small_run")
-	else:
-		ani.play("small")	
+		ani.flip_h=true
+		ani.rotation_degrees=-90
+	
+	if type==Game.enemyType.TYPEA:
+		if vec!=Vector2.ZERO:	
+			ani.play('typeA_run')
+		else:
+			ani.play("typeA")	
 
 
 func _on_radar_area_entered(area):
@@ -130,6 +104,7 @@ func _on_radar_area_entered(area):
 	if area.get('objType')==Game.objType.BASE:
 		isStop=true
 
+
 func _on_radar_area_exited(area):
 	if area==body:
 		return 
@@ -137,18 +112,5 @@ func _on_radar_area_exited(area):
 		isStop=false
 
 
-
-func _on_body_area_entered(area):
-	if area.get('objType')==Game.objType.BULLET:
-		if invincible:
-			return
-		
-
-
-func _on_body_area_exited(area):
-	pass # Replace with function body.
-
-
 func _on_initTimer_timeout():
 	state=Game.tankstate.START
-	startinvincible(3)

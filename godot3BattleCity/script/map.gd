@@ -25,6 +25,7 @@ var basePos=Vector2(12,24)
 var brick=preload("res://scene/brick.tscn")
 var base=preload("res://scene/base.tscn")
 var player=preload("res://scene/player.tscn")
+var enemy=preload("res://scene/enemy.tscn")
 var currentLevel  #当前场景文件内容
 var enemyLogo=preload("res://scene/enemyLogo.tscn")
 onready var brickNode=$child/brick
@@ -134,3 +135,19 @@ func setP1LiveNum(num):
 func setP2LiveNum(num):
 	p2LiveNUm=num
 	p2Count.text=str(num)
+
+#获取敌人总数
+func getEnemyCount():
+	var num=0;
+	for i in tanksNode.get_children():
+		if i.get('objType')==Game.objType.ENEMY:
+			num+=1
+	return num		
+
+#添加敌人
+func addEnemy(isFreeze=false):
+	var temp=enemy.instance()
+	temp.position=enemyRevivePos[randi()%3]*cellSize+Vector2(temp.tankSize/2,temp.tankSize/2)
+	tanksNode.add_child(temp)
+	removeEnemyLogo()
+	enemyCount-=1

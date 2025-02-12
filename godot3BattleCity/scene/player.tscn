@@ -11,10 +11,10 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "flash",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
@@ -41,5 +41,8 @@ animation = "small_run"
 [node name="radar" parent="." index="2"]
 collision_mask = 15
 
+[connection signal="area_entered" from="body" to="." method="_on_body_area_entered"]
+[connection signal="area_exited" from="body" to="." method="_on_body_area_exited"]
 [connection signal="area_entered" from="radar" to="." method="_on_radar_area_entered"]
 [connection signal="area_exited" from="radar" to="." method="_on_radar_area_exited"]
+[connection signal="timeout" from="initTimer" to="." method="_on_initTimer_timeout"]

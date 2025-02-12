@@ -40,6 +40,10 @@ enum tankstate{
 	IDLE,START,DEAD
 }
 
+#敌人坦克类型
+enum enemyType{
+	TYPEA=90,TYPEB,TYPEC,TYPED
+}
 
 #信号
 signal baseDestroyed

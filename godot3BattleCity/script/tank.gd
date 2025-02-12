@@ -2,7 +2,7 @@ extends Node2D
 
 var vec=Vector2.ZERO
 var level=0
-var state  #状态
+var state=Game.tankstate.IDLE  #状态
 var isInvincible=false #无敌
 var speed = 70  #移动速度
 var hasShip=false	#是否有船
@@ -18,18 +18,35 @@ var isStop=false#是否停止
 var canShoot=true #可以发射子弹
 var bulletPower=Game.bulletPower.NORMAL
 var tankSize=28
+var armour=1  #护甲  最大4
 
 const cellSize=16	#每个格子的大小是16px
 var mapSize=Vector2(cellSize*26,cellSize*26)
 
 
 onready var body=$body
+onready var bodyShape=$body/shape
 onready var radar=$radar
 onready var ani=$ani
 onready var shootTimer=$shootTimer
+onready var ship=$ship
+onready var invincible=$invincible
+onready var invincibleTimer=$invincibleTimer
+onready var initTimer=$initTimer
 
+#设置无敌
+func startinvincible(time=10):
+	isInvincible=true
+	invincibleTimer.start(time)
+	invincible.visible=true
+	invincible.play("default")
 
 
 func _on_shootTimer_timeout():
 	canShoot=true
 
+
+func _on_invincibleTimer_timeout():
+	isInvincible=false
+	invincible.stop()
+	invincible.visible=false
