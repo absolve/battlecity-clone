@@ -35,7 +35,7 @@ func changeType(value):
 func _on_brick_area_entered(area):
 	if area.get('objType')==Game.objType.BULLET:
 		if type ==Game.brickType.WALL:
-			print(area.get('dir'))
+#			print(area.get('dir'))
 			if area.get('dir')!=null:
 				var dir=area.dir
 				if area.get('power')!=null && area.power==Game.bulletPower.SUPER:
@@ -74,7 +74,7 @@ func _on_brick_area_entered(area):
 				if all==0:
 					queue_free()
 					return
-				print(blockMask)	
+#				print(blockMask)	
 				ani.material.set_shader_param('block',Color(blockMask[0],
 				blockMask[1],blockMask[2],blockMask[3]))							
 		elif type==Game.brickType.STONE:

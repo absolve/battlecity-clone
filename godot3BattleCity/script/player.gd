@@ -8,6 +8,7 @@ var maxBullet=1
 var objType=Game.objType.PLAYER
 
 func _ready():
+	collision_layer=1+8
 	if dir==Game.dir.UP:
 		radar.rotation_degrees=-90
 	elif dir==Game.dir.DOWN:
@@ -142,7 +143,7 @@ func _on_radar_area_entered(area):
 	if area.get('objType')==Game.objType.BRICK:
 		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
 			isStop=true
-	elif area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
 		isStop=true
 
 func _on_radar_area_exited(area):
@@ -150,7 +151,7 @@ func _on_radar_area_exited(area):
 		return 
 	if area.get('objType')==Game.objType.BRICK:	
 		isStop=false
-	elif area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
 		isStop=false
 
 
@@ -163,13 +164,13 @@ func _on_initTimer_timeout():
 
 func _on_tank_area_entered(area):
 	if area.get('objType')==Game.objType.BULLET:
-		if invincible:
+		if isInvincible:
 			return
 		if area.get('own')==Game.objType.ENEMY:
 			if armour>0:
 				armour-=1
 			else:
 				addExplode()
-				bodyShape.disabled=false
+				bodyShape.call_deferred('set_disabled',false)
 				call_deferred('queue_free')	
 				Game.emit_signal("hitPlayer",playerId)

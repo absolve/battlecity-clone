@@ -14,7 +14,7 @@ var fireDelay=200 #延迟
 
 func _ready():
 	dir=Game.dir.DOWN
-	
+	collision_layer=2
 	if dir==Game.dir.UP:
 		radar.rotation_degrees=-90
 	elif dir==Game.dir.DOWN:
@@ -57,6 +57,7 @@ func _physics_process(delta):
 		fireTime+=1
 		if isStop:
 			keepMoveTime-=15
+			vec=Vector2.ZERO
 			
 		if moveTime>keepMoveTime: #改变方向
 			moveTime=0
@@ -207,7 +208,7 @@ func _on_radar_area_entered(area):
 	if area.get('objType')==Game.objType.BRICK:
 		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
 			isStop=true
-	elif area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
 		isStop=true
 
 func _on_radar_area_exited(area):
@@ -215,7 +216,7 @@ func _on_radar_area_exited(area):
 		return 
 	if area.get('objType')==Game.objType.BRICK:	
 		isStop=false
-	elif area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
 		isStop=false
 #	isStop=false
 
@@ -232,6 +233,6 @@ func _on_tank_area_entered(area):
 				armour-=1
 			else:	
 				addExplode()
-				bodyShape.disabled=false
+				bodyShape.call_deferred('set_disabled',false)
 				call_deferred('queue_free')	
 

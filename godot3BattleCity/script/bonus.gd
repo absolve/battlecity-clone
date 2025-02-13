@@ -1,9 +1,23 @@
 extends Area2D
 
-
-
+var objType=Game.objType.BONUS
+var type=Game.bonusType.STAR
+onready var ani=$ani
 
 func _ready():
-	pass # Replace with function body.
-
-
+	if type==Game.bonusType.BOAT:
+		ani.play("0")
+	elif type==Game.bonusType.CLOCK:
+		ani.play("1")
+	elif type==Game.bonusType.GRENADE:
+		ani.play("2")
+	elif type==Game.bonusType.GUN:
+		ani.play("3")
+	elif type==Game.bonusType.HELMET:
+		ani.play("4")	
+	elif type==Game.bonusType.SHOVEL:
+		ani.play("5")	
+	elif type==Game.bonusType.STAR:
+		ani.play("6")	
+	elif type==Game.bonusType.TANK:	
+		ani.play("7")

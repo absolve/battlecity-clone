@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 var vec=Vector2.ZERO
 var level=0
@@ -40,7 +40,7 @@ func startinvincible(time=10):
 	invincibleTimer.start(time)
 	invincible.visible=true
 	invincible.play("default")
-
+	
 
 func _on_shootTimer_timeout():
 	canShoot=true
