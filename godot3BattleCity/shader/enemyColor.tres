@@ -1,0 +1,41 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform bool ischange=false;
+uniform vec4 oldColor1:hint_color=vec4(0);
+uniform vec4 oldColor2:hint_color=vec4(0);
+uniform vec4 oldColor3:hint_color=vec4(0);
+
+uniform vec4 newColor1:hint_color=vec4(0);
+uniform vec4 newColor2:hint_color=vec4(0);
+uniform vec4 newColor3:hint_color=vec4(0);
+
+void fragment(){
+	if(ischange){
+		vec4 color = texture(TEXTURE, UV);
+		
+		if(color==oldColor1){
+			color=newColor1;
+		}else if(color==oldColor2){
+			color=newColor2;
+		}else if(color==oldColor3){
+			color=newColor3;
+		}
+		COLOR=color;
+	}else{
+		COLOR=texture(TEXTURE, UV);
+	}
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/ischange = false
+shader_param/oldColor1 = Color( 0.105882, 0.247059, 0.372549, 1 )
+shader_param/oldColor2 = Color( 1, 1, 1, 1 )
+shader_param/oldColor3 = Color( 0.737255, 0.737255, 0.737255, 1 )
+shader_param/newColor1 = Color( 0.105882, 0.247059, 0.372549, 1 )
+shader_param/newColor2 = Color( 1, 1, 1, 1 )
+shader_param/newColor3 = Color( 0.737255, 0.737255, 0.737255, 1 )

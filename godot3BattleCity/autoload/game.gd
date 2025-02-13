@@ -47,6 +47,8 @@ enum enemyType{
 
 #信号
 signal baseDestroyed
+signal hitPlayer
+
 
 var map
 

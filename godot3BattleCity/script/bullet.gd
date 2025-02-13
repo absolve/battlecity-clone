@@ -59,5 +59,15 @@ func addexplode():
 
 func _on_bullet_area_entered(area):
 	if area.get_instance_id()==ownId:
-		return
-	addexplode()
+		return	
+	if own==Game.objType.ENEMY:
+		if area.get('objType')==Game.objType.PLAYER:
+			addexplode()
+	elif own==Game.objType.PLAYER:
+		if area.get('objType')==Game.objType.ENEMY:
+			addexplode()		
+	if area.get('objType')==Game.objType.BULLET:
+		call_deferred('queue_free')	
+	elif area.get('objType')==Game.objType.BRICK:
+		if area.get('type')==Game.brickType.WALL||area.get('type')==Game.brickType.STONE:
+			addexplode()

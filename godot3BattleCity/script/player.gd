@@ -3,6 +3,7 @@ extends "res://script/tank.gd"
 #玩家id 用来区分按键
 var playerId=Game.playerId.p1
 var bullet=preload("res://scene/bullet.tscn")
+var explode=preload("res://scene/explode.tscn")
 var maxBullet=1
 var objType=Game.objType.PLAYER
 
@@ -15,10 +16,11 @@ func _ready():
 		radar.rotation_degrees=180
 	elif dir==Game.dir.RIGHT:
 		radar.rotation_degrees=0
+	speed=120	
 	startInit()
+	
 
 func _physics_process(delta):
-	
 	if state==Game.tankstate.START:
 		lastDir=dir
 		if Input.is_action_pressed("p1_down"):
@@ -77,6 +79,14 @@ func turnDirection():
 #发射子弹
 func fire():
 	if canShoot:
+		var del=[]
+		for i in bullets: #清理无效对象
+			if not is_instance_valid(i):
+				del.append(i)
+		for i in del:
+			bullets.remove(bullets.find(i))	
+		if bullets.size()>maxBullet:
+			return
 		canShoot=false
 		shootTimer.start()
 		var temp=bullet.instance()
@@ -85,10 +95,15 @@ func fire():
 		temp.playerId=playerId
 		temp.own=Game.objType.PLAYER
 		temp.setPower(bulletPower)
-		temp.ownId=body.get_instance_id()
+		temp.ownId=get_instance_id()
 		bullets.append(temp)
 		Game.map.addBullet(temp)
-		get_instance_id()
+
+func addExplode(isBig=true):
+	var temp=explode.instance()
+	temp.big=isBig
+	temp.position=position
+	Game.map.addOther(temp)
 		
 #开始初始化
 func startInit():
@@ -122,33 +137,39 @@ func animation(dir,vec):
 
 
 func _on_radar_area_entered(area):
-	if area==body: #排除自己
+	if area==self: #排除自己
 		return
 	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
 			isStop=true
-	if area.get('objType')==Game.objType.BASE:
+	elif area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
 		isStop=true
 
 func _on_radar_area_exited(area):
-	if area==body:
+	if area==self:
 		return 
 	if area.get('objType')==Game.objType.BRICK:	
+		isStop=false
+	elif area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
 		isStop=false
 
 
 
-func _on_body_area_entered(area):
+func _on_initTimer_timeout():
+	state=Game.tankstate.START
+	bodyShape.disabled=false
+	startinvincible(3)
+
+
+func _on_tank_area_entered(area):
 	if area.get('objType')==Game.objType.BULLET:
 		if invincible:
 			return
-		
-
-
-func _on_body_area_exited(area):
-	pass # Replace with function body.
-
-
-func _on_initTimer_timeout():
-	state=Game.tankstate.START
-	startinvincible(3)
+		if area.get('own')==Game.objType.ENEMY:
+			if armour>0:
+				armour-=1
+			else:
+				addExplode()
+				bodyShape.disabled=false
+				call_deferred('queue_free')	
+				Game.emit_signal("hitPlayer",playerId)

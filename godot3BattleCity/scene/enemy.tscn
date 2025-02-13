@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scene/tank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://script/enemy.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://sprite/appear_4.png" type="Texture" id=6]
 [ext_resource path="res://sprite/appear_2.png" type="Texture" id=7]
 [ext_resource path="res://sprite/appear_1.png" type="Texture" id=8]
+[ext_resource path="res://shader/enemyColor.tres" type="Material" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -58,15 +59,19 @@ animations = [ {
 } ]
 
 [node name="tank" instance=ExtResource( 1 )]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource( 2 )
 
-[node name="ani" parent="." index="1"]
+[node name="ani" parent="." index="0"]
+material = ExtResource( 9 )
 frames = SubResource( 1 )
 animation = "typeA"
 
 [node name="radar" parent="." index="2"]
 collision_mask = 15
 
+[connection signal="area_entered" from="." to="." method="_on_tank_area_entered"]
 [connection signal="area_entered" from="radar" to="." method="_on_radar_area_entered"]
 [connection signal="area_exited" from="radar" to="." method="_on_radar_area_exited"]
 [connection signal="timeout" from="initTimer" to="." method="_on_initTimer_timeout"]
