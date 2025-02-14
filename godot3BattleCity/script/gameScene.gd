@@ -15,13 +15,16 @@ func _ready():
 	map.removeEnemyLogo()
 	
 	Game.connect("baseDestroyed",self,"baseDestroyed")
+	Game.connect('addBonus',self,'addBonus')
 	produceTimer.start()
 
 #基地爆炸
 func baseDestroyed():
 	print('baseDestroyed')
-	pass
 
+#添加物品
+func addBonus():
+	print('addBonus')
 
 
 func _on_produceTimer_timeout():

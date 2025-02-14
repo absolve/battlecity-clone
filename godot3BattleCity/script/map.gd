@@ -28,6 +28,7 @@ var player=preload("res://scene/player.tscn")
 var enemy=preload("res://scene/enemy.tscn")
 var currentLevel  #当前场景文件内容
 var enemyLogo=preload("res://scene/enemyLogo.tscn")
+var bonus=preload("res://scene/bonus.tscn")
 onready var brickNode=$child/brick
 onready var bulletsNode=$child/bullets
 onready var tanksNode=$child/tanks
@@ -82,20 +83,20 @@ func removeEnemyLogo():
 #删除玩家复活点方块	
 func delPlayerPosBrick():
 	for i in player1:
-		var brick=getBrick(i.x,i.y)
-		if brick:
-			brick.queue_free()
+		var temp=getBrick(i.x,i.y)
+		if temp:
+			temp.queue_free()
 	for i in player2:
-		var brick=getBrick(i.x,i.y)
-		if brick:
-			brick.queue_free()
+		var temp=getBrick(i.x,i.y)
+		if temp:
+			temp.queue_free()
 	
 #删除基地周边的方块	
 func delBasePlaceBrick():
 	for i in basePlacePos:
-		var brick=getBrick(i.x,i.y)
-		if brick:
-			brick.queue_free()
+		var temp=getBrick(i.x,i.y)
+		if temp:
+			temp.queue_free()
 
 
 #创建基地	
@@ -106,12 +107,12 @@ func createBase():
 
 #获取地图中的砖块 x [0-25] y[0-25]
 func getBrick(x:int,y:int):
-	var brick=null
+	var temp=null
 	for i in brickNode.get_children():
 		if i.mapPos.x==x&&i.mapPos.y==y:
-			brick=i
+			temp=i
 			break
-	return brick
+	return temp
 
 #添加玩家
 func addPlayer(playNo:int):
@@ -148,6 +149,14 @@ func getEnemyCount():
 func addEnemy(isFreeze=false):
 	var temp=enemy.instance()
 	temp.position=enemyRevivePos[randi()%3]*cellSize+Vector2(temp.tankSize/2,temp.tankSize/2)
+	var types=[Game.enemyType.TYPEA,Game.enemyType.TYPEB,
+				Game.enemyType.TYPEC,Game.enemyType.TYPED]
+	temp.type=types[randi()%4]
 	tanksNode.add_child(temp)
 	removeEnemyLogo()
 	enemyCount-=1
+
+#添加物品 物品不在基地附近和玩家当前附近
+func addBonus():
+	
+	pass

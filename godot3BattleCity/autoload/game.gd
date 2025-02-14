@@ -5,7 +5,7 @@ enum dir{
 	UP,DOWN,LEFT,RIGHT
 }
 
-#坦克级别
+#玩家坦克级别
 enum level{
 	MIN,MEDIUM,LARGE,SUPER
 }
@@ -45,10 +45,16 @@ enum enemyType{
 	TYPEA=90,TYPEB,TYPEC,TYPED
 }
 
+#玩家数据
+var p1Data={'p1Score':0,'p1Lives':2,'level':level.MIN,'armour':0,'hasShip':false}
+var p2Data={'p2Score':0,'p2Lives':2,'level':level.MIN,'armour':0,'hasShip':false}
+var gameLevel=1 #游戏关卡
+
+
 #信号
 signal baseDestroyed
 signal hitPlayer
-
+signal addBonus
 
 var map
 

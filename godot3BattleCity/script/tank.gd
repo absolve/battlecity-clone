@@ -1,7 +1,7 @@
 extends Area2D
 
 var vec=Vector2.ZERO
-var level=0
+#var level=Game.level.MIN  #玩家坦克级别
 var state=Game.tankstate.IDLE  #状态
 var isInvincible=false #无敌
 var speed = 50  #移动速度

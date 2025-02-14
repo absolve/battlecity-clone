@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scene/tank.tscn" type="PackedScene" id=1]
 [ext_resource path="res://script/enemy.gd" type="Script" id=2]
@@ -64,6 +64,38 @@ animations = [ {
 "speed": 15.0
 } ]
 
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ani:material:shader_param/ischange")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "blink"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ani:material:shader_param/ischange")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
 [node name="tank" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
@@ -72,8 +104,15 @@ material = ExtResource( 9 )
 frames = SubResource( 1 )
 animation = "typeA_run"
 
+[node name="shape" parent="." index="1"]
+visible = false
+
 [node name="radar" parent="." index="2"]
 collision_mask = 7
+
+[node name="player" type="AnimationPlayer" parent="." index="8"]
+anims/RESET = SubResource( 3 )
+anims/blink = SubResource( 2 )
 
 [connection signal="area_entered" from="." to="." method="_on_tank_area_entered"]
 [connection signal="area_entered" from="radar" to="." method="_on_radar_area_entered"]

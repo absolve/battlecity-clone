@@ -6,6 +6,7 @@ var bullet=preload("res://scene/bullet.tscn")
 var explode=preload("res://scene/explode.tscn")
 var maxBullet=1
 var objType=Game.objType.PLAYER
+var level=Game.level.MIN  #玩家坦克级别
 
 func _ready():
 	collision_layer=1+8
