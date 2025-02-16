@@ -35,10 +35,25 @@ script = ExtResource( 2 )
 frames = SubResource( 1 )
 animation = "small_run"
 
-[node name="radar" parent="." index="2"]
+[node name="radarRight" parent="." index="2"]
+collision_mask = 7
+
+[node name="radarLeft" parent="." index="3"]
+collision_mask = 7
+
+[node name="radarTop" parent="." index="4"]
+collision_mask = 7
+
+[node name="radarBottom" parent="." index="5"]
 collision_mask = 7
 
 [connection signal="area_entered" from="." to="." method="_on_tank_area_entered"]
-[connection signal="area_entered" from="radar" to="." method="_on_radar_area_entered"]
-[connection signal="area_exited" from="radar" to="." method="_on_radar_area_exited"]
+[connection signal="area_entered" from="radarRight" to="." method="_on_radarRight_area_entered"]
+[connection signal="area_exited" from="radarRight" to="." method="_on_radarRight_area_exited"]
+[connection signal="area_entered" from="radarLeft" to="." method="_on_radarLeft_area_entered"]
+[connection signal="area_exited" from="radarLeft" to="." method="_on_radarLeft_area_exited"]
+[connection signal="area_entered" from="radarTop" to="." method="_on_radarTop_area_entered"]
+[connection signal="area_exited" from="radarTop" to="." method="_on_radarTop_area_exited"]
+[connection signal="area_entered" from="radarBottom" to="." method="_on_radarBottom_area_entered"]
+[connection signal="area_exited" from="radarBottom" to="." method="_on_radarBottom_area_exited"]
 [connection signal="timeout" from="initTimer" to="." method="_on_initTimer_timeout"]

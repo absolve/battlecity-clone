@@ -69,7 +69,7 @@ func loadMap(filePath:String):
 func loadEnemyCount():
 	for i in enemyList.get_children():
 		i.queue_free()
-	for i in range(enemyCount):
+	for i in range(enemyCount+1):
 		var temp=enemyLogo.instance()
 		enemyList.add_child(temp)
 
@@ -118,7 +118,13 @@ func getBrick(x:int,y:int):
 func addPlayer(playNo:int):
 	if playNo==1:
 		var temp=player.instance()
+		temp.playerId=Game.playerId.p1
 		temp.position=Vector2(9*cellSize,25*cellSize)
+		tanksNode.add_child(temp)
+	elif playNo==2:
+		var temp=player.instance()
+		temp.playerId=Game.playerId.p2
+		temp.position=Vector2(17*cellSize,25*cellSize)
 		tanksNode.add_child(temp)
 
 #添加子弹

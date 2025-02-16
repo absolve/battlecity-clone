@@ -3,7 +3,7 @@ extends Node2D
 const mapDir="res://level"	#内置地图路径
 onready var map=$map
 onready var produceTimer=$produceTimer
-var minEnemyCount=8	#最小同屏敌人数量 2人就6个
+var minEnemyCount=20	#最小同屏敌人数量 2人就6个
 
 func _ready():
 	randomize()
@@ -12,6 +12,7 @@ func _ready():
 	map.loadMap(mapDir+"/"+'1.json')
 	map.loadEnemyCount()
 	map.addPlayer(1)
+	map.addPlayer(2)
 	map.removeEnemyLogo()
 	
 	Game.connect("baseDestroyed",self,"baseDestroyed")

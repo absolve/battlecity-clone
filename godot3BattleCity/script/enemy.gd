@@ -21,14 +21,6 @@ onready var player=$player
 func _ready():
 	dir=Game.dir.DOWN
 	collision_layer=2
-	if dir==Game.dir.UP:
-		radar.rotation_degrees=-90
-	elif dir==Game.dir.DOWN:
-		radar.rotation_degrees=90
-	elif dir==Game.dir.LEFT:
-		radar.rotation_degrees=180
-	elif dir==Game.dir.RIGHT:
-		radar.rotation_degrees=0
 	
 	if type==Game.enemyType.TYPEA:
 		armour=randi()%2
@@ -66,7 +58,20 @@ func _physics_process(delta):
 		
 		moveTime+=1
 		fireTime+=1
-		if isStop:
+#		if isStop:
+#			keepMoveTime-=15
+#			vec=Vector2.ZERO
+		
+		if dir==Game.dir.LEFT && leftIsStop:
+			keepMoveTime-=15
+			vec=Vector2.ZERO
+		elif dir==Game.dir.RIGHT && rightIsStop:
+			keepMoveTime-=15
+			vec=Vector2.ZERO
+		elif dir==Game.dir.UP && topIsStop:
+			keepMoveTime-=15
+			vec=Vector2.ZERO
+		elif dir==Game.dir.DOWN&& bottomIsStop:
 			keepMoveTime-=15
 			vec=Vector2.ZERO
 			
@@ -103,7 +108,13 @@ func _physics_process(delta):
 		animation(dir,vec)
 
 
-		if !isStop:
+		if dir==Game.dir.LEFT && !leftIsStop:
+			position+=vec*delta
+		elif dir==Game.dir.RIGHT && !rightIsStop:
+			position+=vec*delta
+		elif dir==Game.dir.UP && !topIsStop:
+			position+=vec*delta
+		elif dir==Game.dir.DOWN&& !bottomIsStop:
 			position+=vec*delta
 
 		#调整一下位置
@@ -122,18 +133,13 @@ func _physics_process(delta):
 			
 #改变方向的时候调整位置
 func turnDirection():
+#	position.y=round((position.y)/16)*16
+#	position.x=round((position.x)/16)*16
 	if dir==Game.dir.LEFT||dir==Game.dir.RIGHT:
 		position.y=round((position.y)/16)*16
 	else:
 		position.x=round((position.x)/16)*16
-	if dir==Game.dir.UP:
-		radar.rotation_degrees=-90
-	elif dir==Game.dir.DOWN:
-		radar.rotation_degrees=90
-	elif dir==Game.dir.LEFT:
-		radar.rotation_degrees=180
-	elif dir==Game.dir.RIGHT:
-		radar.rotation_degrees=0
+	
 
 #向基地出发
 func targetEagle(p):
@@ -258,23 +264,23 @@ func setColor():
 			if ani.material.get_shader_param('ischange'):
 				ani.material.set_shader_param('ischange',false)	
 
-func _on_radar_area_entered(area):
-	if area==self: #排除自己
-		return
-#	print(area.get('objType'))	
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			isStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		isStop=true
+#func _on_radar_area_entered(area):
+#	if area==self: #排除自己
+#		return
+##	print(area.get('objType'))	
+#	if area.get('objType')==Game.objType.BRICK:
+#		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+#			isStop=true
+#	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+#		isStop=true
 
-func _on_radar_area_exited(area):
-	if area==self:
-		return 
-	if area.get('objType')==Game.objType.BRICK:	
-		isStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		isStop=false
+#func _on_radar_area_exited(area):
+#	if area==self:
+#		return 
+#	if area.get('objType')==Game.objType.BRICK:	
+#		isStop=false
+#	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+#		isStop=false
 #	isStop=false
 
 func _on_initTimer_timeout():
@@ -296,3 +302,91 @@ func _on_tank_area_entered(area):
 				bodyShape.call_deferred('set_disabled',false)
 				call_deferred('queue_free')	
 
+
+
+func _on_radarRight_area_entered(area):
+	if area==self: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+			rightIsStop=true
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+		if position.distance_to(area.position)<=4:
+			return
+		rightIsStop=true
+
+
+func _on_radarRight_area_exited(area):
+	if area==self: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+			rightIsStop=false
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+		rightIsStop=false
+
+
+func _on_radarLeft_area_entered(area):
+	if area==self: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+			leftIsStop=true
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+		if position.distance_to(area.position)<=4:
+			return
+		leftIsStop=true
+
+
+func _on_radarLeft_area_exited(area):
+	if area==self: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+			leftIsStop=false
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+		leftIsStop=false
+
+
+func _on_radarTop_area_entered(area):
+	if area==self: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+			topIsStop=true
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+		if position.distance_to(area.position)<=4:
+			return
+		topIsStop=true
+
+
+func _on_radarTop_area_exited(area):
+	if area==self: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+			topIsStop=false
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+		topIsStop=false
+
+
+func _on_radarBottom_area_entered(area):
+	if area==self: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+			bottomIsStop=true
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+		if position.distance_to(area.position)<=4:
+			return
+		bottomIsStop=true
+
+
+func _on_radarBottom_area_exited(area):
+	if area==self: #排除自己
+		return
+	if area.get('objType')==Game.objType.BRICK:
+		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
+			bottomIsStop=false
+	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
+		bottomIsStop=false
