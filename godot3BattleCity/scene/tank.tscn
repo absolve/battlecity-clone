@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://script/tank.gd" type="Script" id=1]
 [ext_resource path="res://sprite/invincible2.png" type="Texture" id=2]
@@ -8,18 +8,6 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 14 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 5, 14 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 5, 14 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 14, 5 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 14, 5 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
@@ -55,38 +43,6 @@ shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="radarRight" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="shape" type="CollisionShape2D" parent="radarRight"]
-modulate = Color( 0, 0.133333, 1, 1 )
-position = Vector2( 9, 0 )
-shape = SubResource( 2 )
-
-[node name="radarLeft" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="shape" type="CollisionShape2D" parent="radarLeft"]
-modulate = Color( 0, 0.133333, 1, 1 )
-position = Vector2( -9, 0 )
-shape = SubResource( 5 )
-
-[node name="radarTop" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="shape" type="CollisionShape2D" parent="radarTop"]
-modulate = Color( 0, 0.133333, 1, 1 )
-position = Vector2( 0, -9 )
-shape = SubResource( 6 )
-
-[node name="radarBottom" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="shape" type="CollisionShape2D" parent="radarBottom"]
-modulate = Color( 0, 0.133333, 1, 1 )
-position = Vector2( 0, 9 )
-shape = SubResource( 7 )
 
 [node name="invincible" type="AnimatedSprite" parent="."]
 visible = false

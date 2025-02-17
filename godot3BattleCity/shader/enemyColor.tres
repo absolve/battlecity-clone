@@ -16,6 +16,7 @@ void fragment(){
 	if(ischange){
 		vec4 color = texture(TEXTURE, UV);
 		
+		
 		if(color==oldColor1){
 			color=newColor1;
 		}else if(color==oldColor2){

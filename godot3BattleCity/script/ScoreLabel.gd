@@ -3,6 +3,7 @@ extends Label
 onready var timer=$Timer
 
 func _ready():
+	
 	pass
 
 func setScore(s:int):

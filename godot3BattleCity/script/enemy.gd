@@ -35,11 +35,12 @@ func _ready():
 		bulletPower=Game.bulletPower.FAST
 		speed-=10
 	
-	if randi()>=0.7:
-		if armour<3:
-			armour+=1
-		hasItem=true
+#	if randi()>=0.7:
+#		if armour<3:
+#			armour+=1
+#		hasItem=true
 #	hasItem=true	
+	armour=2
 	keepMoveTime=randi()%300+80
 	startInit()
 
@@ -121,32 +122,36 @@ func _physics_process(delta):
 			var result=space_state.intersect_ray(global_position,global_position+Vector2(-14,0)
 			,[self],1+2+4,false,true)
 			if result:
-				if position.distance_to(result.position) >24:
-					isStop=true
+				isStop=true
+#				if global_position.distance_to(result.collider.global_position) <20:
+#					isStop=false
 		elif dir==Game.dir.RIGHT:
 			var result=space_state.intersect_ray(global_position,global_position+Vector2(14,0)
 			,[self],1+2+4,false,true)
 			if result:
-				if position.distance_to(result.position) >24:
-					isStop=true
+				isStop=true
+#				if global_position.distance_to(result.collider.global_position) <20:
+#					isStop=false
 		
 		elif dir==Game.dir.UP:
 			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,-14)
 			,[self],1+2+4,false,true)
 			if result:
-				if position.distance_to(result.position) >24:
-					isStop=true
+				isStop=true
+#				if global_position.distance_to(result.collider.global_position) <20:
+#					isStop=false
 		elif dir==Game.dir.DOWN:
 			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,14)
 			,[self],1+2+4,false,true)
 			if result:
-				if position.distance_to(result.position) >24:
-					isStop=true
+				isStop=true
+#				if global_position.distance_to(result.collider.global_position) <20:
+#					isStop=false
 		
 		if !isStop:
 			position+=vec*delta	
 		else:
-			keepMoveTime-=15
+			keepMoveTime-=10
 
 		#调整一下位置
 		if position.x<=tankSize/2:
@@ -262,6 +267,7 @@ func animation(dir,vec):
 			ani.play('typeD_run')
 		else:
 			ani.play("typeD")	
+	
 			
 #设置颜色
 func setColor():
@@ -332,92 +338,7 @@ func _on_tank_area_entered(area):
 				addExplode()
 				bodyShape.call_deferred('set_disabled',false)
 				call_deferred('queue_free')	
-				Game.emit_signal("destroyEnemy",type,area.get('playerId'),global_position)
+				Game.emit_signal("destroyEnemy",type,area.get('playerId'),position)
 
 
-func _on_radarRight_area_entered(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			rightIsStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		if position.distance_to(area.position)<=4:
-			return
-		rightIsStop=true
 
-
-func _on_radarRight_area_exited(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			rightIsStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		rightIsStop=false
-
-
-func _on_radarLeft_area_entered(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			leftIsStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		if position.distance_to(area.position)<=4:
-			return
-		leftIsStop=true
-
-
-func _on_radarLeft_area_exited(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			leftIsStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		leftIsStop=false
-
-
-func _on_radarTop_area_entered(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			topIsStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		if position.distance_to(area.position)<=4:
-			return
-		topIsStop=true
-
-
-func _on_radarTop_area_exited(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			topIsStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		topIsStop=false
-
-
-func _on_radarBottom_area_entered(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			bottomIsStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		if position.distance_to(area.position)<=4:
-			return
-		bottomIsStop=true
-
-
-func _on_radarBottom_area_exited(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			bottomIsStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		bottomIsStop=false

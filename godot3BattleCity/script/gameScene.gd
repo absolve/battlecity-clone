@@ -13,13 +13,13 @@ func _ready():
 	map.loadMap(mapDir+"/"+'1.json')
 	map.loadEnemyCount()
 	map.addPlayer(1)
-#	map.addPlayer(2)
+	map.addPlayer(2)
 	map.removeEnemyLogo()
 	
 	Game.connect("baseDestroyed",self,"baseDestroyed")
 	Game.connect('addBonus',self,'addBonus')
 	Game.connect('destroyEnemy',self,'destroyEnemy')
-#	produceTimer.start()
+	produceTimer.start()
 
 #基地爆炸
 func baseDestroyed():
@@ -71,7 +71,7 @@ func destroyEnemy(type,playerId,pos):
 func addScore(s,pos):
 	var temp=scoreLabel.instance()
 	temp.setScore(s)
-	temp.position=pos
+	temp.rect_position=pos+Vector2(-14,-14)
 	map.addOther(temp)
 
 #保存用户数据

@@ -31,6 +31,7 @@ func _ready():
 func _physics_process(delta):
 	if state==Game.tankstate.START:
 		lastDir=dir
+		isStop=false
 		if Input.is_action_pressed(keymap["down"]):
 			vec=Vector2(0,speed)
 			dir=Game.dir.DOWN
@@ -66,32 +67,46 @@ func _physics_process(delta):
 			var result=space_state.intersect_ray(global_position,global_position+Vector2(-14,0)
 			,[self],1+2+4,false,true)
 			if result:
-				print(global_position.distance_to(result.collider.global_position))
-				pass
-			else:
-				position+=vec*delta
+#				print(global_position.distance_to(result.collider.global_position))
+				isStop=true
+				if result.collider.get('objType')==Game.objType.BRICK:
+					var type=result.collider.get('type')
+					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+						isStop=false
+				
 		elif dir==Game.dir.RIGHT:
 			var result=space_state.intersect_ray(global_position,global_position+Vector2(14,0)
 			,[self],1+2+4,false,true)
 			if result:
-				print(global_position.distance_to(result.collider.global_position))
-				pass
-			else:
-				position+=vec*delta
+#				print(global_position.distance_to(result.collider.global_position))
+				isStop=true
+				if result.collider.get('objType')==Game.objType.BRICK:
+					var type=result.collider.get('type')
+					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+						isStop=false
 		elif dir==Game.dir.UP:
 			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,-14)
 			,[self],1+2+4,false,true)
 			if result:
-				pass
-			else:
-				position+=vec*delta	
+#				print(global_position.distance_to(result.collider.global_position))
+				isStop=true
+				if result.collider.get('objType')==Game.objType.BRICK:
+					var type=result.collider.get('type')
+					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+						isStop=false
 		elif dir==Game.dir.DOWN:
 			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,14)
 			,[self],1+2+4,false,true)
 			if result:
-				pass
-			else:
-				position+=vec*delta		
+				print(global_position.distance_to(result.collider.global_position))
+				isStop=true
+				if result.collider.get('objType')==Game.objType.BRICK:
+					var type=result.collider.get('type')
+					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+						isStop=false
+		
+		if !isStop:
+			position+=vec*delta		
 			
 		#调整一下位置
 		if position.x<=tankSize/2:
@@ -125,7 +140,7 @@ func fire():
 				del.append(i)
 		for i in del:
 			bullets.remove(bullets.find(i))	
-		if bullets.size()>maxBullet:
+		if bullets.size()>=maxBullet:
 			return
 		canShoot=false
 		shootTimer.start()
@@ -215,81 +230,4 @@ func _on_tank_area_entered(area):
 				Game.emit_signal("hitPlayer",playerId)
 
 
-func _on_radarRight_area_entered(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			rightIsStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		rightIsStop=true
 
-
-func _on_radarRight_area_exited(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			rightIsStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		rightIsStop=false
-
-
-func _on_radarLeft_area_entered(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			leftIsStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		leftIsStop=true
-
-
-func _on_radarLeft_area_exited(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			leftIsStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		leftIsStop=false
-
-
-func _on_radarTop_area_entered(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			topIsStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		topIsStop=true
-
-
-func _on_radarTop_area_exited(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			topIsStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		topIsStop=false
-
-
-func _on_radarBottom_area_entered(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			bottomIsStop=true
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		bottomIsStop=true
-
-
-func _on_radarBottom_area_exited(area):
-	if area==self: #排除自己
-		return
-	if area.get('objType')==Game.objType.BRICK:
-		if area.get('type')!=Game.brickType.BUSH&&area.get('type')!=Game.brickType.ICE:
-			bottomIsStop=false
-	if area.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER,Game.objType.BASE]:
-		bottomIsStop=false

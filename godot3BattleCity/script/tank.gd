@@ -31,10 +31,6 @@ var mapSize=Vector2(cellSize*26,cellSize*26)
 
 
 onready var bodyShape=$shape
-onready var radarLeft=$radarLeft
-onready var radarRight=$radarRight
-onready var radarTop=$radarTop
-onready var radarBottom=$radarBottom
 onready var ani=$ani
 onready var shootTimer=$shootTimer
 onready var ship=$ship
