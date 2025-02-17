@@ -11,4 +11,9 @@ script = ExtResource( 1 )
 [node name="produceTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="nextLevel" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
 [connection signal="timeout" from="produceTimer" to="." method="_on_produceTimer_timeout"]
+[connection signal="timeout" from="nextLevel" to="." method="_on_nextLevel_timeout"]

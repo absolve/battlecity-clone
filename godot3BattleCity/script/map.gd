@@ -166,3 +166,27 @@ func addEnemy(isFreeze=false):
 func addBonus():
 	
 	pass
+
+#获取玩家数据
+func getPlayerStatus():
+	var temp={'p1':{
+		'level':0,
+		'armour':0,
+		'hasShip':false
+	},
+	'p2':{
+		'level':0,
+		'armour':0,
+		'hasShip':false
+	}}
+	for i in tanksNode.get_children():
+		if i.objType==Game.objType.PLAYER:
+			if i.playerId==Game.playerId.p1:
+				temp['p1']['level']=i.level
+				temp['p1']['armour']=i.armour
+				temp['p1']['hasShip']=i.hasShip
+			elif i.playerId==Game.playerId.p2:
+				temp['p2']['level']=i.level
+				temp['p2']['armour']=i.armour
+				temp['p2']['hasShip']=i.hasShip
+	return temp

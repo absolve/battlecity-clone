@@ -46,7 +46,7 @@ func _ready():
 func _physics_process(delta):
 	if state==Game.tankstate.START:
 		lastDir=dir
-		
+		isStop=false
 		if dir==Game.dir.DOWN:
 			vec=Vector2(0,speed)
 		elif dir==Game.dir.UP:
@@ -62,18 +62,18 @@ func _physics_process(delta):
 #			keepMoveTime-=15
 #			vec=Vector2.ZERO
 		
-		if dir==Game.dir.LEFT && leftIsStop:
-			keepMoveTime-=15
-			vec=Vector2.ZERO
-		elif dir==Game.dir.RIGHT && rightIsStop:
-			keepMoveTime-=15
-			vec=Vector2.ZERO
-		elif dir==Game.dir.UP && topIsStop:
-			keepMoveTime-=15
-			vec=Vector2.ZERO
-		elif dir==Game.dir.DOWN&& bottomIsStop:
-			keepMoveTime-=15
-			vec=Vector2.ZERO
+#		if dir==Game.dir.LEFT && leftIsStop:
+#			keepMoveTime-=15
+#			vec=Vector2.ZERO
+#		elif dir==Game.dir.RIGHT && rightIsStop:
+#			keepMoveTime-=15
+#			vec=Vector2.ZERO
+#		elif dir==Game.dir.UP && topIsStop:
+#			keepMoveTime-=15
+#			vec=Vector2.ZERO
+#		elif dir==Game.dir.DOWN&& bottomIsStop:
+#			keepMoveTime-=15
+#			vec=Vector2.ZERO
 			
 		if moveTime>keepMoveTime: #改变方向
 			moveTime=0
@@ -108,14 +108,45 @@ func _physics_process(delta):
 		animation(dir,vec)
 
 
-		if dir==Game.dir.LEFT && !leftIsStop:
-			position+=vec*delta
-		elif dir==Game.dir.RIGHT && !rightIsStop:
-			position+=vec*delta
-		elif dir==Game.dir.UP && !topIsStop:
-			position+=vec*delta
-		elif dir==Game.dir.DOWN&& !bottomIsStop:
-			position+=vec*delta
+#		if dir==Game.dir.LEFT && !leftIsStop:
+#			position+=vec*delta
+#		elif dir==Game.dir.RIGHT && !rightIsStop:
+#			position+=vec*delta
+#		elif dir==Game.dir.UP && !topIsStop:
+#			position+=vec*delta
+#		elif dir==Game.dir.DOWN&& !bottomIsStop:
+#			position+=vec*delta
+		var space_state = get_world_2d().direct_space_state
+		if dir==Game.dir.LEFT:
+			var result=space_state.intersect_ray(global_position,global_position+Vector2(-14,0)
+			,[self],1+2+4,false,true)
+			if result:
+				if position.distance_to(result.position) >24:
+					isStop=true
+		elif dir==Game.dir.RIGHT:
+			var result=space_state.intersect_ray(global_position,global_position+Vector2(14,0)
+			,[self],1+2+4,false,true)
+			if result:
+				if position.distance_to(result.position) >24:
+					isStop=true
+		
+		elif dir==Game.dir.UP:
+			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,-14)
+			,[self],1+2+4,false,true)
+			if result:
+				if position.distance_to(result.position) >24:
+					isStop=true
+		elif dir==Game.dir.DOWN:
+			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,14)
+			,[self],1+2+4,false,true)
+			if result:
+				if position.distance_to(result.position) >24:
+					isStop=true
+		
+		if !isStop:
+			position+=vec*delta	
+		else:
+			keepMoveTime-=15
 
 		#调整一下位置
 		if position.x<=tankSize/2:
@@ -301,7 +332,7 @@ func _on_tank_area_entered(area):
 				addExplode()
 				bodyShape.call_deferred('set_disabled',false)
 				call_deferred('queue_free')	
-
+				Game.emit_signal("destroyEnemy",type,area.get('playerId'),global_position)
 
 
 func _on_radarRight_area_entered(area):

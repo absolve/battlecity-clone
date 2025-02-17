@@ -53,17 +53,46 @@ func _physics_process(delta):
 			fire()
 		
 		animation(dir,vec)		
-		if dir==Game.dir.LEFT && !leftIsStop:
-			position+=vec*delta
-		elif dir==Game.dir.RIGHT && !rightIsStop:
-			position+=vec*delta
-		elif dir==Game.dir.UP && !topIsStop:
-			position+=vec*delta
-		elif dir==Game.dir.DOWN&& !bottomIsStop:
-			position+=vec*delta
-		
+#		if dir==Game.dir.LEFT && !leftIsStop:
+#			position+=vec*delta
+#		elif dir==Game.dir.RIGHT && !rightIsStop:
+#			position+=vec*delta
+#		elif dir==Game.dir.UP && !topIsStop:
+#			position+=vec*delta
+#		elif dir==Game.dir.DOWN&& !bottomIsStop:
+#			position+=vec*delta
+		var space_state = get_world_2d().direct_space_state
+		if dir==Game.dir.LEFT:
+			var result=space_state.intersect_ray(global_position,global_position+Vector2(-14,0)
+			,[self],1+2+4,false,true)
+			if result:
+				print(global_position.distance_to(result.collider.global_position))
+				pass
+			else:
+				position+=vec*delta
+		elif dir==Game.dir.RIGHT:
+			var result=space_state.intersect_ray(global_position,global_position+Vector2(14,0)
+			,[self],1+2+4,false,true)
+			if result:
+				print(global_position.distance_to(result.collider.global_position))
+				pass
+			else:
+				position+=vec*delta
+		elif dir==Game.dir.UP:
+			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,-14)
+			,[self],1+2+4,false,true)
+			if result:
+				pass
+			else:
+				position+=vec*delta	
+		elif dir==Game.dir.DOWN:
+			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,14)
+			,[self],1+2+4,false,true)
+			if result:
+				pass
+			else:
+				position+=vec*delta		
 			
-
 		#调整一下位置
 		if position.x<=tankSize/2:
 			position.x=tankSize/2
