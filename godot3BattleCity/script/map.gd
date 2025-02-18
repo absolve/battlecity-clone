@@ -120,12 +120,12 @@ func addPlayer(playNo:int):
 		var temp=player.instance()
 		temp.playerId=Game.playerId.p1
 		temp.position=Vector2(9*cellSize,25*cellSize)
-		tanksNode.add_child(temp)
+		tanksNode.call_deferred('add_child',temp)
 	elif playNo==2:
 		var temp=player.instance()
 		temp.playerId=Game.playerId.p2
 		temp.position=Vector2(17*cellSize,25*cellSize)
-		tanksNode.add_child(temp)
+		tanksNode.call_deferred('add_child',temp)
 
 #添加子弹
 func addBullet(obj):
@@ -164,9 +164,26 @@ func addEnemy(isFreeze=false):
 
 #添加物品 物品不在基地附近和玩家当前附近
 func addBonus():
+	for i in otherNode.get_children():
+		if i.get('objType')==Game.objType.BONUS:
+			otherNode.remove_child(i)
+	var playerPos=[]
+	for i in tanksNode.get_children():
+		if i.get('objType')	==Game.objType.PLAYER:
+			var p=Vector2(round(i.position.x/16),round(i.position.y/16))
+			playerPos.append(p)
+			playerPos.append(Vector2(p.x-1,p.y))
+			playerPos.append(Vector2(p.x+1,p.y))
+			
+	#不在基地和玩家附近
+	var pos = Vector2(randi()%25+1,randi()%25+1)
+	while pos in basePlacePos && pos in playerPos:
+		pos = Vector2(randi()%25+1,randi()%25+1)
+	var temp=bonus.instance()	
+	temp.position=pos*cellSize
+	temp.setRandomType()
+	otherNode.add_child(temp)
 	
-	pass
-
 #获取玩家数据
 func getPlayerStatus():
 	var temp={'p1':{

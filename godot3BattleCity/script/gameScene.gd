@@ -13,12 +13,15 @@ func _ready():
 	map.loadMap(mapDir+"/"+'1.json')
 	map.loadEnemyCount()
 	map.addPlayer(1)
-	map.addPlayer(2)
+#	map.addPlayer(2)
 	map.removeEnemyLogo()
+	map.setP1LiveNum(Game.p1Data.lives)
+	map.setP2LiveNum(Game.p2Data.lives)
 	
 	Game.connect("baseDestroyed",self,"baseDestroyed")
 	Game.connect('addBonus',self,'addBonus')
 	Game.connect('destroyEnemy',self,'destroyEnemy')
+	Game.connect('hitPlayer',self,'hitPlayer')
 	produceTimer.start()
 
 #基地爆炸
@@ -67,6 +70,22 @@ func destroyEnemy(type,playerId,pos):
 			Game.p2Data['p2Score']+=400
 			addScore(400,pos)
 
+#玩家被摧毁
+func hitPlayer(playerId):
+	print('hitPlayer',playerId)
+	if playerId==Game.playerId.p1:
+		if Game.p1Data.lives>0:
+			map.addPlayer(1)
+			Game.p1Data.lives-=1
+			map.setP1LiveNum(Game.p1Data.lives)
+	elif playerId==Game.playerId.p2:
+		if Game.p2Data.lives>0:	
+			map.addPlayer(2)
+			Game.p2Data.lives-=1
+			map.setP2LiveNum(Game.p2Data.lives)
+	#如果玩家生命都为0，游戏结束
+	
+			
 #添加分数
 func addScore(s,pos):
 	var temp=scoreLabel.instance()

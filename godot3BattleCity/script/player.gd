@@ -8,6 +8,8 @@ var maxBullet=1
 var objType=Game.objType.PLAYER
 var level=Game.level.MIN  #玩家坦克级别
 var keymap={"up":0,"down":0,"left":0,"right":0,'shoot':0}
+var greenColor=['#0d472f','#d9ffe7','#5ea77b']  #外表颜色
+var rayLength=16  #射线长度
 
 func _ready():
 	collision_layer=1+8
@@ -54,57 +56,91 @@ func _physics_process(delta):
 			fire()
 		
 		animation(dir,vec)		
-#		if dir==Game.dir.LEFT && !leftIsStop:
-#			position+=vec*delta
-#		elif dir==Game.dir.RIGHT && !rightIsStop:
-#			position+=vec*delta
-#		elif dir==Game.dir.UP && !topIsStop:
-#			position+=vec*delta
-#		elif dir==Game.dir.DOWN&& !bottomIsStop:
-#			position+=vec*delta
+
 		var space_state = get_world_2d().direct_space_state
 		if dir==Game.dir.LEFT:
-			var result=space_state.intersect_ray(global_position,global_position+Vector2(-14,0)
-			,[self],1+2+4,false,true)
-			if result:
-#				print(global_position.distance_to(result.collider.global_position))
+			var rayDir=[Vector2.LEFT,Vector2.LEFT.rotated(deg2rad(45))
+			,Vector2.LEFT.rotated(deg2rad(-45))]
+			var dirIsStop=[false,false,false]
+			for i in range(rayDir.size()):
+				var result=space_state.intersect_ray(global_position,
+				global_position+rayDir[i]*rayLength
+				,[self],1+2+4,false,true)
+				if result:
+	#				print(global_position.distance_to(result.collider.global_position))
+					dirIsStop[i]=true
+					if result.collider.get('objType')==Game.objType.BRICK:
+						var type=result.collider.get('type')
+						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+							dirIsStop[i]=false
+					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+						if global_position.distance_to(result.collider.global_position)<14:
+							dirIsStop[i]=false	
+			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
 				isStop=true
-				if result.collider.get('objType')==Game.objType.BRICK:
-					var type=result.collider.get('type')
-					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-						isStop=false
-				
+					
 		elif dir==Game.dir.RIGHT:
-			var result=space_state.intersect_ray(global_position,global_position+Vector2(14,0)
-			,[self],1+2+4,false,true)
-			if result:
-#				print(global_position.distance_to(result.collider.global_position))
-				isStop=true
-				if result.collider.get('objType')==Game.objType.BRICK:
-					var type=result.collider.get('type')
-					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-						isStop=false
+			var rayDir=[Vector2.RIGHT,Vector2.RIGHT.rotated(deg2rad(45))
+			,Vector2.RIGHT.rotated(deg2rad(-45))]
+			var dirIsStop=[false,false,false]
+			for i in range(rayDir.size()):
+				var result=space_state.intersect_ray(global_position,
+				global_position+rayDir[i]*rayLength
+				,[self],1+2+4,false,true)
+				if result:
+	#				print(global_position.distance_to(result.collider.global_position))
+					dirIsStop[i]=true
+					if result.collider.get('objType')==Game.objType.BRICK:
+						var type=result.collider.get('type')
+						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+							dirIsStop[i]=false
+					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+						if global_position.distance_to(result.collider.global_position)<14:
+							dirIsStop[i]=false			
+			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
+				isStop=true			
 		elif dir==Game.dir.UP:
-			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,-14)
-			,[self],1+2+4,false,true)
-			if result:
-#				print(global_position.distance_to(result.collider.global_position))
-				isStop=true
-				if result.collider.get('objType')==Game.objType.BRICK:
-					var type=result.collider.get('type')
-					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-						isStop=false
+			var rayDir=[Vector2.UP,Vector2.UP.rotated(deg2rad(45))
+			,Vector2.UP.rotated(deg2rad(-45))]
+			var dirIsStop=[false,false,false]
+			for i in range(rayDir.size()):
+				var result=space_state.intersect_ray(global_position,
+				global_position+rayDir[i]*rayLength
+				,[self],1+2+4,false,true)
+				if result:
+	#				print(global_position.distance_to(result.collider.global_position))
+					dirIsStop[i]=true
+					if result.collider.get('objType')==Game.objType.BRICK:
+						var type=result.collider.get('type')
+						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+							dirIsStop[i]=false
+					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+						if global_position.distance_to(result.collider.global_position)<14:
+							dirIsStop[i]=false			
+			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
+				isStop=true					
+							
 		elif dir==Game.dir.DOWN:
-			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,14)
-			,[self],1+2+4,false,true)
-			if result:
-				print(global_position.distance_to(result.collider.global_position))
-				isStop=true
-				if result.collider.get('objType')==Game.objType.BRICK:
-					var type=result.collider.get('type')
-					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-						isStop=false
-		
+			var rayDir=[Vector2.DOWN,Vector2.DOWN.rotated(deg2rad(45))
+			,Vector2.DOWN.rotated(deg2rad(-45))]
+			var dirIsStop=[false,false,false]
+			for i in range(rayDir.size()):
+				var result=space_state.intersect_ray(global_position,
+				global_position++rayDir[i]*rayLength
+				,[self],1+2+4,false,true)
+				if result:
+#					print(global_position.distance_to(result.collider.global_position))
+					dirIsStop[i]=true
+					if result.collider.get('objType')==Game.objType.BRICK:
+						var type=result.collider.get('type')
+						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+							dirIsStop[i]=false
+					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+						if global_position.distance_to(result.collider.global_position)<14:
+							dirIsStop[i]=false			
+			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
+				isStop=true	
+					
 		if !isStop:
 			position+=vec*delta		
 			
@@ -162,7 +198,7 @@ func addExplode(isBig=true):
 		
 #开始初始化
 func startInit():
-	bodyShape.disabled=true
+	bodyShape.call_deferred('set_disabled',true)
 	initTimer.start()
 	ani.play('flash')
 	

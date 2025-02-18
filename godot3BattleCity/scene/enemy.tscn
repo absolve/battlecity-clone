@@ -104,9 +104,6 @@ material = ExtResource( 9 )
 frames = SubResource( 1 )
 animation = "typeA_run"
 
-[node name="shape" parent="." index="1"]
-visible = false
-
 [node name="player" type="AnimationPlayer" parent="." index="7"]
 anims/RESET = SubResource( 3 )
 anims/blink = SubResource( 2 )

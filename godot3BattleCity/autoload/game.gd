@@ -46,8 +46,8 @@ enum enemyType{
 }
 
 #玩家数据
-var p1Data={'p1Score':0,'p1Lives':2,'level':level.MIN,'armour':0,'hasShip':false}
-var p2Data={'p2Score':0,'p2Lives':2,'level':level.MIN,'armour':0,'hasShip':false}
+var p1Data={'p1Score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
+var p2Data={'p2Score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
 var p1Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 var p2Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 var gameLevel=1 #游戏关卡

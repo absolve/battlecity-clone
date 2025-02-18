@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://script/welcome.gd" type="Script" id=1]
+[ext_resource path="res://sprite/battle_city.png" type="Texture" id=2]
 
 [node name="welcome" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 256, 104 )
+texture = ExtResource( 2 )

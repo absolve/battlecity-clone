@@ -15,6 +15,7 @@ var armourColor1=['#1b3f5f','#d8f2b9','#7f963b']
 var armourColor2=['#0d472f','#d9ffe7','#5ea77b']
 var armourColor3=['#8f0077','#ffffff','#db2b00']
 var hasItem=false #有物品
+var rayLength=16  #射线长度
 
 onready var player=$player
 
@@ -35,12 +36,12 @@ func _ready():
 		bulletPower=Game.bulletPower.FAST
 		speed-=10
 	
-#	if randi()>=0.7:
-#		if armour<3:
-#			armour+=1
-#		hasItem=true
+	if randi()%10>=7:
+		if armour<3:
+			armour+=1
+		hasItem=true
 #	hasItem=true	
-	armour=2
+#	armour=2
 	keepMoveTime=randi()%300+80
 	startInit()
 
@@ -60,19 +61,6 @@ func _physics_process(delta):
 		moveTime+=1
 		fireTime+=1
 #		if isStop:
-#			keepMoveTime-=15
-#			vec=Vector2.ZERO
-		
-#		if dir==Game.dir.LEFT && leftIsStop:
-#			keepMoveTime-=15
-#			vec=Vector2.ZERO
-#		elif dir==Game.dir.RIGHT && rightIsStop:
-#			keepMoveTime-=15
-#			vec=Vector2.ZERO
-#		elif dir==Game.dir.UP && topIsStop:
-#			keepMoveTime-=15
-#			vec=Vector2.ZERO
-#		elif dir==Game.dir.DOWN&& bottomIsStop:
 #			keepMoveTime-=15
 #			vec=Vector2.ZERO
 			
@@ -108,64 +96,108 @@ func _physics_process(delta):
 			turnDirection()
 		animation(dir,vec)
 
-
-#		if dir==Game.dir.LEFT && !leftIsStop:
-#			position+=vec*delta
-#		elif dir==Game.dir.RIGHT && !rightIsStop:
-#			position+=vec*delta
-#		elif dir==Game.dir.UP && !topIsStop:
-#			position+=vec*delta
-#		elif dir==Game.dir.DOWN&& !bottomIsStop:
-#			position+=vec*delta
 		var space_state = get_world_2d().direct_space_state
 		if dir==Game.dir.LEFT:
-			var result=space_state.intersect_ray(global_position,global_position+Vector2(-14,0)
-			,[self],1+2+4,false,true)
-			if result:
+			var rayDir=[Vector2.LEFT,Vector2.LEFT.rotated(deg2rad(45))
+			,Vector2.LEFT.rotated(deg2rad(-45))]
+			var dirIsStop=[false,false,false]
+			for i in range(rayDir.size()):
+				var result=space_state.intersect_ray(global_position,
+				global_position+rayDir[i]*rayLength
+				,[self],1+2+4,false,true)
+				if result:
+	#				print(global_position.distance_to(result.collider.global_position))
+					dirIsStop[i]=true
+					if result.collider.get('objType')==Game.objType.BRICK:
+						var type=result.collider.get('type')
+						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+							dirIsStop[i]=false
+					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+						if global_position.distance_to(result.collider.global_position)<14:
+							dirIsStop[i]=false	
+			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
 				isStop=true
-#				if global_position.distance_to(result.collider.global_position) <20:
-#					isStop=false
+					
 		elif dir==Game.dir.RIGHT:
-			var result=space_state.intersect_ray(global_position,global_position+Vector2(14,0)
-			,[self],1+2+4,false,true)
-			if result:
-				isStop=true
-#				if global_position.distance_to(result.collider.global_position) <20:
-#					isStop=false
-		
+			var rayDir=[Vector2.RIGHT,Vector2.RIGHT.rotated(deg2rad(45))
+			,Vector2.RIGHT.rotated(deg2rad(-45))]
+			var dirIsStop=[false,false,false]
+			for i in range(rayDir.size()):
+				var result=space_state.intersect_ray(global_position,
+				global_position+rayDir[i]*rayLength
+				,[self],1+2+4,false,true)
+				if result:
+	#				print(global_position.distance_to(result.collider.global_position))
+					dirIsStop[i]=true
+					if result.collider.get('objType')==Game.objType.BRICK:
+						var type=result.collider.get('type')
+						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+							dirIsStop[i]=false
+					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+						if global_position.distance_to(result.collider.global_position)<14:
+							dirIsStop[i]=false			
+			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
+				isStop=true			
 		elif dir==Game.dir.UP:
-			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,-14)
-			,[self],1+2+4,false,true)
-			if result:
-				isStop=true
-#				if global_position.distance_to(result.collider.global_position) <20:
-#					isStop=false
+			var rayDir=[Vector2.UP,Vector2.UP.rotated(deg2rad(45))
+			,Vector2.UP.rotated(deg2rad(-45))]
+			var dirIsStop=[false,false,false]
+			for i in range(rayDir.size()):
+				var result=space_state.intersect_ray(global_position,
+				global_position+rayDir[i]*rayLength
+				,[self],1+2+4,false,true)
+				if result:
+	#				print(global_position.distance_to(result.collider.global_position))
+					dirIsStop[i]=true
+					if result.collider.get('objType')==Game.objType.BRICK:
+						var type=result.collider.get('type')
+						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+							dirIsStop[i]=false
+					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+						if global_position.distance_to(result.collider.global_position)<14:
+							dirIsStop[i]=false			
+			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
+				isStop=true					
+							
 		elif dir==Game.dir.DOWN:
-			var result=space_state.intersect_ray(global_position,global_position+Vector2(0,14)
-			,[self],1+2+4,false,true)
-			if result:
-				isStop=true
-#				if global_position.distance_to(result.collider.global_position) <20:
-#					isStop=false
+			var rayDir=[Vector2.DOWN,Vector2.DOWN.rotated(deg2rad(45))
+			,Vector2.DOWN.rotated(deg2rad(-45))]
+			var dirIsStop=[false,false,false]
+			for i in range(rayDir.size()):
+				var result=space_state.intersect_ray(global_position,
+				global_position++rayDir[i]*rayLength
+				,[self],1+2+4,false,true)
+				if result:
+#					print(global_position.distance_to(result.collider.global_position))
+					dirIsStop[i]=true
+					if result.collider.get('objType')==Game.objType.BRICK:
+						var type=result.collider.get('type')
+						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+							dirIsStop[i]=false
+					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+						if global_position.distance_to(result.collider.global_position)<14:
+							dirIsStop[i]=false			
+			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
+				isStop=true	
 		
 		if !isStop:
 			position+=vec*delta	
 		else:
-			keepMoveTime-=10
+			keepMoveTime-=25
 
 		#调整一下位置
 		if position.x<=tankSize/2:
 			position.x=tankSize/2
-			keepMoveTime-=10
+			keepMoveTime-=20
 		if position.x>=mapSize.x-tankSize/2:	
 			position.x=mapSize.x-tankSize/2
-			keepMoveTime-=10
+			keepMoveTime-=20
 		if position.y<=tankSize/2:
 			position.y=tankSize/2
-			keepMoveTime-=10
+			keepMoveTime-=20
 		if position.y>=mapSize.y-tankSize/2:	
 			position.y=mapSize.y-tankSize/2
-			keepMoveTime-=10
+			keepMoveTime-=20
 			
 #改变方向的时候调整位置
 func turnDirection():
@@ -326,8 +358,7 @@ func _on_initTimer_timeout():
 	setColor()
 
 func _on_tank_area_entered(area):
-	if area.get('objType')==Game.objType.BULLET:
-		
+	if area.get('objType')==Game.objType.BULLET:	
 		if area.get('own')==Game.objType.PLAYER:
 			if armour>0:
 				armour-=1
