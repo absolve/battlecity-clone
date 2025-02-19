@@ -45,6 +45,11 @@ enum enemyType{
 	TYPEA=90,TYPEB,TYPEC,TYPED
 }
 
+#游戏状态
+enum gameState{
+	IDLE=70,START
+}
+
 #玩家数据
 var p1Data={'p1Score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
 var p2Data={'p2Score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
@@ -58,6 +63,7 @@ signal baseDestroyed
 signal hitPlayer
 signal addBonus
 signal destroyEnemy
+signal getBonus
 
 var map
 

@@ -20,10 +20,10 @@ var bulletPower=Game.bulletPower.NORMAL
 var tankSize=28
 var armour=0  #护甲  最大4
 #四个方向是否可以前进
-var leftIsStop=false
-var rightIsStop=false
-var topIsStop=false
-var bottomIsStop=false
+#var leftIsStop=false
+#var rightIsStop=false
+#var topIsStop=false
+#var bottomIsStop=false
 
 const cellSize=16	#每个格子的大小是16px
 var mapSize=Vector2(cellSize*26,cellSize*26)
@@ -39,7 +39,7 @@ onready var invincibleTimer=$invincibleTimer
 onready var initTimer=$initTimer
 
 #设置无敌
-func startinvincible(time=10):
+func startinvincible(time=8):
 	isInvincible=true
 	invincibleTimer.start(time)
 	invincible.visible=true

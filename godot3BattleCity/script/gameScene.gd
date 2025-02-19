@@ -3,8 +3,19 @@ extends Node2D
 const mapDir="res://level"	#内置地图路径
 onready var map=$map
 onready var produceTimer=$produceTimer
+onready var nextLevel=$nextLevel
+onready var shovelTimer=$shovelTimer
+onready var clockTimer=$clockTimer
+
 var minEnemyCount=20	#最小同屏敌人数量 2人就6个
 var scoreLabel=preload("res://scene/scoreLabel.tscn")
+var hasShovel=false #有铲子
+var hasClock=false #时钟
+var state=Game.gameState.IDLE
+var changeBrickTime=0
+var changeBrickDelay=30
+var brickType=Game.brickType.WALL
+
 
 func _ready():
 	randomize()
@@ -14,7 +25,6 @@ func _ready():
 	map.loadEnemyCount()
 	map.addPlayer(1)
 #	map.addPlayer(2)
-	map.removeEnemyLogo()
 	map.setP1LiveNum(Game.p1Data.lives)
 	map.setP2LiveNum(Game.p2Data.lives)
 	
@@ -22,7 +32,9 @@ func _ready():
 	Game.connect('addBonus',self,'addBonus')
 	Game.connect('destroyEnemy',self,'destroyEnemy')
 	Game.connect('hitPlayer',self,'hitPlayer')
+	Game.connect("getBonus",self,'getBonus')
 	produceTimer.start()
+	
 
 #基地爆炸
 func baseDestroyed():
@@ -31,6 +43,7 @@ func baseDestroyed():
 #添加物品
 func addBonus():
 	print('addBonus')
+	map.addBonus()
 
 #敌人被摧毁
 func destroyEnemy(type,playerId,pos):
@@ -102,17 +115,83 @@ func savePlayerData():
 	Game.p2Data['level']=temp['p2']['level']
 	Game.p2Data['armour']=temp['p2']['armour']
 	Game.p2Data['hasShip']=temp['p2']['hasShip']
+
+#获取物品
+func getBonus(type,objType,playerId):
+	print(type,objType,playerId)
+	if playerId==Game.playerId.p1:
+		Game.p1Score['p1Score']+=500
+	elif playerId==Game.playerId.p2:
+		Game.p1Score['p2Score']+=500
+	var tank=map.getPlayer(playerId)
+	if !tank:
+		return
+	addScore(500,tank.global_position)
+	if type==Game.bonusType.GRENADE:
+		pass
+	elif type==Game.bonusType.TANK:
+		if playerId==Game.playerId.p1:
+			Game.p1Data.lives+=1
+			map.setP1LiveNum(Game.p1Data.lives)
+		elif playerId==Game.playerId.p2:
+			Game.p2Data.lives+=1
+			map.setP2LiveNum(Game.p2Data.lives)
 	
+	elif type==Game.bonusType.HELMET:
+		tank.startinvincible()
+	elif type==Game.bonusType.BOAT:
+		tank.setShip(true)
+	elif type==Game.bonusType.STAR:
+		tank.upgrade()
+	elif type==Game.bonusType.GUN:
+		tank.upgrade2Max()
+	elif type==Game.bonusType.CLOCK:
+		hasClock=true
+		clockTimer.start()
+		map.setEnemyFreeze()
+	elif type==Game.bonusType.SHOVEL:
+		hasShovel=true
+		map.delBasePlaceBrick()
+		map.addBasePlaceStone()
+			
+func _physics_process(delta):
+	if state==Game.gameState.START:
+		if hasShovel:
+			if shovelTimer.get_time_left()<=5:
+				changeBrickTime+=1
+				if changeBrickTime>changeBrickDelay:
+					changeBrickTime=0
+					map.changeBasePlaceBrickType(brickType)
+					if brickType==Game.brickType.WALL:
+						brickType=Game.brickType.STONE
+					else:
+						brickType=Game.brickType.WALL	
+	
+
 func _on_produceTimer_timeout():
 	if map.enemyCount>0:
 		if map.getEnemyCount()<minEnemyCount:
-			map.addEnemy()
+			if hasClock:
+				map.addEnemy(true)
+			else:	
+				map.addEnemy()
 	else: #判断是不是所有敌人都消灭了
 		if map.getEnemyCount()==0:
 			produceTimer.stop()
 			#保存玩家数据进入下一关
 			savePlayerData()
+			nextLevel.start()
 
 func _on_nextLevel_timeout():
 	Game.changeScene("res://scene/settlement.tscn")
 
+
+func _on_shovelTimer_timeout():
+	hasShovel=false
+	map.changeBasePlaceBrickType(Game.brickType.WALL)
+	changeBrickTime=0
+	brickType=Game.brickType.WALL
+	
+func _on_clockTimer_timeout():
+	map.setEnemyFreeze(false)
+	hasClock=false

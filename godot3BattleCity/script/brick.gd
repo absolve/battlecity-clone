@@ -28,6 +28,9 @@ func setType(value):
 #改变类型
 func changeType(value):
 	self.type=value
+	blockMask=[1,1,1,1]
+	ani.material.set_shader_param('block',Color(blockMask[0],
+				blockMask[1],blockMask[2],blockMask[3]))	
 	setType(value)
 	
 

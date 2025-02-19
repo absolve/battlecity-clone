@@ -69,7 +69,7 @@ func loadMap(filePath:String):
 func loadEnemyCount():
 	for i in enemyList.get_children():
 		i.queue_free()
-	for i in range(enemyCount+1):
+	for i in range(enemyCount):
 		var temp=enemyLogo.instance()
 		enemyList.add_child(temp)
 
@@ -98,6 +98,31 @@ func delBasePlaceBrick():
 		if temp:
 			temp.queue_free()
 
+#添加基地周边石头
+func addBasePlaceStone():
+	for i in basePlacePos:
+		var temp=brick.instance()
+		temp.type=Game.brickType.STONE
+		temp.position=i*cellSize+cellSize/2
+		brickNode.add_child(temp)
+
+#改变砖块类型
+func changeBasePlaceBrickType(type):
+	for i in basePlacePos:
+		var b=getBrick(i.x,i.y)
+		if b:
+			b.changeType(type)
+		else:
+			var temp=brick.instance()
+			temp.type=type
+			temp.position=i*cellSize+cellSize/2
+			brickNode.add_child(temp)
+
+
+func setEnemyFreeze(flag=true):
+	for i in tanksNode.get_children():
+		if i.get('objType')==Game.objType.ENEMY:
+			i.setFreeze(flag)
 
 #创建基地	
 func createBase():
@@ -158,6 +183,8 @@ func addEnemy(isFreeze=false):
 	var types=[Game.enemyType.TYPEA,Game.enemyType.TYPEB,
 				Game.enemyType.TYPEC,Game.enemyType.TYPED]
 	temp.type=types[randi()%4]
+	if isFreeze:
+		temp.setFreeze()
 	tanksNode.add_child(temp)
 	removeEnemyLogo()
 	enemyCount-=1
@@ -207,3 +234,12 @@ func getPlayerStatus():
 				temp['p2']['armour']=i.armour
 				temp['p2']['hasShip']=i.hasShip
 	return temp
+
+#获取玩家
+func getPlayer(id):
+	var tank
+	for i in tanksNode.get_children():
+		if i.get('objType')==Game.objType.PLAYER && i.get('playerId')==id:
+			tank=i
+			break
+	return tank

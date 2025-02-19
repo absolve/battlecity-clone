@@ -9,11 +9,25 @@ script = ExtResource( 1 )
 [node name="map" parent="." instance=ExtResource( 2 )]
 
 [node name="produceTimer" type="Timer" parent="."]
+process_mode = 0
 wait_time = 2.0
 
 [node name="nextLevel" type="Timer" parent="."]
+process_mode = 0
 wait_time = 1.5
+one_shot = true
+
+[node name="shovelTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 15.0
+one_shot = true
+
+[node name="clockTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 8.0
 one_shot = true
 
 [connection signal="timeout" from="produceTimer" to="." method="_on_produceTimer_timeout"]
 [connection signal="timeout" from="nextLevel" to="." method="_on_nextLevel_timeout"]
+[connection signal="timeout" from="shovelTimer" to="." method="_on_shovelTimer_timeout"]
+[connection signal="timeout" from="clockTimer" to="." method="_on_clockTimer_timeout"]

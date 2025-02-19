@@ -58,88 +58,38 @@ func _physics_process(delta):
 		animation(dir,vec)		
 
 		var space_state = get_world_2d().direct_space_state
+		var rayDir=[]
+		var dirIsStop=[false,false,false]
 		if dir==Game.dir.LEFT:
-			var rayDir=[Vector2.LEFT,Vector2.LEFT.rotated(deg2rad(45))
+			rayDir=[Vector2.LEFT,Vector2.LEFT.rotated(deg2rad(45))
 			,Vector2.LEFT.rotated(deg2rad(-45))]
-			var dirIsStop=[false,false,false]
-			for i in range(rayDir.size()):
-				var result=space_state.intersect_ray(global_position,
-				global_position+rayDir[i]*rayLength
-				,[self],1+2+4,false,true)
-				if result:
-	#				print(global_position.distance_to(result.collider.global_position))
-					dirIsStop[i]=true
-					if result.collider.get('objType')==Game.objType.BRICK:
-						var type=result.collider.get('type')
-						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-							dirIsStop[i]=false
-					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-						if global_position.distance_to(result.collider.global_position)<14:
-							dirIsStop[i]=false	
-			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-				isStop=true
-					
 		elif dir==Game.dir.RIGHT:
-			var rayDir=[Vector2.RIGHT,Vector2.RIGHT.rotated(deg2rad(45))
+			rayDir=[Vector2.RIGHT,Vector2.RIGHT.rotated(deg2rad(45))
 			,Vector2.RIGHT.rotated(deg2rad(-45))]
-			var dirIsStop=[false,false,false]
-			for i in range(rayDir.size()):
-				var result=space_state.intersect_ray(global_position,
-				global_position+rayDir[i]*rayLength
-				,[self],1+2+4,false,true)
-				if result:
-	#				print(global_position.distance_to(result.collider.global_position))
-					dirIsStop[i]=true
-					if result.collider.get('objType')==Game.objType.BRICK:
-						var type=result.collider.get('type')
-						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-							dirIsStop[i]=false
-					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-						if global_position.distance_to(result.collider.global_position)<14:
-							dirIsStop[i]=false			
-			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-				isStop=true			
 		elif dir==Game.dir.UP:
-			var rayDir=[Vector2.UP,Vector2.UP.rotated(deg2rad(45))
+			rayDir=[Vector2.UP,Vector2.UP.rotated(deg2rad(45))
 			,Vector2.UP.rotated(deg2rad(-45))]
-			var dirIsStop=[false,false,false]
-			for i in range(rayDir.size()):
-				var result=space_state.intersect_ray(global_position,
-				global_position+rayDir[i]*rayLength
-				,[self],1+2+4,false,true)
-				if result:
-	#				print(global_position.distance_to(result.collider.global_position))
-					dirIsStop[i]=true
-					if result.collider.get('objType')==Game.objType.BRICK:
-						var type=result.collider.get('type')
-						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-							dirIsStop[i]=false
-					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-						if global_position.distance_to(result.collider.global_position)<14:
-							dirIsStop[i]=false			
-			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-				isStop=true					
-							
 		elif dir==Game.dir.DOWN:
-			var rayDir=[Vector2.DOWN,Vector2.DOWN.rotated(deg2rad(45))
+			rayDir=[Vector2.DOWN,Vector2.DOWN.rotated(deg2rad(45))
 			,Vector2.DOWN.rotated(deg2rad(-45))]
-			var dirIsStop=[false,false,false]
-			for i in range(rayDir.size()):
-				var result=space_state.intersect_ray(global_position,
-				global_position++rayDir[i]*rayLength
-				,[self],1+2+4,false,true)
-				if result:
-#					print(global_position.distance_to(result.collider.global_position))
-					dirIsStop[i]=true
-					if result.collider.get('objType')==Game.objType.BRICK:
-						var type=result.collider.get('type')
-						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-							dirIsStop[i]=false
-					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-						if global_position.distance_to(result.collider.global_position)<14:
-							dirIsStop[i]=false			
-			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-				isStop=true	
+		for i in range(rayDir.size()):
+			var result=space_state.intersect_ray(global_position,
+			global_position+rayDir[i]*rayLength
+			,[self],1+2+4,false,true)
+			if result:
+				dirIsStop[i]=true
+				if result.collider.get('objType')==Game.objType.BRICK:
+					var type=result.collider.get('type')
+					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+						dirIsStop[i]=false
+					if type==Game.brickType.WATER&& hasShip:
+						dirIsStop[i]=false		
+				if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+					if global_position.distance_to(result.collider.global_position)<14:
+						dirIsStop[i]=false			
+		if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
+			isStop=true	
+		
 					
 		if !isStop:
 			position+=vec*delta		
@@ -190,7 +140,7 @@ func fire():
 		bullets.append(temp)
 		Game.map.addBullet(temp)
 
-func addExplode(isBig=true):
+func addExplosion(isBig=true):
 	var temp=explode.instance()
 	temp.big=isBig
 	temp.position=position
@@ -201,6 +151,28 @@ func startInit():
 	bodyShape.call_deferred('set_disabled',true)
 	initTimer.start()
 	ani.play('flash')
+
+#设置是否有船
+func setShip(flag:bool):
+	hasShip=flag
+	ship.visible=flag
+
+#升级	
+func upgrade():
+	if level==Game.level.MIN:
+		level==Game.level.MEDIUM
+		bulletPower=Game.bulletPower.FAST
+	elif level==Game.level.MEDIUM:
+		level==Game.level.SUPER
+		bulletPower=Game.bulletPower.SUPER
+		bulletMax=2
+
+#升级成肥坦克
+func upgrade2Max():
+	level==Game.level.SUPER
+	bulletPower=Game.bulletPower.SUPER
+	bulletMax=2
+	armour=1
 	
 func animation(dir,vec):
 	if dir==Game.dir.UP:
@@ -257,13 +229,20 @@ func _on_tank_area_entered(area):
 		if isInvincible:
 			return
 		if area.get('own')==Game.objType.ENEMY:
+			if hasShip:
+				setShip(false)
+				return
 			if armour>0:
 				armour-=1
+				if level==Game.level.SUPER:
+					level=Game.level.MEDIUM
+					bulletPower=Game.bulletPower.FAST
 			else:
-				addExplode()
+				addExplosion()
 				bodyShape.call_deferred('set_disabled',false)
 				call_deferred('queue_free')	
 				Game.emit_signal("hitPlayer",playerId)
-
-
+	if area.get('objType')==Game.objType.BONUS:
+		Game.emit_signal("getBonus",area.get('type'),objType,playerId)
+		area.call_deferred('queue_free')
 
