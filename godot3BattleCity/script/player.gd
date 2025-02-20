@@ -12,8 +12,8 @@ var greenColor=['#0d472f','#d9ffe7','#5ea77b']  #外表颜色
 var rayLength=16  #射线长度
 
 func _ready():
-	collision_layer=1+8
-	
+	collision_layer=1
+	collision_mask=8
 	speed=120	
 	startInit()
 	if playerId==Game.playerId.p1:
@@ -194,9 +194,23 @@ func animation(dir,vec):
 
 			
 	if vec!=Vector2.ZERO:	
-		ani.play("small_run")
+		if level==Game.level.MIN:
+			ani.play("small_run")
+		elif level==Game.level.MEDIUM:
+			ani.play('medium_run')	
+		elif level==Game.level.LARGE:
+			ani.play('large_run')	
+		elif level==Game.level.SUPER:
+			ani.play('super_run')		
 	else:
-		ani.play("small")	
+		if level==Game.level.MIN:
+			ani.play("small")
+		elif level==Game.level.MEDIUM:
+			ani.play('medium')	
+		elif level==Game.level.LARGE:
+			ani.play('large')	
+		elif level==Game.level.SUPER:
+			ani.play('super')	
 
 
 #func _on_radar_area_entered(area):

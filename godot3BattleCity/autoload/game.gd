@@ -37,7 +37,7 @@ enum bulletPower{
 
 #坦克状态
 enum tankstate{
-	IDLE,START,DEAD
+	IDLE,START,DEAD,FREEZE
 }
 
 #敌人坦克类型
@@ -55,8 +55,8 @@ enum gameMode{
 }
 
 #玩家数据
-var p1Data={'p1Score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
-var p2Data={'p2Score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
+var p1Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
+var p2Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
 var p1Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 var p2Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 var gameLevel=1 #游戏关卡

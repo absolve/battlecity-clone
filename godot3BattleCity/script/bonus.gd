@@ -21,10 +21,11 @@ func _ready():
 		ani.play("6")	
 	elif type==Game.bonusType.TANK:	
 		ani.play("7")
+	
 
 func setRandomType():
 	var arr=[Game.bonusType.BOAT,Game.bonusType.CLOCK,
 	Game.bonusType.GRENADE,Game.bonusType.GUN,Game.bonusType.HELMET,
 	Game.bonusType.SHOVEL,Game.bonusType.STAR,Game.bonusType.TANK]
 	type=arr[randi()%arr.size()]
-		
+	type=Game.bonusType.CLOCK	

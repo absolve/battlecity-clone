@@ -44,7 +44,7 @@ func startinvincible(time=8):
 	invincibleTimer.start(time)
 	invincible.visible=true
 	invincible.play("default")
-	
+	ani.play()
 
 func _on_shootTimer_timeout():
 	canShoot=true

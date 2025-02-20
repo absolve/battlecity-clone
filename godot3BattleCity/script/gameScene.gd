@@ -43,6 +43,7 @@ func baseDestroyed():
 #添加物品
 func addBonus():
 	print('addBonus')
+	SoundsUtil.playBouns()
 	map.addBonus()
 
 #敌人被摧毁
@@ -51,36 +52,36 @@ func destroyEnemy(type,playerId,pos):
 	if playerId==Game.playerId.p1:
 		if type==Game.enemyType.TYPEA:
 			Game.p1Score['typeA']+=1
-			Game.p1Data['p1Score']+=100
+			Game.p1Data['score']+=100
 			addScore(100,pos)
 		elif type==Game.enemyType.TYPEB:
 			Game.p1Score['typeB']+=1	
-			Game.p1Data['p1Score']+=200
+			Game.p1Data['score']+=200
 			addScore(200,pos)
 		elif type==Game.enemyType.TYPEC:
 			Game.p1Score['typeC']+=1	
-			Game.p1Data['p1Score']+=300
+			Game.p1Data['score']+=300
 			addScore(300,pos)
 		elif type==Game.enemyType.TYPED:
 			Game.p1Score['typeD']+=1
-			Game.p1Data['p1Score']+=400	
+			Game.p1Data['score']+=400	
 			addScore(400,pos)
 	elif playerId==Game.playerId.p2:
 		if type==Game.enemyType.TYPEA:
 			Game.p2Score['typeA']+=1
-			Game.p2Data['p2Score']+=100
+			Game.p2Data['score']+=100
 			addScore(100,pos)
 		elif type==Game.enemyType.TYPEB:
 			Game.p2Score['typeB']+=1	
-			Game.p2Data['p2Score']+=200
+			Game.p2Data['score']+=200
 			addScore(200,pos)
 		elif type==Game.enemyType.TYPEC:
 			Game.p2Score['typeC']+=1	
-			Game.p2Data['p2Score']+=300
+			Game.p2Data['score']+=300
 			addScore(300,pos)
 		elif type==Game.enemyType.TYPED:
 			Game.p2Score['typeD']+=1	
-			Game.p2Data['p2Score']+=400
+			Game.p2Data['score']+=400
 			addScore(400,pos)
 
 #玩家被摧毁
@@ -120,9 +121,9 @@ func savePlayerData():
 func getBonus(type,objType,playerId):
 	print(type,objType,playerId)
 	if playerId==Game.playerId.p1:
-		Game.p1Score['p1Score']+=500
+		Game.p1Data['score']+=500
 	elif playerId==Game.playerId.p2:
-		Game.p1Score['p2Score']+=500
+		Game.p2Data['score']+=500
 	var tank=map.getPlayer(playerId)
 	if !tank:
 		return
@@ -153,6 +154,13 @@ func getBonus(type,objType,playerId):
 		hasShovel=true
 		map.delBasePlaceBrick()
 		map.addBasePlaceStone()
+			
+	if type==Game.bonusType.TANK:	
+		SoundsUtil.playAddLives()
+	elif type==Game.bonusType.GRENADE:
+		SoundsUtil.playBomb()
+	else:
+		SoundsUtil.playGetBouns()			
 			
 func _physics_process(delta):
 	if state==Game.gameState.START:

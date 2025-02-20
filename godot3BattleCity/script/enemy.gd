@@ -40,12 +40,13 @@ func _ready():
 		if armour<3:
 			armour+=1
 		hasItem=true
-#	hasItem=true	
+	hasItem=true	
 #	armour=2
 	keepMoveTime=randi()%300+80
 	startInit()
 
 func _physics_process(delta):
+
 	if state==Game.tankstate.START:
 		lastDir=dir
 		isStop=false
@@ -297,6 +298,8 @@ func setFreeze(flag=true):
 	if flag:
 		isFreeze=flag
 		state=Game.tankstate.IDLE
+		if ani.animation!='flash':
+			ani.stop()
 	else:
 		isFreeze=false
 		if initTimer.is_stopped():
@@ -377,6 +380,8 @@ func setColor():
 func _on_initTimer_timeout():
 	if !isFreeze:
 		state=Game.tankstate.START
+	else:
+		animation(dir,Vector2.ZERO)	
 	bodyShape.disabled=false
 	setColor()
 

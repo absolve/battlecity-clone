@@ -183,9 +183,9 @@ func addEnemy(isFreeze=false):
 	var types=[Game.enemyType.TYPEA,Game.enemyType.TYPEB,
 				Game.enemyType.TYPEC,Game.enemyType.TYPED]
 	temp.type=types[randi()%4]
+	tanksNode.add_child(temp)
 	if isFreeze:
 		temp.setFreeze()
-	tanksNode.add_child(temp)
 	removeEnemyLogo()
 	enemyCount-=1
 
@@ -209,7 +209,8 @@ func addBonus():
 	var temp=bonus.instance()	
 	temp.position=pos*cellSize
 	temp.setRandomType()
-	otherNode.add_child(temp)
+	otherNode.call_deferred('add_child',temp)
+	
 	
 #获取玩家数据
 func getPlayerStatus():
