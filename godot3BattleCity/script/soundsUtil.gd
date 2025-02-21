@@ -5,6 +5,7 @@ onready var bouns=$bouns
 onready var addLives=$addLives
 onready var getBouns=$GetBouns
 onready var bomb=$bomb
+onready var award=$award
 
 func _ready():
 	pass
@@ -22,3 +23,6 @@ func playGetBouns():
 
 func playBomb():
 	bomb.play()
+
+func playAward():
+	award.play()

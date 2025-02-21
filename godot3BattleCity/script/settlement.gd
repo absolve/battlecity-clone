@@ -1,6 +1,6 @@
 extends Control
 
-var isGameOver=false
+export var isGameOver=false
 
 
 onready var levelNode=$HBoxContainer2/level
@@ -8,34 +8,53 @@ onready var highScoreNode=$HBoxContainer/highScore
 onready var p1ScoreNode=$VBoxContainer2/p1Score
 onready var p2ScoreNode=$VBoxContainer3/p2Score
 onready var totalResultNode=$totalResultNode
-onready var p1TotalNode=$HBoxContainer3/p1Total
-onready var p2TotalNode=$HBoxContainer3/p2Total
+onready var p1TotalNode=$totalResultNode/p1Total
+onready var p2TotalNode=$totalResultNode/p2Total
 onready var p1ScoreListNode=$p1ScoreList
+onready var p1TypeANode=$p1ScoreList/typeA
+onready var p1TypeAScoreNode=$p1ScoreList/typeA/typeAScore
+onready var p1TypeANumNode=$p1ScoreList/typeA/HBoxContainer/typeANum
+onready var p1TypeBNode=$p1ScoreList/typeB
+onready var p1TypeBScoreNode=$p1ScoreList/typeB/typeBScore
+onready var p1TypeBNumNode=$p1ScoreList/typeB/HBoxContainer/typeBNum
+onready var p1TypeCNode=$p1ScoreList/typeC
+onready var p1TypeCScoreNode=$p1ScoreList/typeC/typeCScore
+onready var p1TypeCNumNode=$p1ScoreList/typeC/HBoxContainer/typeCNum
+onready var p1TypeDNode=$p1ScoreList/typeD
+onready var p1TypeDScoreNode=$p1ScoreList/typeD/typeDScore
+onready var p1TypeDNumNode=$p1ScoreList/typeD/HBoxContainer/typeDNum
 
+onready var timer=$Timer
 
-var p1Total=0
-var p2Total=0
+var p1Score=0
+var p2Score=0
 var scoreType=[Game.enemyType.TYPEA,Game.enemyType.TYPEB,
 				Game.enemyType.TYPEC,Game.enemyType.TYPED]
 var countIndex=0
 
 func _ready():
-	p1ScoreNode.text="%d"%Game.p1Data['p1Score']
-	p2ScoreNode.text="%d"%Game.p2Data['p2Score']
-	if Game.p1Data['p1Score']>=Game.p2Data['p2Score']:
-		highScoreNode.text="%d"%Game.p1Data['p1Score']
+	p1Score=Game.p1Data['score']
+	p2Score=Game.p2Data['score']
+	p1ScoreNode.text="%d"%p1Score
+	p2ScoreNode.text="%d"%p2Score
+	levelNode.text='$d'%(Game.gameLevel+1)
+	
+	if p1Score>=p2Score:
+		highScoreNode.text="%d"%p2Score
 	else:
-		highScoreNode.text="%d"%Game.p2Data['p2Score']
+		highScoreNode.text="%d"%p2Score
 	
 	if Game.mode==Game.gameMode.SINGLE:
 		pass
 	elif Game.mode==Game.gameMode.DOUBLE:
 		pass
-	
+	print(Game.p1Score)
+	#显示分数	
+	showScore()
 		
 
 func showScore():
-	yield(get_tree(),"physics_frame")
+	
 	#从坦克A开始计算
 	if countIndex==0:
 		var resultP1=false
@@ -47,34 +66,116 @@ func showScore():
 		while tempP1Num<Game.p1Score['typeA']||tempP2Num<Game.p2Score['typeA']:
 			if tempP1Num<Game.p1Score['typeA']:
 				tempP1Num+=1
-			
+				setNumLable(0,Game.enemyType.TYPEA,tempP1Num)
+				
 			if tempP2Num<Game.p2Score['typeA']:
-				tempP2Num
-			
-			pass
-			
-		pass
-	pass
-
+				tempP2Num+=1
+			for i in range(15):
+				yield(get_tree(),"physics_frame")
+		countIndex+=1
+		showScore()	
+	elif countIndex==1:
+		var resultP1=false
+		var resultP2=true
+		if Game.mode==Game.gameMode.DOUBLE:
+			resultP2=false
+		var tempP1Num=0
+		var tempP2Num=0
+		while tempP1Num<Game.p1Score['typeB']||tempP2Num<Game.p2Score['typeB']:
+			if tempP1Num<Game.p1Score['typeB']:
+				tempP1Num+=1
+				setNumLable(0,Game.enemyType.TYPEB,tempP1Num)
+				
+			if tempP2Num<Game.p2Score['typeB']:
+				tempP2Num+=1
+			for i in range(15):
+				yield(get_tree(),"physics_frame")
+		countIndex+=1
+		showScore()	
+	elif countIndex==2:
+		var resultP1=false
+		var resultP2=true
+		if Game.mode==Game.gameMode.DOUBLE:
+			resultP2=false
+		var tempP1Num=0
+		var tempP2Num=0
+		while tempP1Num<Game.p1Score['typeC']||tempP2Num<Game.p2Score['typeC']:
+			if tempP1Num<Game.p1Score['typeC']:
+				tempP1Num+=1
+				setNumLable(0,Game.enemyType.TYPEC,tempP1Num)
+				
+			if tempP2Num<Game.p2Score['typeC']:
+				tempP2Num+=1
+			for i in range(15):
+				yield(get_tree(),"physics_frame")	
+		countIndex+=1
+		showScore()			
+	elif countIndex==3:		
+		var resultP1=false
+		var resultP2=true
+		if Game.mode==Game.gameMode.DOUBLE:
+			resultP2=false
+		var tempP1Num=0
+		var tempP2Num=0
+		while tempP1Num<Game.p1Score['typeD']||tempP2Num<Game.p2Score['typeD']:
+			if tempP1Num<Game.p1Score['typeD']:
+				tempP1Num+=1
+				setNumLable(0,Game.enemyType.TYPED,tempP1Num)
+				
+			if tempP2Num<Game.p2Score['typeD']:
+				tempP2Num+=1
+			for i in range(15):
+				yield(get_tree(),"physics_frame")	
+		countIndex+=1
+		showScore()	
+	else:
+		var p1Num=Game.p1Score['typeA']+\
+				Game.p1Score['typeB']+Game.p1Score['typeC']+\
+				Game.p1Score['typeD']
+		p1TotalNode.text="%d"%p1Num
+		if 	Game.mode==Game.gameMode.DOUBLE:	
+			var p2Num=Game.p2Score['typeA']+\
+				Game.p2Score['typeB']+Game.p2Score['typeC']+\
+				Game.p2Score['typeD']
+			p2TotalNode.text="%d"%p2Num
+			if p1Num>p2Num:
+				SoundsUtil.playAward()
+				Game.p1Data['score']+=1000
+			elif p1Num<p2Num&&p2Num!=0:
+				SoundsUtil.playAward()
+				Game.p2Data['score']+=1000	
+		timer.start()		
 #
-func setP1NumLable(id,type,num):
+func setNumLable(id,type,num):
 	if id==0:
 		if type==Game.enemyType.TYPEA:
-			pass
+			p1TypeAScoreNode.text='%d'%(num*100)
+			p1TypeANumNode.text='%d'%num
 		elif type==Game.enemyType.TYPEB:
-			pass
+			p1TypeBScoreNode.text='%d'%(num*200)
+			p1TypeBNumNode.text='%d'%num
 		elif type==Game.enemyType.TYPEC:
-			pass
+			p1TypeCScoreNode.text='%d'%(num*300)
+			p1TypeCNumNode.text='%d'%num
 		elif type==Game.enemyType.TYPED:
-			pass
+			p1TypeDScoreNode.text='%d'%(num*400)
+			p1TypeDNumNode.text='%d'%num
 						
 						
 
 func nextLevel():
 	if isGameOver:
 		gameOver()
-
+	if Game.gameLevel>=Game.mapList.size()-1:
+		pass
+	else:
+		Game.gameLevel+=1
+		Game.changeScene("res://scene/game.tscn")
+	
 	
 func gameOver():
 	Game.changeScene("res://scene/gameover.tscn")
 
+
+func _on_Timer_timeout():
+	nextLevel()

@@ -156,7 +156,11 @@ func startInit():
 func setShip(flag:bool):
 	hasShip=flag
 	ship.visible=flag
-
+	if playerId==Game.playerId.p1:
+		ship.play('0')
+	elif playerId==Game.playerId.p2:
+		ship.play('1')
+		
 #升级	
 func upgrade():
 	if level==Game.level.MIN:

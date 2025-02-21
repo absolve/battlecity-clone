@@ -57,9 +57,9 @@ enum gameMode{
 #玩家数据
 var p1Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
 var p2Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
-var p1Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
+var p1Score={'typeA':10,'typeB':10,'typeC':10,'typeD':10}
 var p2Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
-var gameLevel=1 #游戏关卡
+var gameLevel=0 #游戏关卡
 var mode=gameMode.SINGLE
 
 #信号
@@ -70,15 +70,33 @@ signal destroyEnemy
 signal getBonus
 
 var map
+var mapList=[] #地图名字
 
 func _ready():
 	OS.center_window()
 	printFont()
+	loadBuiltInMap()
+
 
 func changeScene(stagePath):
 	set_process_input(false)
 	get_tree().change_scene(stagePath)
 	set_process_input(true)
+
+#获取内置地图
+func loadBuiltInMap():
+	mapList.clear()
+	var dir = Directory.new()
+	if dir.open("res://level")== OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir():
+				mapList.append(file_name)
+			file_name = dir.get_next()	
+	else:
+		print("An error occurred when trying to access the path.")	
+
 
 #打印提示信息
 func printFont():

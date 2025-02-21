@@ -199,12 +199,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Label" type="Label" parent="p1ScoreList/typeA"]
+[node name="typeAScore" type="Label" parent="p1ScoreList/typeA"]
 margin_right = 91.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "100"
 align = 2
 
 [node name="Label2" type="Label" parent="p1ScoreList/typeA"]
@@ -224,7 +223,7 @@ margin_bottom = 16.0
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Label3" type="Label" parent="p1ScoreList/typeA/HBoxContainer"]
+[node name="typeANum" type="Label" parent="p1ScoreList/typeA/HBoxContainer"]
 margin_right = 31.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -248,12 +247,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Label" type="Label" parent="p1ScoreList/typeB"]
+[node name="typeBScore" type="Label" parent="p1ScoreList/typeB"]
 margin_right = 91.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "100"
 align = 2
 
 [node name="Label2" type="Label" parent="p1ScoreList/typeB"]
@@ -273,7 +271,7 @@ margin_bottom = 16.0
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Label3" type="Label" parent="p1ScoreList/typeB/HBoxContainer"]
+[node name="typeBNum" type="Label" parent="p1ScoreList/typeB/HBoxContainer"]
 margin_right = 31.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -297,12 +295,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Label" type="Label" parent="p1ScoreList/typeC"]
+[node name="typeCScore" type="Label" parent="p1ScoreList/typeC"]
 margin_right = 91.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "100"
 align = 2
 
 [node name="Label2" type="Label" parent="p1ScoreList/typeC"]
@@ -322,7 +319,7 @@ margin_bottom = 16.0
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Label3" type="Label" parent="p1ScoreList/typeC/HBoxContainer"]
+[node name="typeCNum" type="Label" parent="p1ScoreList/typeC/HBoxContainer"]
 margin_right = 31.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -346,12 +343,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Label" type="Label" parent="p1ScoreList/typeD"]
+[node name="typeDScore" type="Label" parent="p1ScoreList/typeD"]
 margin_right = 91.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "100"
 align = 2
 
 [node name="Label2" type="Label" parent="p1ScoreList/typeD"]
@@ -371,7 +367,7 @@ margin_bottom = 16.0
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Label3" type="Label" parent="p1ScoreList/typeD/HBoxContainer"]
+[node name="typeDNum" type="Label" parent="p1ScoreList/typeD/HBoxContainer"]
 margin_right = 31.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
@@ -385,3 +381,10 @@ margin_right = 46.0
 margin_bottom = 13.0
 size_flags_vertical = 4
 texture = ExtResource( 7 )
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 1.8
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

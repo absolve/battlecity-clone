@@ -1,13 +1,15 @@
 extends Node2D
 
 const mapDir="res://level"	#内置地图路径
+var mapExtensionMap=OS.get_executable_path().get_base_dir()+"/level"
+
 onready var map=$map
 onready var produceTimer=$produceTimer
 onready var nextLevel=$nextLevel
 onready var shovelTimer=$shovelTimer
 onready var clockTimer=$clockTimer
 
-var minEnemyCount=20	#最小同屏敌人数量 2人就6个
+var minEnemyCount=4		#最小同屏敌人数量 2人就6个
 var scoreLabel=preload("res://scene/scoreLabel.tscn")
 var hasShovel=false #有铲子
 var hasClock=false #时钟
@@ -21,10 +23,14 @@ func _ready():
 	randomize()
 	OS.center_window()
 	Game.map=map
-	map.loadMap(mapDir+"/"+'1.json')
+	map.loadMap(mapDir+"/"+Game.mapList[Game.gameLevel])
 	map.loadEnemyCount()
 	map.addPlayer(1)
-#	map.addPlayer(2)
+	if Game.mode==Game.gameMode.DOUBLE:
+		if Game.p2Data['lives']>0:
+			map.addPlayer(2)
+			minEnemyCount=8
+			
 	map.setP1LiveNum(Game.p1Data.lives)
 	map.setP2LiveNum(Game.p2Data.lives)
 	
