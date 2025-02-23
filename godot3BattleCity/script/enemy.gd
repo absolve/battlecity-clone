@@ -18,6 +18,8 @@ var hasItem=false #有物品
 var rayLength=16  #射线长度
 
 onready var player=$player
+onready var hitSound=$hit
+onready var explosion=$explosion
 
 func _ready():
 	dir=Game.dir.DOWN
@@ -97,120 +99,50 @@ func _physics_process(delta):
 			turnDirection()
 		animation(dir,vec)
 
-		var space_state = get_world_2d().direct_space_state
-#		if dir==Game.dir.LEFT:
-#			var rayDir=[Vector2.LEFT,Vector2.LEFT.rotated(deg2rad(45))
-#			,Vector2.LEFT.rotated(deg2rad(-45))]
-#			var dirIsStop=[false,false,false]
-#			for i in range(rayDir.size()):
-#				var result=space_state.intersect_ray(global_position,
-#				global_position+rayDir[i]*rayLength
-#				,[self],1+2+4,false,true)
-#				if result:
-#	#				print(global_position.distance_to(result.collider.global_position))
-#					dirIsStop[i]=true
-#					if result.collider.get('objType')==Game.objType.BRICK:
-#						var type=result.collider.get('type')
-#						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-#							dirIsStop[i]=false
-#					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-#						if global_position.distance_to(result.collider.global_position)<14:
-#							dirIsStop[i]=false	
-#			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-#				isStop=true
-#
-#		elif dir==Game.dir.RIGHT:
-#			var rayDir=[Vector2.RIGHT,Vector2.RIGHT.rotated(deg2rad(45))
-#			,Vector2.RIGHT.rotated(deg2rad(-45))]
-#			var dirIsStop=[false,false,false]
-#			for i in range(rayDir.size()):
-#				var result=space_state.intersect_ray(global_position,
-#				global_position+rayDir[i]*rayLength
-#				,[self],1+2+4,false,true)
-#				if result:
-#	#				print(global_position.distance_to(result.collider.global_position))
-#					dirIsStop[i]=true
-#					if result.collider.get('objType')==Game.objType.BRICK:
-#						var type=result.collider.get('type')
-#						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-#							dirIsStop[i]=false
-#					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-#						if global_position.distance_to(result.collider.global_position)<14:
-#							dirIsStop[i]=false			
-#			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-#				isStop=true			
-#		elif dir==Game.dir.UP:
-#			var rayDir=[Vector2.UP,Vector2.UP.rotated(deg2rad(45))
-#			,Vector2.UP.rotated(deg2rad(-45))]
-#			var dirIsStop=[false,false,false]
-#			for i in range(rayDir.size()):
-#				var result=space_state.intersect_ray(global_position,
-#				global_position+rayDir[i]*rayLength
-#				,[self],1+2+4,false,true)
-#				if result:
-#	#				print(global_position.distance_to(result.collider.global_position))
-#					dirIsStop[i]=true
-#					if result.collider.get('objType')==Game.objType.BRICK:
-#						var type=result.collider.get('type')
-#						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-#							dirIsStop[i]=false
-#					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-#						if global_position.distance_to(result.collider.global_position)<14:
-#							dirIsStop[i]=false			
-#			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-#				isStop=true					
-#
-#		elif dir==Game.dir.DOWN:
-#			var rayDir=[Vector2.DOWN,Vector2.DOWN.rotated(deg2rad(45))
-#			,Vector2.DOWN.rotated(deg2rad(-45))]
-#			var dirIsStop=[false,false,false]
-#			for i in range(rayDir.size()):
-#				var result=space_state.intersect_ray(global_position,
-#				global_position+rayDir[i]*rayLength
-#				,[self],1+2+4,false,true)
-#				if result:
-##					print(global_position.distance_to(result.collider.global_position))
-#					dirIsStop[i]=true
-#					if result.collider.get('objType')==Game.objType.BRICK:
-#						var type=result.collider.get('type')
-#						if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-#							dirIsStop[i]=false
-#					if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-#						if global_position.distance_to(result.collider.global_position)<14:
-#							dirIsStop[i]=false			
-#			if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-#				isStop=true	
-		
-		var rayDir=[]
-		var dirIsStop=[false,false,false]
+#		var space_state = get_world_2d().direct_space_state
+#		var rayDir=[]
+#		var dirIsStop=[false,false,false]
+		var areas=[]
 		if dir==Game.dir.LEFT:
-			rayDir=[Vector2.LEFT,Vector2.LEFT.rotated(deg2rad(45))
-			,Vector2.LEFT.rotated(deg2rad(-45))]
+			areas=leftArea.get_overlapping_areas()
 		elif dir==Game.dir.RIGHT:
-			rayDir=[Vector2.RIGHT,Vector2.RIGHT.rotated(deg2rad(45))
-			,Vector2.RIGHT.rotated(deg2rad(-45))]
+			areas=rightArea.get_overlapping_areas()
 		elif dir==Game.dir.UP:
-			rayDir=[Vector2.UP,Vector2.UP.rotated(deg2rad(45))
-			,Vector2.UP.rotated(deg2rad(-45))]
+			areas=topArea.get_overlapping_areas()
 		elif dir==Game.dir.DOWN:
-			rayDir=[Vector2.DOWN,Vector2.DOWN.rotated(deg2rad(45))
-			,Vector2.DOWN.rotated(deg2rad(-45))]
+			areas=bottomArea.get_overlapping_areas()
 		
-		for i in range(rayDir.size()):
-			var result=space_state.intersect_ray(global_position,
-			global_position++rayDir[i]*rayLength
-			,[self],1+2+4,false,true)
-			if result:
-				dirIsStop[i]=true
-				if result.collider.get('objType')==Game.objType.BRICK:
-					var type=result.collider.get('type')
-					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-						dirIsStop[i]=false
-				if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-					if global_position.distance_to(result.collider.global_position)<14:
-						dirIsStop[i]=false			
-		if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-			isStop=true	
+#		for i in range(rayDir.size()):
+#			var result=space_state.intersect_ray(global_position,
+#			global_position++rayDir[i]*rayLength
+#			,[self],1+2+4,false,true)
+#			if result:
+#				dirIsStop[i]=true
+#				if result.collider.get('objType')==Game.objType.BRICK:
+#					var type=result.collider.get('type')
+#					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+#						dirIsStop[i]=false
+#				if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+#					if global_position.distance_to(result.collider.global_position)<14:
+#						dirIsStop[i]=false			
+#		if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
+#			isStop=true	
+		
+		for i in areas:
+			if i == leftArea||i ==rightArea||i==topArea\
+			||i==bottomArea||i==self:
+				continue	
+			if i.get('objType') in [Game.objType.BRICK,Game.objType.BASE]:
+				var type=i.get('type')
+				if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+					if type==Game.brickType.ICE:
+						isOnIce=true
+					continue
+				isStop=true
+			if i.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+				if global_position.distance_to(i.global_position)<14:
+					continue
+				isStop=true
 		
 		if !isStop:
 			position+=vec*delta	
@@ -297,7 +229,7 @@ func startInit():
 func setFreeze(flag=true):
 	if flag:
 		isFreeze=flag
-		state=Game.tankstate.IDLE
+		state=Game.tankstate.FREEZE
 		if ani.animation!='flash':
 			ani.stop()
 	else:
@@ -377,6 +309,12 @@ func setColor():
 			if ani.material.get_shader_param('ischange'):
 				ani.material.set_shader_param('ischange',false)	
 
+#设置爆炸
+func setExplosion():
+	addExplosion()
+	bodyShape.call_deferred('set_disabled',false)
+	call_deferred('queue_free')	
+
 func _on_initTimer_timeout():
 	if !isFreeze:
 		state=Game.tankstate.START
@@ -386,6 +324,8 @@ func _on_initTimer_timeout():
 	setColor()
 
 func _on_tank_area_entered(area):
+	if isDestroy||area==null:
+		return
 	if area.get('objType')==Game.objType.BULLET:	
 		if area.get('own')==Game.objType.PLAYER:
 			if armour>0:
@@ -393,11 +333,17 @@ func _on_tank_area_entered(area):
 				if hasItem: #添加物品
 					Game.emit_signal("addBonus")
 				setColor()	
-			else:	
+				hitSound.play()
+			else:
+				isDestroy=true	
+				state=Game.tankstate.DEAD
 				addExplosion()
 				bodyShape.call_deferred('set_disabled',false)
-				call_deferred('queue_free')	
 				Game.emit_signal("destroyEnemy",type,area.get('playerId'),position)
+				explosion.play()
+				yield(explosion,"finished")
+				call_deferred('queue_free')	
+				
 
 
 

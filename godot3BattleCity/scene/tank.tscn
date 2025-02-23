@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://script/tank.gd" type="Script" id=1]
 [ext_resource path="res://sprite/invincible2.png" type="Texture" id=2]
@@ -29,6 +29,18 @@ animations = [ {
 "name": "1",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 2, 14 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 2, 14 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 14, 2 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 14, 2 )
 
 [node name="tank" type="Area2D"]
 collision_layer = 0
@@ -64,6 +76,38 @@ one_shot = true
 [node name="initTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="left" type="Area2D" parent="."]
+position = Vector2( -14, 0 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="left"]
+shape = SubResource( 5 )
+
+[node name="right" type="Area2D" parent="."]
+position = Vector2( 14, 0 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="right"]
+shape = SubResource( 6 )
+
+[node name="top" type="Area2D" parent="."]
+position = Vector2( 0, -14 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="top"]
+shape = SubResource( 7 )
+
+[node name="bottom" type="Area2D" parent="."]
+position = Vector2( 0, 14 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="bottom"]
+shape = SubResource( 8 )
 
 [connection signal="timeout" from="shootTimer" to="." method="_on_shootTimer_timeout"]
 [connection signal="timeout" from="invincibleTimer" to="." method="_on_invincibleTimer_timeout"]

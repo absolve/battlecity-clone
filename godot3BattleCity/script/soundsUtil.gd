@@ -6,6 +6,7 @@ onready var addLives=$addLives
 onready var getBouns=$GetBouns
 onready var bomb=$bomb
 onready var award=$award
+onready var point=$point
 
 func _ready():
 	pass
@@ -26,3 +27,6 @@ func playBomb():
 
 func playAward():
 	award.play()
+
+func playPoint():
+	point.play()

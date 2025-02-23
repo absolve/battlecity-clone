@@ -23,8 +23,6 @@ SoundsUtil="*res://scene/soundsUtil.tscn"
 
 window/size/width=512
 window/size/height=448
-window/size/test_width=256
-window/size/test_height=224
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 

@@ -17,6 +17,7 @@ var explode=preload("res://scene/explode.tscn")
 onready var sprite=$Sprite
 onready var shape=$shape
 
+
 func _ready():
 	if dir==Game.dir.UP:
 		sprite.flip_v=true
@@ -66,7 +67,7 @@ func _on_bullet_area_entered(area):
 	elif own==Game.objType.PLAYER:
 		if area.get('objType')==Game.objType.ENEMY:
 			addexplode()		
-	if area.get('objType')==Game.objType.BULLET:
+	if area.get('objType')==Game.objType.BULLET||area.get('objType')==Game.objType.BASE:
 		call_deferred('queue_free')	
 	elif area.get('objType')==Game.objType.BRICK:
 		if area.get('type')==Game.brickType.WALL||area.get('type')==Game.brickType.STONE:

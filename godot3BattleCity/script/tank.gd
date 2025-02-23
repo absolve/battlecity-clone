@@ -19,17 +19,17 @@ var canShoot=true #可以发射子弹
 var bulletPower=Game.bulletPower.NORMAL
 var tankSize=28
 var armour=0  #护甲  最大4
-#四个方向是否可以前进
-#var leftIsStop=false
-#var rightIsStop=false
-#var topIsStop=false
-#var bottomIsStop=false
+var isDestroy=false #是否被摧毁
+
 
 const cellSize=16	#每个格子的大小是16px
 var mapSize=Vector2(cellSize*26,cellSize*26)
 
 
-
+onready var leftArea=$left
+onready var rightArea=$right
+onready var topArea=$top
+onready var bottomArea=$bottom
 onready var bodyShape=$shape
 onready var ani=$ani
 onready var shootTimer=$shootTimer

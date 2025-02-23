@@ -103,7 +103,7 @@ func addBasePlaceStone():
 	for i in basePlacePos:
 		var temp=brick.instance()
 		temp.type=Game.brickType.STONE
-		temp.position=i*cellSize+cellSize/2
+		temp.position=i*cellSize+Vector2(cellSize/2,cellSize/2)
 		brickNode.add_child(temp)
 
 #改变砖块类型
@@ -140,17 +140,30 @@ func getBrick(x:int,y:int):
 	return temp
 
 #添加玩家
-func addPlayer(playNo:int):
+func addPlayer(playNo:int,data:Dictionary={}):
+	var temp=player.instance()
 	if playNo==1:
-		var temp=player.instance()
 		temp.playerId=Game.playerId.p1
 		temp.position=Vector2(9*cellSize,25*cellSize)
-		tanksNode.call_deferred('add_child',temp)
 	elif playNo==2:
-		var temp=player.instance()
 		temp.playerId=Game.playerId.p2
 		temp.position=Vector2(17*cellSize,25*cellSize)
-		tanksNode.call_deferred('add_child',temp)
+	if !data.empty():
+		temp.hasShip=data['hasShip']
+		temp.level=data['level']
+		temp.armour=data['armour']
+		if data['level'] in [Game.level.MEDIUM]:
+			temp.bulletPower=Game.bulletPower.FAST
+		elif data['level'] in [Game.level.SUPER,Game.level.LARGE]:
+			temp.bulletMax=2
+			if data['level']==Game.level.SUPER:
+				temp.bulletPower=Game.bulletPower.SUPER
+			else:
+				temp.bulletPower=Game.bulletPower.FAST
+			
+	tanksNode.call_deferred('add_child',temp)
+
+
 
 #添加子弹
 func addBullet(obj):
@@ -244,3 +257,21 @@ func getPlayer(id):
 			tank=i
 			break
 	return tank
+
+#清空敌人坦克
+func clearEnemyTank()->Dictionary:
+	var list={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
+	for i in tanksNode.get_children():
+		if i.get('objType')==Game.objType.ENEMY&&i.get('state')!=Game.tankstate.IDLE:
+			var type=i.get('type')
+			if type==Game.enemyType.TYPEA:
+				list['typeA']+=1
+			elif type==	Game.enemyType.TYPEB:
+				list['typeB']+=1
+			elif type==	Game.enemyType.TYPEC:
+				list['typeC']+=1
+			elif type==Game.enemyType.TYPED:
+				list['typeD']+=1
+			i.setExplosion()	
+	return list
+

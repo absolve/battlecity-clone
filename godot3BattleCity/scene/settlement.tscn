@@ -18,9 +18,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 136.0
+margin_left = 141.0
 margin_top = 16.0
-margin_right = 300.0
+margin_right = 305.0
 margin_bottom = 66.0
 __meta__ = {
 "_edit_group_": true
@@ -43,9 +43,9 @@ custom_colors/font_color = Color( 0.988235, 0.572549, 0.360784, 1 )
 text = "0"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-margin_left = 168.0
+margin_left = 192.0
 margin_top = 64.0
-margin_right = 320.0
+margin_right = 344.0
 margin_bottom = 104.0
 __meta__ = {
 "_edit_group_": true
@@ -158,38 +158,21 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="."]
 margin_left = 104.0
-margin_top = 400.0
+margin_top = 390.0
 margin_right = 184.0
-margin_bottom = 416.0
+margin_bottom = 406.0
 text = "total"
 uppercase = true
-
-[node name="totalResultNode" type="HBoxContainer" parent="."]
-margin_left = 200.0
-margin_top = 384.0
-margin_right = 312.0
-margin_bottom = 424.0
-
-[node name="p1Total" type="Label" parent="totalResultNode"]
-margin_top = 12.0
-margin_right = 54.0
-margin_bottom = 28.0
-size_flags_horizontal = 3
-text = "0"
-
-[node name="p2Total" type="Label" parent="totalResultNode"]
-margin_left = 58.0
-margin_top = 12.0
-margin_right = 112.0
-margin_bottom = 28.0
-size_flags_horizontal = 3
-text = "0"
 
 [node name="p1ScoreList" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="typeA" type="HBoxContainer" parent="p1ScoreList"]
+visible = false
 margin_left = 28.0
 margin_top = 183.0
 margin_right = 228.0
@@ -239,6 +222,7 @@ size_flags_vertical = 4
 texture = ExtResource( 7 )
 
 [node name="typeB" type="HBoxContainer" parent="p1ScoreList"]
+visible = false
 margin_left = 28.0
 margin_top = 234.0
 margin_right = 228.0
@@ -287,6 +271,7 @@ size_flags_vertical = 4
 texture = ExtResource( 7 )
 
 [node name="typeC" type="HBoxContainer" parent="p1ScoreList"]
+visible = false
 margin_left = 27.0
 margin_top = 288.0
 margin_right = 227.0
@@ -335,6 +320,7 @@ size_flags_vertical = 4
 texture = ExtResource( 7 )
 
 [node name="typeD" type="HBoxContainer" parent="p1ScoreList"]
+visible = false
 margin_left = 27.0
 margin_top = 337.0
 margin_right = 227.0
@@ -382,9 +368,263 @@ margin_bottom = 13.0
 size_flags_vertical = 4
 texture = ExtResource( 7 )
 
+[node name="p2ScoreList" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="typeA" type="HBoxContainer" parent="p2ScoreList"]
+visible = false
+margin_left = 284.0
+margin_top = 183.0
+margin_right = 484.0
+margin_bottom = 199.0
+alignment = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p2ScoreList/typeA"]
+margin_right = 45.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="p2ScoreList/typeA/HBoxContainer"]
+margin_top = 2.0
+margin_right = 11.0
+margin_bottom = 13.0
+size_flags_vertical = 4
+texture = ExtResource( 7 )
+flip_h = true
+
+[node name="typeANum" type="Label" parent="p2ScoreList/typeA/HBoxContainer"]
+margin_left = 15.0
+margin_right = 45.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Label2" type="Label" parent="p2ScoreList/typeA"]
+margin_left = 49.0
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+text = "pts"
+align = 2
+uppercase = true
+
+[node name="typeAScore" type="Label" parent="p2ScoreList/typeA"]
+margin_left = 108.0
+margin_right = 200.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+align = 2
+
+[node name="typeB" type="HBoxContainer" parent="p2ScoreList"]
+visible = false
+margin_left = 284.0
+margin_top = 234.0
+margin_right = 484.0
+margin_bottom = 250.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p2ScoreList/typeB"]
+margin_right = 45.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="p2ScoreList/typeB/HBoxContainer"]
+margin_top = 2.0
+margin_right = 11.0
+margin_bottom = 13.0
+size_flags_vertical = 4
+texture = ExtResource( 7 )
+flip_h = true
+
+[node name="typeBNum" type="Label" parent="p2ScoreList/typeB/HBoxContainer"]
+margin_left = 15.0
+margin_right = 45.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Label2" type="Label" parent="p2ScoreList/typeB"]
+margin_left = 49.0
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+text = "pts"
+align = 2
+uppercase = true
+
+[node name="typeBScore" type="Label" parent="p2ScoreList/typeB"]
+margin_left = 108.0
+margin_right = 200.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+align = 2
+
+[node name="typeC" type="HBoxContainer" parent="p2ScoreList"]
+visible = false
+margin_left = 284.0
+margin_top = 288.0
+margin_right = 484.0
+margin_bottom = 304.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p2ScoreList/typeC"]
+margin_right = 45.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="p2ScoreList/typeC/HBoxContainer"]
+margin_top = 2.0
+margin_right = 11.0
+margin_bottom = 13.0
+size_flags_vertical = 4
+texture = ExtResource( 7 )
+flip_h = true
+
+[node name="typeCNum" type="Label" parent="p2ScoreList/typeC/HBoxContainer"]
+margin_left = 15.0
+margin_right = 45.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Label2" type="Label" parent="p2ScoreList/typeC"]
+margin_left = 49.0
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+text = "pts"
+align = 2
+uppercase = true
+
+[node name="typeCScore" type="Label" parent="p2ScoreList/typeC"]
+margin_left = 108.0
+margin_right = 200.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+align = 2
+
+[node name="typeD" type="HBoxContainer" parent="p2ScoreList"]
+visible = false
+margin_left = 284.0
+margin_top = 337.0
+margin_right = 484.0
+margin_bottom = 353.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p2ScoreList/typeD"]
+margin_right = 45.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="p2ScoreList/typeD/HBoxContainer"]
+margin_top = 2.0
+margin_right = 11.0
+margin_bottom = 13.0
+size_flags_vertical = 4
+texture = ExtResource( 7 )
+flip_h = true
+
+[node name="typeDNum" type="Label" parent="p2ScoreList/typeD/HBoxContainer"]
+margin_left = 15.0
+margin_right = 45.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Label2" type="Label" parent="p2ScoreList/typeD"]
+margin_left = 49.0
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+text = "pts"
+align = 2
+uppercase = true
+
+[node name="typeDScore" type="Label" parent="p2ScoreList/typeD"]
+margin_left = 108.0
+margin_right = 200.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+align = 2
+
+[node name="totalResultNode" type="HBoxContainer" parent="."]
+margin_left = 196.0
+margin_top = 390.0
+margin_right = 316.0
+margin_bottom = 406.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="p1Total" type="Label" parent="totalResultNode"]
+visible = false
+margin_right = 120.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "0"
+
+[node name="p2Total" type="Label" parent="totalResultNode"]
+visible = false
+margin_left = 62.0
+margin_right = 120.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "0"
+align = 2
+
+[node name="reward" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 392.0
+margin_top = 400.0
+margin_right = 504.0
+margin_bottom = 440.0
+
+[node name="Label" type="Label" parent="reward"]
+margin_right = 112.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0.988235, 0.211765, 0.109804, 1 )
+text = "bouns"
+uppercase = true
+
+[node name="Label2" type="Label" parent="reward"]
+margin_top = 20.0
+margin_right = 112.0
+margin_bottom = 36.0
+text = "1000pts"
+uppercase = true
+
 [node name="Timer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 1.8
+wait_time = 3.0
 one_shot = true
 
+[node name="startTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 1.5
+one_shot = true
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="startTimer" to="." method="_on_startTimer_timeout"]

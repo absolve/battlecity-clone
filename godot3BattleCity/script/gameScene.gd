@@ -24,13 +24,15 @@ func _ready():
 	OS.center_window()
 	Game.map=map
 	map.loadMap(mapDir+"/"+Game.mapList[Game.gameLevel])
+#	map.loadMap(mapDir+"/"+'1992.json')
 	map.loadEnemyCount()
-	map.addPlayer(1)
+	map.addPlayer(1,Game.p1Data)
 	if Game.mode==Game.gameMode.DOUBLE:
 		if Game.p2Data['lives']>0:
-			map.addPlayer(2)
+			map.addPlayer(2,Game.p2Data)
 			minEnemyCount=8
-			
+
+#	minEnemyCount=20		
 	map.setP1LiveNum(Game.p1Data.lives)
 	map.setP2LiveNum(Game.p2Data.lives)
 	
@@ -135,7 +137,17 @@ func getBonus(type,objType,playerId):
 		return
 	addScore(500,tank.global_position)
 	if type==Game.bonusType.GRENADE:
-		pass
+		var list=map.clearEnemyTank()
+		if playerId==Game.playerId.p1:
+			Game.p1Score['typeA']+=list['typeA']
+			Game.p1Score['typeB']+=list['typeB']
+			Game.p1Score['typeC']+=list['typeC']
+			Game.p1Score['typeD']+=list['typeD']
+		elif playerId==Game.playerId.p2:
+			Game.p2Score['typeA']+=list['typeA']
+			Game.p2Score['typeB']+=list['typeB']
+			Game.p2Score['typeC']+=list['typeC']
+			Game.p2Score['typeD']+=list['typeD']	
 	elif type==Game.bonusType.TANK:
 		if playerId==Game.playerId.p1:
 			Game.p1Data.lives+=1
