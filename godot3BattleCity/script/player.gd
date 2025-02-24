@@ -173,7 +173,9 @@ func addExplosion(isBig=true):
 		
 #开始初始化
 func startInit():
-	bodyShape.call_deferred('set_disabled',true)
+#	bodyShape.call_deferred('set_disabled',true)
+	monitorable=false
+	monitoring=false
 	initTimer.start()
 	ani.play('flash')
 
@@ -245,7 +247,9 @@ func animation(dir,vec):
 
 func _on_initTimer_timeout():
 	state=Game.tankstate.START
-	bodyShape.disabled=false
+#	bodyShape.disabled=false
+	set_deferred('monitorable',true)
+	set_deferred('monitoring',true)
 	startinvincible(3)
 
 

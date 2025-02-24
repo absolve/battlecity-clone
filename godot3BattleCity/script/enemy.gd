@@ -221,7 +221,8 @@ func addExplosion(isBig=true):
 			
 #开始初始化
 func startInit():
-	bodyShape.disabled=true
+	monitorable=false
+	monitoring=false
 	initTimer.start()
 	ani.play('flash')
 
@@ -320,7 +321,8 @@ func _on_initTimer_timeout():
 		state=Game.tankstate.START
 	else:
 		animation(dir,Vector2.ZERO)	
-	bodyShape.disabled=false
+	set_deferred('monitorable',true)
+	set_deferred('monitoring',true)
 	setColor()
 
 func _on_tank_area_entered(area):
@@ -338,7 +340,9 @@ func _on_tank_area_entered(area):
 				isDestroy=true	
 				state=Game.tankstate.DEAD
 				addExplosion()
-				bodyShape.call_deferred('set_disabled',false)
+#				bodyShape.call_deferred('set_disabled',false)
+				monitorable=false
+				monitoring=false
 				Game.emit_signal("destroyEnemy",type,area.get('playerId'),position)
 				explosion.play()
 				yield(explosion,"finished")

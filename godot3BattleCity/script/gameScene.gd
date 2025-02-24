@@ -21,7 +21,7 @@ var brickType=Game.brickType.WALL
 
 func _ready():
 	randomize()
-	OS.center_window()
+#	OS.center_window()
 	Game.map=map
 	map.loadMap(mapDir+"/"+Game.mapList[Game.gameLevel])
 #	map.loadMap(mapDir+"/"+'1992.json')
@@ -41,6 +41,7 @@ func _ready():
 	Game.connect('destroyEnemy',self,'destroyEnemy')
 	Game.connect('hitPlayer',self,'hitPlayer')
 	Game.connect("getBonus",self,'getBonus')
+	Game.resetPlayerScore() #重新设置分数
 	produceTimer.start()
 	
 

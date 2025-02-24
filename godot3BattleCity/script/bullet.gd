@@ -8,6 +8,8 @@ var own=Game.objType.PLAYER
 var ownId=0
 var playerId=Game.playerId.p1
 var vec=Vector2.ZERO
+var isDestroy=false #是否被摧毁
+var state=Game.objState.START
 
 const cellSize=16
 var mapSize=Vector2(cellSize*26,cellSize*26)
@@ -16,7 +18,7 @@ var mapSize=Vector2(cellSize*26,cellSize*26)
 var explode=preload("res://scene/explode.tscn")
 onready var sprite=$Sprite
 onready var shape=$shape
-
+onready var sound=$sound
 
 func _ready():
 	if dir==Game.dir.UP:
@@ -45,21 +47,39 @@ func setPower(value):
 
 
 func _physics_process(delta):
-	position+=vec*delta
-	if position.x<0||position.x>mapSize.x:
-		addexplode()
-	if position.y<0||position.y>mapSize.y:
-		addexplode()
+	if state==Game.objState.START:
+		position+=vec*delta
+		if position.x<0||position.x>mapSize.x:
+			if own==Game.objType.PLAYER:
+				addexplode(true)
+			else:
+				addexplode()	
+		if position.y<0||position.y>mapSize.y:
+			if own==Game.objType.PLAYER:
+				addexplode(true)
+			else:
+				addexplode()	
 	
-
-func addexplode():
+#爆炸效果
+func addexplode(playSound=false):
+	isDestroy=true
+	state=Game.objState.IDLE
+	visible=false
+	set_deferred('monitorable',false)
+	set_deferred('monitoring',false)
 	var temp = explode.instance()
 	temp.position=position
 	Game.map.addOther(temp)
-	queue_free()
+	if playSound:
+		sound.play()
+		yield(sound,"finished")
+		queue_free()
+	else:
+		queue_free()
+
 
 func _on_bullet_area_entered(area):
-	if area.get_instance_id()==ownId:
+	if area.get_instance_id()==ownId||isDestroy:
 		return	
 	if own==Game.objType.ENEMY:
 		if area.get('objType')==Game.objType.PLAYER:
@@ -71,4 +91,7 @@ func _on_bullet_area_entered(area):
 		call_deferred('queue_free')	
 	elif area.get('objType')==Game.objType.BRICK:
 		if area.get('type')==Game.brickType.WALL||area.get('type')==Game.brickType.STONE:
-			addexplode()
+			if own==Game.objType.PLAYER:
+				addexplode(true)
+			else:
+				addexplode()	

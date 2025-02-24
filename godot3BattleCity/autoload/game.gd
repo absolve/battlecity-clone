@@ -54,6 +54,10 @@ enum gameMode{
 	SINGLE,DOUBLE
 }
 
+enum objState{
+	IDLE,START
+}
+
 #玩家数据
 var p1Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
 var p2Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
@@ -97,12 +101,16 @@ func loadBuiltInMap():
 	else:
 		print("An error occurred when trying to access the path.")	
 
-func reset():
+func resetData():
 	p1Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
 	p2Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
 	p1Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 	p2Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 	gameLevel=0
+
+func resetPlayerScore():
+	p1Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
+	p2Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 
 #打印提示信息
 func printFont():

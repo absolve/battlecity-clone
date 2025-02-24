@@ -7,6 +7,7 @@ onready var getBouns=$GetBouns
 onready var bomb=$bomb
 onready var award=$award
 onready var point=$point
+onready var music=$music
 
 func _ready():
 	pass
@@ -30,3 +31,6 @@ func playAward():
 
 func playPoint():
 	point.play()
+
+func playMusic():
+	music.play()

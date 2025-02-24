@@ -85,6 +85,9 @@ func showScore():
 			SoundsUtil.playPoint()	
 			for i in range(15):
 				yield(get_tree(),"physics_frame")
+		if tempP1Num==0 && tempP2Num==0:
+			for i in range(20):
+				yield(get_tree(),"physics_frame")
 		countIndex+=1
 		showScore()	
 	elif countIndex==1:
@@ -103,6 +106,9 @@ func showScore():
 				setNumLable(1,Game.enemyType.TYPEB,tempP2Num)
 			SoundsUtil.playPoint()		
 			for i in range(15):
+				yield(get_tree(),"physics_frame")
+		if tempP1Num==0 && tempP2Num==0:
+			for i in range(20):
 				yield(get_tree(),"physics_frame")
 		countIndex+=1
 		showScore()	
@@ -123,6 +129,9 @@ func showScore():
 			SoundsUtil.playPoint()		
 			for i in range(15):
 				yield(get_tree(),"physics_frame")	
+		if tempP1Num==0 && tempP2Num==0:
+			for i in range(20):
+				yield(get_tree(),"physics_frame")
 		countIndex+=1
 		showScore()			
 	elif countIndex==3:		
@@ -142,6 +151,9 @@ func showScore():
 			SoundsUtil.playPoint()		
 			for i in range(15):
 				yield(get_tree(),"physics_frame")	
+		if tempP1Num==0 && tempP2Num==0:
+			for i in range(20):
+				yield(get_tree(),"physics_frame")
 		countIndex+=1
 		showScore()	
 	else:
@@ -204,7 +216,11 @@ func nextLevel():
 		pass
 	else:
 		Game.gameLevel+=1
-		Game.changeScene("res://scene/game.tscn")
+		var temp=load("res://scene/splash.tscn")
+		get_tree().change_scene_to(temp)
+
+#		queue_free()
+#		Game.changeScene("res://scene/game.tscn")
 	
 	
 func gameOver():
