@@ -129,7 +129,6 @@ align = 1
 uppercase = true
 
 [node name="Sprite" type="Sprite" parent="main"]
-visible = false
 position = Vector2( 256, 125 )
 texture = ExtResource( 2 )
 

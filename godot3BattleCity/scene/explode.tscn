@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://sprite/big_explosion_5.png" type="Texture" id=1]
 [ext_resource path="res://sprite/bullet_explosion_1.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://sprite/big_explosion_4.png" type="Texture" id=7]
 [ext_resource path="res://sprite/big_explosion_2.png" type="Texture" id=8]
 [ext_resource path="res://script/explode.gd" type="Script" id=9]
+[ext_resource path="res://sound/explosion_1.ogg" type="AudioStream" id=10]
+[ext_resource path="res://sound/tankDestroy.ogg" type="AudioStream" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -28,4 +30,8 @@ z_index = 2
 frames = SubResource( 1 )
 script = ExtResource( 9 )
 
-[connection signal="animation_finished" from="." to="." method="_on_explode_animation_finished"]
+[node name="player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="enemy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )

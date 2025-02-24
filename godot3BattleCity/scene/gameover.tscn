@@ -13,6 +13,7 @@ texture = ExtResource( 2 )
 
 [node name="sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "bg"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.2

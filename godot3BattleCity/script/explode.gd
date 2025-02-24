@@ -2,14 +2,23 @@ extends AnimatedSprite
 
 
 var big=false
-
+var playSound=false
+var own=Game.objType.ENEMY 
+onready var playerSound=$player
+onready var enemySound=$enemy
 
 func _ready():
 	if big:
 		play("big")
 	else:
 		play("default")
+		
+	if playSound:
+		if own==Game.objType.ENEMY:
+			enemySound.play()
+		elif own==Game.objType.PLAYER:
+			playerSound.play()
+	yield(self,"animation_finished")	
+	queue_free()	
+	
 
-
-func _on_explode_animation_finished():
-	queue_free()

@@ -13,7 +13,9 @@ var rayLength=16  #射线长度
 
 onready var fireSound=$fire
 onready var hitSound=$hit
-onready var explosion=$explosion
+onready var idleSound=$idle
+onready var walkSound=$walk
+onready var slideSound=$slide
 
 func _ready():
 	collision_layer=1
@@ -38,17 +40,26 @@ func _physics_process(delta):
 	if state==Game.tankstate.START:
 		lastDir=dir
 		isStop=false
-		isOnIce=false
+	
 		if Input.is_action_pressed(keymap["down"]):
+			print(vec,isOnIce)
+			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
+				slideSound.play()
 			vec=Vector2(0,speed)
 			dir=Game.dir.DOWN
 		elif Input.is_action_pressed(keymap["up"]):
+			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
+				slideSound.play()
 			vec=Vector2(0,-speed)
 			dir=Game.dir.UP
 		elif Input.is_action_pressed(keymap["left"]):
+			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
+				slideSound.play()
 			vec=Vector2(-speed,0)
 			dir=Game.dir.LEFT
 		elif Input.is_action_pressed(keymap["right"]):
+			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
+				slideSound.play()
 			vec=Vector2(speed,0)
 			dir=Game.dir.RIGHT
 		else:
@@ -74,30 +85,8 @@ func _physics_process(delta):
 			areas=topArea.get_overlapping_areas()
 		elif dir==Game.dir.DOWN:
 			areas=bottomArea.get_overlapping_areas()
-			
-#		for i in range(rayDir.size()):
-#			var result=space_state.intersect_ray(global_position,
-#			global_position+rayDir[i]*(rayLength+1)
-#			,[self],1+2+4,false,true)
-#			if result:
-#				print(result)			
-#				if result.collider.get('objType')==Game.objType.BRICK:
-#					var type=result.collider.get('type')
-#					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-##						dirIsStop[i]=false
-#						print('Game.brickType.BUSH')
-#						continue
-#					dirIsStop[i]=true	
-##					if type==Game.brickType.WATER&& hasShip:
-##						dirIsStop[i]=false	
-#
-#
-#				if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-#					if global_position.distance_to(result.collider.global_position)<14:
-#						dirIsStop[i]=false			
-#		if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-#			isStop=true	
-		
+		print(areas)	
+		isOnIce=false	
 		for i in areas:
 			if i == leftArea||i ==rightArea||i==topArea\
 			||i==bottomArea||i==self:
@@ -115,8 +104,32 @@ func _physics_process(delta):
 					continue
 				isStop=true
 					
+		
+		if vec!=Vector2.ZERO:
+			slideTime=20
+			if !walkSound.playing:
+				walkSound.play()
+			if idleSound.playing:
+				idleSound.stop()
+		else:
+			if walkSound.playing:
+				walkSound.stop()
+			if !idleSound.playing:
+				idleSound.play()	
+		
+			
+		if isOnIce&&slideTime>0&&vec==Vector2.ZERO: #冰块上继续滑行
+			if dir==Game.dir.LEFT:
+				vec=Vector2(-speed,0)
+			elif dir==Game.dir.RIGHT:
+				vec=Vector2(speed,0)
+			elif dir==Game.dir.UP:
+				vec=Vector2(0,-speed)
+			elif dir==Game.dir.DOWN:
+				vec=Vector2(0,speed)
+			
 		if !isStop:
-			position+=vec*delta		
+			position+=vec*delta			
 			
 		#调整一下位置
 		if position.x<=tankSize/2:
@@ -169,6 +182,8 @@ func addExplosion(isBig=true):
 	var temp=explode.instance()
 	temp.big=isBig
 	temp.position=position
+	temp.playSound=true
+	temp.own=Game.objType.PLAYER
 	Game.map.addOther(temp)
 		
 #开始初始化
@@ -256,7 +271,7 @@ func _on_initTimer_timeout():
 func _on_tank_area_entered(area):
 	if isDestroy||area==null:
 		return
-	if area.get('objType')==Game.objType.BULLET:
+	if area!=null&&area.get('objType')==Game.objType.BULLET:
 		if isInvincible:
 			return
 		if area.get('own')==Game.objType.ENEMY:
@@ -266,20 +281,22 @@ func _on_tank_area_entered(area):
 			if armour>0:
 				armour-=1
 				if level==Game.level.SUPER:
-					level=Game.level.MEDIUM
+					level=Game.level.LARGE
 					bulletPower=Game.bulletPower.FAST
 				hitSound.play()
 			else:
 				isDestroy=true
 				state=Game.tankstate.DEAD
-				bodyShape.call_deferred('set_disabled',false)
+				set_deferred('monitorable',false)
+				set_deferred('monitoring',false)
 				Game.emit_signal("hitPlayer",playerId)
+				visible=false
 				addExplosion()
-				explosion.play()
-				yield(explosion,"finished")
 				call_deferred('queue_free')	
 				
-	if area.get('objType')==Game.objType.BONUS:
+	if area!=null&&area.get('objType')==Game.objType.BONUS:
 		Game.emit_signal("getBonus",area.get('type'),objType,playerId)
 		area.call_deferred('queue_free')
+
+
 

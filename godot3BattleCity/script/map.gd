@@ -35,7 +35,7 @@ onready var tanksNode=$child/tanks
 onready var otherNode=$child/other
 onready var enemyList=$gui/enemyList
 onready var levelName=$gui/vbox/name
-onready var p1NUm=$gui/p1NUm
+onready var p1Num=$gui/p1NUm
 onready var p2Num=$gui/p2Num
 onready var p1Count=$gui/p1NUm/hbox/Label
 onready var p2Count=$gui/p2Num/hbox/Label
@@ -174,12 +174,17 @@ func addOther(obj):
 	otherNode.add_child(obj)
 
 func setP1LiveNum(num):
+	p1Num.visible=true
 	p1LiveNum=num
 	p1Count.text=str(num)
 	
 func setP2LiveNum(num):
+	p2Num.visible=true
 	p2LiveNUm=num
 	p2Count.text=str(num)
+
+func setLevelName(name):
+	levelName.text='%d'%name
 
 #获取敌人总数
 func getEnemyCount():

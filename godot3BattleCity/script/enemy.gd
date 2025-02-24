@@ -19,7 +19,7 @@ var rayLength=16  #射线长度
 
 onready var player=$player
 onready var hitSound=$hit
-onready var explosion=$explosion
+
 
 func _ready():
 	dir=Game.dir.DOWN
@@ -48,7 +48,6 @@ func _ready():
 	startInit()
 
 func _physics_process(delta):
-
 	if state==Game.tankstate.START:
 		lastDir=dir
 		isStop=false
@@ -99,9 +98,7 @@ func _physics_process(delta):
 			turnDirection()
 		animation(dir,vec)
 
-#		var space_state = get_world_2d().direct_space_state
-#		var rayDir=[]
-#		var dirIsStop=[false,false,false]
+
 		var areas=[]
 		if dir==Game.dir.LEFT:
 			areas=leftArea.get_overlapping_areas()
@@ -112,21 +109,6 @@ func _physics_process(delta):
 		elif dir==Game.dir.DOWN:
 			areas=bottomArea.get_overlapping_areas()
 		
-#		for i in range(rayDir.size()):
-#			var result=space_state.intersect_ray(global_position,
-#			global_position++rayDir[i]*rayLength
-#			,[self],1+2+4,false,true)
-#			if result:
-#				dirIsStop[i]=true
-#				if result.collider.get('objType')==Game.objType.BRICK:
-#					var type=result.collider.get('type')
-#					if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-#						dirIsStop[i]=false
-#				if result.collider.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-#					if global_position.distance_to(result.collider.global_position)<14:
-#						dirIsStop[i]=false			
-#		if dirIsStop[0]||dirIsStop[1]||dirIsStop[2]:
-#			isStop=true	
 		
 		for i in areas:
 			if i == leftArea||i ==rightArea||i==topArea\
@@ -217,6 +199,7 @@ func addExplosion(isBig=true):
 	var temp=explode.instance()
 	temp.big=isBig
 	temp.position=position
+	temp.playSound=true
 	Game.map.addOther(temp)
 			
 #开始初始化
@@ -313,7 +296,8 @@ func setColor():
 #设置爆炸
 func setExplosion():
 	addExplosion()
-	bodyShape.call_deferred('set_disabled',false)
+	set_deferred('monitorable',false)
+	set_deferred('monitoring',false)
 	call_deferred('queue_free')	
 
 func _on_initTimer_timeout():
@@ -328,7 +312,7 @@ func _on_initTimer_timeout():
 func _on_tank_area_entered(area):
 	if isDestroy||area==null:
 		return
-	if area.get('objType')==Game.objType.BULLET:	
+	if area!=null&&area.get('objType')==Game.objType.BULLET:	
 		if area.get('own')==Game.objType.PLAYER:
 			if armour>0:
 				armour-=1
@@ -340,12 +324,10 @@ func _on_tank_area_entered(area):
 				isDestroy=true	
 				state=Game.tankstate.DEAD
 				addExplosion()
-#				bodyShape.call_deferred('set_disabled',false)
-				monitorable=false
-				monitoring=false
+				visible=false
+				set_deferred('monitorable',false)
+				set_deferred('monitoring',false)
 				Game.emit_signal("destroyEnemy",type,area.get('playerId'),position)
-				explosion.play()
-				yield(explosion,"finished")
 				call_deferred('queue_free')	
 				
 

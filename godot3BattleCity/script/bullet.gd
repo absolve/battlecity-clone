@@ -91,7 +91,8 @@ func _on_bullet_area_entered(area):
 		call_deferred('queue_free')	
 	elif area.get('objType')==Game.objType.BRICK:
 		if area.get('type')==Game.brickType.WALL||area.get('type')==Game.brickType.STONE:
-			if own==Game.objType.PLAYER:
+			if own==Game.objType.PLAYER&&power!=Game.bulletPower.SUPER\
+				&&area.get('type')==Game.brickType.STONE:
 				addexplode(true)
-			else:
+			else:		
 				addexplode()	

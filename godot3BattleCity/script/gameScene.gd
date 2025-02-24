@@ -21,20 +21,22 @@ var brickType=Game.brickType.WALL
 
 func _ready():
 	randomize()
-#	OS.center_window()
 	Game.map=map
-	map.loadMap(mapDir+"/"+Game.mapList[Game.gameLevel])
-#	map.loadMap(mapDir+"/"+'1992.json')
+#	map.loadMap(mapDir+"/"+Game.mapList[Game.gameLevel])
+	map.loadMap(mapDir+"/"+'1992.json')
 	map.loadEnemyCount()
+	map.setLevelName(Game.gameLevel+1)
 	map.addPlayer(1,Game.p1Data)
+	map.setP1LiveNum(Game.p1Data.lives)
 	if Game.mode==Game.gameMode.DOUBLE:
 		if Game.p2Data['lives']>0:
 			map.addPlayer(2,Game.p2Data)
 			minEnemyCount=8
-
+		map.setP2LiveNum(Game.p2Data.lives)
+		
 #	minEnemyCount=20		
-	map.setP1LiveNum(Game.p1Data.lives)
-	map.setP2LiveNum(Game.p2Data.lives)
+	
+	
 	
 	Game.connect("baseDestroyed",self,"baseDestroyed")
 	Game.connect('addBonus',self,'addBonus')
@@ -42,7 +44,7 @@ func _ready():
 	Game.connect('hitPlayer',self,'hitPlayer')
 	Game.connect("getBonus",self,'getBonus')
 	Game.resetPlayerScore() #重新设置分数
-	produceTimer.start()
+#	produceTimer.start()
 	
 
 #基地爆炸
@@ -112,9 +114,10 @@ func hitPlayer(playerId):
 #添加分数
 func addScore(s,pos):
 	var temp=scoreLabel.instance()
-	temp.setScore(s)
-	temp.rect_position=pos+Vector2(-14,-14)
 	map.addOther(temp)
+	temp.setScore(s)
+	temp.position=pos+Vector2(-14,-14)
+	
 
 #保存用户数据
 func savePlayerData():
@@ -136,7 +139,8 @@ func getBonus(type,objType,playerId):
 	var tank=map.getPlayer(playerId)
 	if !tank:
 		return
-	addScore(500,tank.global_position)
+		
+	addScore(500,tank.position)
 	if type==Game.bonusType.GRENADE:
 		var list=map.clearEnemyTank()
 		if playerId==Game.playerId.p1:

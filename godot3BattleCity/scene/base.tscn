@@ -34,5 +34,6 @@ frames = SubResource( 2 )
 
 [node name="explosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "sfx"
 
 [connection signal="area_entered" from="." to="." method="_on_base_area_entered"]
