@@ -11,8 +11,9 @@ config_version=4
 [application]
 
 config/name="Godot 3 Battle City"
+config/description="Battle City Remake"
 run/main_scene="res://scene/welcome.tscn"
-config/icon="res://icon.png"
+config/icon="res://sprite/tank_main1.png"
 
 [autoload]
 
