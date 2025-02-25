@@ -124,6 +124,11 @@ func setEnemyFreeze(flag=true):
 		if i.get('objType')==Game.objType.ENEMY:
 			i.setFreeze(flag)
 
+func setPlayerFreeze(flag=true):
+	for i in tanksNode.get_children():
+		if i.get('objType')==Game.objType.PLAYER:
+			i.setFreeze(flag)
+
 #创建基地	
 func createBase():
 	var temp=base.instance()
@@ -140,7 +145,7 @@ func getBrick(x:int,y:int):
 	return temp
 
 #添加玩家
-func addPlayer(playNo:int,data:Dictionary={}):
+func addPlayer(playNo:int,data:Dictionary={},isFreeze=false):
 	var temp=player.instance()
 	if playNo==1:
 		temp.playerId=Game.playerId.p1
@@ -162,7 +167,8 @@ func addPlayer(playNo:int,data:Dictionary={}):
 				temp.bulletPower=Game.bulletPower.FAST
 			
 	tanksNode.call_deferred('add_child',temp)
-
+	if isFreeze:
+		temp.call_deferred('setFreeze',true)
 
 
 #添加子弹

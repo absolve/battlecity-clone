@@ -33,6 +33,7 @@ func startGame():
 		var scene=temp.instance()
 		scene.selectLevel=true
 		get_tree().root.add_child(scene)
+		get_tree().current_scene=scene
 		queue_free()
 
 func _input(event):

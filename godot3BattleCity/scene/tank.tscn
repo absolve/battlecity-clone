@@ -31,16 +31,16 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 2, 14 )
+extents = Vector2( 3, 14 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 2, 14 )
+extents = Vector2( 3, 14 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 14, 2 )
+extents = Vector2( 14, 3 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 14, 2 )
+extents = Vector2( 14, 3 )
 
 [node name="tank" type="Area2D"]
 collision_layer = 0
@@ -78,7 +78,7 @@ wait_time = 1.5
 one_shot = true
 
 [node name="left" type="Area2D" parent="."]
-position = Vector2( -14, 0 )
+position = Vector2( -12, 0 )
 collision_layer = 0
 collision_mask = 0
 
@@ -86,7 +86,7 @@ collision_mask = 0
 shape = SubResource( 5 )
 
 [node name="right" type="Area2D" parent="."]
-position = Vector2( 14, 0 )
+position = Vector2( 12, 0 )
 collision_layer = 0
 collision_mask = 0
 
@@ -94,7 +94,7 @@ collision_mask = 0
 shape = SubResource( 6 )
 
 [node name="top" type="Area2D" parent="."]
-position = Vector2( 0, -14 )
+position = Vector2( 0, -12 )
 collision_layer = 0
 collision_mask = 0
 
@@ -102,7 +102,7 @@ collision_mask = 0
 shape = SubResource( 7 )
 
 [node name="bottom" type="Area2D" parent="."]
-position = Vector2( 0, 14 )
+position = Vector2( 0, 12 )
 collision_layer = 0
 collision_mask = 0
 

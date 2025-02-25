@@ -42,7 +42,6 @@ func _physics_process(delta):
 		isStop=false
 	
 		if Input.is_action_pressed(keymap["down"]):
-			print(vec,isOnIce)
 			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
 				slideSound.play()
 			vec=Vector2(0,speed)
@@ -85,7 +84,7 @@ func _physics_process(delta):
 			areas=topArea.get_overlapping_areas()
 		elif dir==Game.dir.DOWN:
 			areas=bottomArea.get_overlapping_areas()
-		print(areas)	
+		
 		isOnIce=false	
 		for i in areas:
 			if i == leftArea||i ==rightArea||i==topArea\
@@ -127,6 +126,7 @@ func _physics_process(delta):
 				vec=Vector2(0,-speed)
 			elif dir==Game.dir.DOWN:
 				vec=Vector2(0,speed)
+			slideTime-=1
 			
 		if !isStop:
 			position+=vec*delta			
@@ -219,7 +219,21 @@ func upgrade2Max():
 	bulletPower=Game.bulletPower.SUPER
 	bulletMax=2
 	armour=1
-	
+
+#设置停止移动
+func setFreeze(flag=true):
+	if flag:
+		isFreeze=flag
+		state=Game.tankstate.FREEZE
+		if ani.animation!='flash':
+			ani.stop()
+			idleSound.stop()
+			walkSound.stop()
+	else:
+		isFreeze=false
+		if initTimer.is_stopped():
+			state=Game.tankstate.START
+			
 func animation(dir,vec):
 	if dir==Game.dir.UP:
 		ani.flip_v=false
@@ -259,9 +273,11 @@ func animation(dir,vec):
 			ani.play('super')	
 
 
-
 func _on_initTimer_timeout():
-	state=Game.tankstate.START
+	if !isFreeze:
+		state=Game.tankstate.START
+	else:
+		animation(dir,Vector2.ZERO)	
 #	bodyShape.disabled=false
 	set_deferred('monitorable',true)
 	set_deferred('monitoring',true)

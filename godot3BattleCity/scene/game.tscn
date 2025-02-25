@@ -19,7 +19,7 @@ one_shot = true
 
 [node name="shovelTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 15.0
+wait_time = 12.0
 one_shot = true
 
 [node name="clockTimer" type="Timer" parent="."]

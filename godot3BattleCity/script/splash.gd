@@ -21,6 +21,7 @@ func _ready():
 		player.play("out")
 		SoundsUtil.playMusic()
 		yield(player,"animation_finished")
+		get_tree().current_scene=temp
 		queue_free()		
 	else:
 		set_process_input(true)	
@@ -34,6 +35,7 @@ func _input(event):
 		set_process_input(false)
 		yield(player,"animation_finished")
 		set_physics_process(true)
+		get_tree().current_scene=temp
 		queue_free()
 	if Input.is_action_pressed("p1_up"):
 		if Game.gameLevel<Game.mapList.size()-1:

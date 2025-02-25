@@ -212,20 +212,20 @@ func setNumLable(id,type,num):
 func nextLevel():
 	if isGameOver:
 		gameOver()
+		return
 	if Game.gameLevel>=Game.mapList.size()-1:
-		pass
+		Game.changeScene("res://scene/info.tscn")
 	else:
 		Game.gameLevel+=1
 		var temp=load("res://scene/splash.tscn")
 		get_tree().change_scene_to(temp)
+		
 
-#		queue_free()
-#		Game.changeScene("res://scene/game.tscn")
-	
 	
 func gameOver():
-	Game.changeScene("res://scene/gameover.tscn")
-
+	var temp=load("res://scene/gameover.tscn")
+	get_tree().change_scene_to(temp)
+#	queue_free()
 
 func _on_Timer_timeout():
 	nextLevel()

@@ -17,7 +17,7 @@ var state=Game.gameState.IDLE
 var changeBrickTime=0
 var changeBrickDelay=30
 var brickType=Game.brickType.WALL
-
+var gameOver=true
 
 func _ready():
 	randomize()
@@ -50,7 +50,8 @@ func _ready():
 #基地爆炸
 func baseDestroyed():
 	print('baseDestroyed')
-
+	gameOver()
+	
 #添加物品
 func addBonus():
 	print('addBonus')
@@ -100,16 +101,23 @@ func hitPlayer(playerId):
 	print('hitPlayer',playerId)
 	if playerId==Game.playerId.p1:
 		if Game.p1Data.lives>0:
-			map.addPlayer(1)
+			map.addPlayer(1,{},gameOver)
 			Game.p1Data.lives-=1
 			map.setP1LiveNum(Game.p1Data.lives)
 	elif playerId==Game.playerId.p2:
 		if Game.p2Data.lives>0:	
-			map.addPlayer(2)
+			map.addPlayer(2,{},gameOver)
 			Game.p2Data.lives-=1
 			map.setP2LiveNum(Game.p2Data.lives)
 	#如果玩家生命都为0，游戏结束
-	
+	if gameOver:
+		return
+	if Game.mode==Game.gameMode.SINGLE:
+		if Game.p1Data.lives<=0:
+			gameOver()
+	elif Game.mode==Game.gameMode.DOUBLE:
+		if Game.p1Data.lives<=0&&Game.p2Data.lives<=0:
+			gameOver()
 			
 #添加分数
 func addScore(s,pos):
@@ -184,6 +192,14 @@ func getBonus(type,objType,playerId):
 		SoundsUtil.playBomb()
 	else:
 		SoundsUtil.playGetBouns()			
+
+#游戏结束
+func gameOver():
+	gameOver=true
+	map.setPlayerFreeze()
+	nextLevel.start()
+			
+			
 			
 func _physics_process(delta):
 	if state==Game.gameState.START:
@@ -196,8 +212,7 @@ func _physics_process(delta):
 					if brickType==Game.brickType.WALL:
 						brickType=Game.brickType.STONE
 					else:
-						brickType=Game.brickType.WALL	
-	
+						brickType=Game.brickType.WALL		
 
 func _on_produceTimer_timeout():
 	if map.enemyCount>0:
@@ -214,8 +229,13 @@ func _on_produceTimer_timeout():
 			nextLevel.start()
 
 func _on_nextLevel_timeout():
-	Game.changeScene("res://scene/settlement.tscn")
-
+	var temp=load("res://scene/settlement.tscn")
+	var scene=temp.instance()
+	if gameOver:
+		scene.isGameOver=gameOver
+	get_tree().root.add_child(scene)
+	get_tree().current_scene=scene
+	queue_free()
 
 func _on_shovelTimer_timeout():
 	hasShovel=false
