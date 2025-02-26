@@ -23,6 +23,7 @@ onready var p1TypeCNumNode=$p1ScoreList/typeC/HBoxContainer/typeCNum
 onready var p1TypeDNode=$p1ScoreList/typeD
 onready var p1TypeDScoreNode=$p1ScoreList/typeD/typeDScore
 onready var p1TypeDNumNode=$p1ScoreList/typeD/HBoxContainer/typeDNum
+onready var p2ScoreListNode=$p2ScoreList
 onready var p2TypeANode=$p2ScoreList/typeA
 onready var p2TypeANumNode=$p2ScoreList/typeA/HBoxContainer/typeANum
 onready var p2TypeAScoreNode=$p2ScoreList/typeA/typeAScore
@@ -61,19 +62,19 @@ func _ready():
 	if Game.mode==Game.gameMode.SINGLE:
 		pass
 	elif Game.mode==Game.gameMode.DOUBLE:
-		pass
-	print(Game.p1Score)
+		p2ScoreListNode.visible=true
+#	print(Game.p1Score)
 	
 		
 
 func showScore():
 	#从坦克A开始计算
 	if countIndex==0:
-		p1TypeANode.visible=true
-		if Game.mode==Game.gameMode.DOUBLE:
-			p2TypeANode.visible=true
 		var tempP1Num=0
 		var tempP2Num=0
+		setNumLable(0,Game.enemyType.TYPEA,tempP1Num)
+		if Game.mode==Game.gameMode.DOUBLE:
+			setNumLable(1,Game.enemyType.TYPEA,tempP2Num)
 		while tempP1Num<Game.p1Score['typeA']||tempP2Num<Game.p2Score['typeA']:
 			if tempP1Num<Game.p1Score['typeA']:
 				tempP1Num+=1
@@ -91,11 +92,11 @@ func showScore():
 		countIndex+=1
 		showScore()	
 	elif countIndex==1:
-		p1TypeBNode.visible=true
-		if Game.mode==Game.gameMode.DOUBLE:
-			p2TypeBNode.visible=true
 		var tempP1Num=0
 		var tempP2Num=0
+		setNumLable(0,Game.enemyType.TYPEB,tempP1Num)
+		if Game.mode==Game.gameMode.DOUBLE:
+			setNumLable(1,Game.enemyType.TYPEB,tempP2Num)
 		while tempP1Num<Game.p1Score['typeB']||tempP2Num<Game.p2Score['typeB']:
 			if tempP1Num<Game.p1Score['typeB']:
 				tempP1Num+=1
@@ -113,11 +114,11 @@ func showScore():
 		countIndex+=1
 		showScore()	
 	elif countIndex==2:
-		p1TypeCNode.visible=true
-		if Game.mode==Game.gameMode.DOUBLE:
-			p2TypeCNode.visible=true
 		var tempP1Num=0
 		var tempP2Num=0
+		setNumLable(0,Game.enemyType.TYPEC,tempP1Num)
+		if Game.mode==Game.gameMode.DOUBLE:
+			setNumLable(1,Game.enemyType.TYPEC,tempP2Num)
 		while tempP1Num<Game.p1Score['typeC']||tempP2Num<Game.p2Score['typeC']:
 			if tempP1Num<Game.p1Score['typeC']:
 				tempP1Num+=1
@@ -135,11 +136,11 @@ func showScore():
 		countIndex+=1
 		showScore()			
 	elif countIndex==3:		
-		p1TypeDNode.visible=true
-		if Game.mode==Game.gameMode.DOUBLE:
-			p2TypeDNode.visible=true
 		var tempP1Num=0
 		var tempP2Num=0
+		setNumLable(0,Game.enemyType.TYPED,tempP1Num)
+		if Game.mode==Game.gameMode.DOUBLE:
+			setNumLable(1,Game.enemyType.TYPED,tempP2Num)
 		while tempP1Num<Game.p1Score['typeD']||tempP2Num<Game.p2Score['typeD']:
 			if tempP1Num<Game.p1Score['typeD']:
 				tempP1Num+=1

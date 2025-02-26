@@ -56,11 +56,13 @@ func loadMap(filePath:String):
 				temp.position.x=i['x']*cellSize+cellSize/2
 				temp.position.y=i['y']*cellSize+cellSize/2
 				temp.type=i['type']
-				temp.mapPos=Vector2(int(i['x']),int(i['y']))
+#				temp.mapPos=Vector2(int(i['x']),int(i['y']))
 				brickNode.add_child(temp)
 		#删除玩家复活点和敌人复活点的砖块
 		delPlayerPosBrick()
-		delBasePlaceBrick()
+		delEnemyPosBrick()
+		
+#		delBasePlaceBrick()
 		createBase()
 	else:
 		printerr('file not exists')
@@ -90,32 +92,40 @@ func delPlayerPosBrick():
 		var temp=getBrick(i.x,i.y)
 		if temp:
 			temp.queue_free()
+
+#删除敌人出生点方块
+func delEnemyPosBrick():
+	for i in enemyPos:
+		var brick=getBrick(i.x,i.y)
+		if brick:
+			brick.queue_free()
 	
 #删除基地周边的方块	
 func delBasePlaceBrick():
-	for i in basePlacePos:
+	for i in baseBrickPos:
 		var temp=getBrick(i.x,i.y)
 		if temp:
 			temp.queue_free()
 
 #添加基地周边石头
 func addBasePlaceStone():
-	for i in basePlacePos:
+	for i in baseBrickPos:
 		var temp=brick.instance()
 		temp.type=Game.brickType.STONE
 		temp.position=i*cellSize+Vector2(cellSize/2,cellSize/2)
-		brickNode.add_child(temp)
+#		brickNode.add_child(temp)
+		brickNode.call_deferred('add_child',temp)
 
 #改变砖块类型
 func changeBasePlaceBrickType(type):
-	for i in basePlacePos:
+	for i in baseBrickPos:
 		var b=getBrick(i.x,i.y)
 		if b:
 			b.changeType(type)
 		else:
 			var temp=brick.instance()
 			temp.type=type
-			temp.position=i*cellSize+cellSize/2
+			temp.position=i*cellSize+Vector2(cellSize/2,cellSize/2)
 			brickNode.add_child(temp)
 
 
@@ -139,7 +149,8 @@ func createBase():
 func getBrick(x:int,y:int):
 	var temp=null
 	for i in brickNode.get_children():
-		if i.mapPos.x==x&&i.mapPos.y==y:
+		if round((i.position.y-cellSize/2)/cellSize)==y\
+			&&round((i.position.x-cellSize/2)/cellSize)==x:
 			temp=i
 			break
 	return temp

@@ -20,7 +20,7 @@ onready var slideSound=$slide
 func _ready():
 	collision_layer=1
 	collision_mask=8
-	speed=120	
+	speed=80	
 	startInit()
 	if playerId==Game.playerId.p1:
 		keymap["up"]="p1_up"
@@ -96,6 +96,8 @@ func _physics_process(delta):
 					if type==Game.brickType.ICE:
 						isOnIce=true
 					continue
+				if type==Game.brickType.WATER&&hasShip:
+					continue	
 				isStop=true
 			if i.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
 				if global_position.distance_to(i.global_position)<14:
@@ -276,6 +278,7 @@ func _on_initTimer_timeout():
 		state=Game.tankstate.START
 	else:
 		animation(dir,Vector2.ZERO)	
+	setShip(hasShip)	
 	set_deferred('monitorable',true)
 	set_deferred('monitoring',true)
 	startinvincible(3)

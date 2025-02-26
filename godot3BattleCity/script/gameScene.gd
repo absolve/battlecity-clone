@@ -18,7 +18,7 @@ var state=Game.gameState.IDLE
 var changeBrickTime=0
 var changeBrickDelay=30
 var brickType=Game.brickType.WALL
-var gameOver=true
+var gameOver=false
 var autoHideLabel=preload("res://scene/autoHideLabel.tscn")
 
 func _ready():
@@ -28,19 +28,16 @@ func _ready():
 	map.loadMap(mapDir+"/"+'1992.json')
 	map.loadEnemyCount()
 	map.setLevelName(Game.gameLevel+1)
-	if Game.p1Data['lives']>0:
+	if Game.p1Data['lives']>=0:  #坦克数量为0表示最后一辆，小于0就是没有了
 		map.addPlayer(1,Game.p1Data)
 		map.setP1LiveNum(Game.p1Data.lives)
 	
 	if Game.mode==Game.gameMode.DOUBLE:
-		if Game.p2Data['lives']>0:
+		if Game.p2Data['lives']>=0:
 			map.addPlayer(2,Game.p2Data)
 			minEnemyCount=8
 		map.setP2LiveNum(Game.p2Data.lives)
 		
-#	minEnemyCount=20		
-	
-	
 	
 	Game.connect("baseDestroyed",self,"baseDestroyed")
 	Game.connect('addBonus',self,'addBonus')
@@ -48,8 +45,8 @@ func _ready():
 	Game.connect('hitPlayer',self,'hitPlayer')
 	Game.connect("getBonus",self,'getBonus')
 	Game.resetPlayerScore() #重新设置分数
-#	produceTimer.start()
-	
+	produceTimer.start()
+	state=Game.gameState.START
 
 #基地爆炸
 func baseDestroyed():
@@ -103,30 +100,34 @@ func destroyEnemy(type,playerId,pos):
 
 #玩家被摧毁
 func hitPlayer(playerId):
-	print('hitPlayer',playerId)
+	print('hitPlayer',playerId)	
+	#如果玩家生命都为0，游戏结束
+#	if gameOver:
+#		return			
 	if playerId==Game.playerId.p1:
-		if Game.p1Data.lives>0:
+		Game.p1Data.lives-=1
+		if Game.p1Data.lives>=0:
+			#只有生命数大于0的时候才可以添加新坦克
 			map.addPlayer(1,{},gameOver)
-			Game.p1Data.lives-=1
 			map.setP1LiveNum(Game.p1Data.lives)
 	elif playerId==Game.playerId.p2:
-		if Game.p2Data.lives>0:	
+		Game.p2Data.lives-=1
+		if Game.p2Data.lives>=0:	
 			map.addPlayer(2,{},gameOver)
-			Game.p2Data.lives-=1
-			map.setP2LiveNum(Game.p2Data.lives)
-	#如果玩家生命都为0，游戏结束
-	if gameOver:
-		return
+			map.setP2LiveNum(Game.p2Data.lives)		
+			
 	if Game.mode==Game.gameMode.SINGLE:
-		if Game.p1Data.lives<=0:
+		if Game.p1Data.lives<0:
 			gameOver()
 	elif Game.mode==Game.gameMode.DOUBLE:
-		if Game.p1Data.lives<=0&&Game.p2Data.lives<=0:
+		if Game.p1Data.lives<0&&Game.p2Data.lives<0:
 			gameOver()
-		if playerId==Game.playerId.p1&&Game.p1Data.lives==0:
+		if playerId==Game.playerId.p1&&Game.p1Data.lives<0:
 			addPlayerGameOverLabel(playerId)
-		if playerId==Game.playerId.p2&&	Game.p2Data.lives==0:
-			addPlayerGameOverLabel(playerId)
+		if playerId==Game.playerId.p2&&	Game.p2Data.lives<0:
+			addPlayerGameOverLabel(playerId)	
+		
+		
 			
 #添加分数
 func addScore(s,pos):
@@ -192,6 +193,7 @@ func getBonus(type,objType,playerId):
 		map.setEnemyFreeze()
 	elif type==Game.bonusType.SHOVEL:
 		hasShovel=true
+		shovelTimer.start()
 		map.delBasePlaceBrick()
 		map.addBasePlaceStone()
 			

@@ -172,7 +172,6 @@ __meta__ = {
 }
 
 [node name="typeA" type="HBoxContainer" parent="p1ScoreList"]
-visible = false
 margin_left = 28.0
 margin_top = 183.0
 margin_right = 228.0
@@ -187,7 +186,6 @@ margin_right = 91.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "o"
 align = 2
 
 [node name="Label2" type="Label" parent="p1ScoreList/typeA"]
@@ -211,7 +209,6 @@ alignment = 2
 margin_right = 31.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "0"
 align = 2
 
 [node name="TextureRect" type="TextureRect" parent="p1ScoreList/typeA/HBoxContainer"]
@@ -223,7 +220,6 @@ size_flags_vertical = 4
 texture = ExtResource( 7 )
 
 [node name="typeB" type="HBoxContainer" parent="p1ScoreList"]
-visible = false
 margin_left = 28.0
 margin_top = 234.0
 margin_right = 228.0
@@ -237,7 +233,6 @@ margin_right = 91.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "o"
 align = 2
 
 [node name="Label2" type="Label" parent="p1ScoreList/typeB"]
@@ -261,7 +256,6 @@ alignment = 2
 margin_right = 31.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "0"
 align = 2
 
 [node name="TextureRect" type="TextureRect" parent="p1ScoreList/typeB/HBoxContainer"]
@@ -273,7 +267,6 @@ size_flags_vertical = 4
 texture = ExtResource( 7 )
 
 [node name="typeC" type="HBoxContainer" parent="p1ScoreList"]
-visible = false
 margin_left = 27.0
 margin_top = 288.0
 margin_right = 227.0
@@ -287,7 +280,6 @@ margin_right = 91.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "o"
 align = 2
 
 [node name="Label2" type="Label" parent="p1ScoreList/typeC"]
@@ -311,7 +303,6 @@ alignment = 2
 margin_right = 31.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "0"
 align = 2
 
 [node name="TextureRect" type="TextureRect" parent="p1ScoreList/typeC/HBoxContainer"]
@@ -323,7 +314,6 @@ size_flags_vertical = 4
 texture = ExtResource( 7 )
 
 [node name="typeD" type="HBoxContainer" parent="p1ScoreList"]
-visible = false
 margin_left = 27.0
 margin_top = 337.0
 margin_right = 227.0
@@ -337,7 +327,6 @@ margin_right = 91.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "o"
 align = 2
 
 [node name="Label2" type="Label" parent="p1ScoreList/typeD"]
@@ -361,7 +350,6 @@ alignment = 2
 margin_right = 31.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "0"
 align = 2
 
 [node name="TextureRect" type="TextureRect" parent="p1ScoreList/typeD/HBoxContainer"]
@@ -373,11 +361,11 @@ size_flags_vertical = 4
 texture = ExtResource( 7 )
 
 [node name="p2ScoreList" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="typeA" type="HBoxContainer" parent="p2ScoreList"]
-visible = false
 margin_left = 284.0
 margin_top = 183.0
 margin_right = 484.0
@@ -406,7 +394,6 @@ margin_left = 15.0
 margin_right = 45.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "0"
 
 [node name="Label2" type="Label" parent="p2ScoreList/typeA"]
 margin_left = 49.0
@@ -424,11 +411,9 @@ margin_right = 200.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "o"
 align = 2
 
 [node name="typeB" type="HBoxContainer" parent="p2ScoreList"]
-visible = false
 margin_left = 284.0
 margin_top = 234.0
 margin_right = 484.0
@@ -456,7 +441,6 @@ margin_left = 15.0
 margin_right = 45.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "0"
 
 [node name="Label2" type="Label" parent="p2ScoreList/typeB"]
 margin_left = 49.0
@@ -474,11 +458,9 @@ margin_right = 200.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "o"
 align = 2
 
 [node name="typeC" type="HBoxContainer" parent="p2ScoreList"]
-visible = false
 margin_left = 284.0
 margin_top = 288.0
 margin_right = 484.0
@@ -506,7 +488,6 @@ margin_left = 15.0
 margin_right = 45.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "0"
 
 [node name="Label2" type="Label" parent="p2ScoreList/typeC"]
 margin_left = 49.0
@@ -524,11 +505,9 @@ margin_right = 200.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "o"
 align = 2
 
 [node name="typeD" type="HBoxContainer" parent="p2ScoreList"]
-visible = false
 margin_left = 284.0
 margin_top = 337.0
 margin_right = 484.0
@@ -556,7 +535,6 @@ margin_left = 15.0
 margin_right = 45.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
-text = "0"
 
 [node name="Label2" type="Label" parent="p2ScoreList/typeD"]
 margin_left = 49.0
@@ -574,7 +552,6 @@ margin_right = 200.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-text = "o"
 align = 2
 
 [node name="totalResultNode" type="HBoxContainer" parent="."]

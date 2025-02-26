@@ -9,7 +9,7 @@ var keepMoveTime=0 #保持移动的时间
 var bullet=preload("res://scene/bullet.tscn")
 var explode=preload("res://scene/explode.tscn")
 var fireTime=0	#开火计时
-var fireDelay=200 #延迟
+var fireDelay=150 #延迟
 var armourColor=['#52582f','#fff2d1','#ddab7b']
 var armourColor1=['#1b3f5f','#d8f2b9','#7f963b']
 var armourColor2=['#0d472f','#d9ffe7','#5ea77b']
@@ -42,8 +42,7 @@ func _ready():
 		if armour<3:
 			armour+=1
 		hasItem=true
-	hasItem=true	
-#	armour=2
+#	hasItem=true	
 	keepMoveTime=randi()%300+80
 	startInit()
 
@@ -91,7 +90,7 @@ func _physics_process(delta):
 					
 		if fireTime>fireDelay:
 			fireTime=0
-			fireDelay=randi()%300+120
+			fireDelay=randi()%140+100
 			fire()
 				
 		if lastDir!=dir:	#转向的需要修改位置

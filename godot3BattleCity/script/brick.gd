@@ -3,7 +3,7 @@ extends Area2D
 
 export var type=Game.brickType.WALL #类型
 export var objType=Game.objType.BRICK
-export var mapPos=Vector2.ZERO #地图的位置 x [0-25] y[0-25]
+#export var mapPos=Vector2.ZERO #地图的位置 x [0-25] y[0-25]
 var blockMask=[1,1,1,1] #砖块分割成4块 上左 上右 下左 下右 1是显示 0是不显示
 
 onready var ani=$ani

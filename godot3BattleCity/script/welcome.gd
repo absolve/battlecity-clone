@@ -30,6 +30,11 @@ func setMode(index):
 func startGame():
 	if selectedMode in [mode.P1,mode.P2]:
 		var temp=load("res://scene/splash.tscn")
+		Game.resetData()
+		if selectedMode==mode.P1:
+			Game.mode=Game.gameMode.SINGLE
+		elif selectedMode==mode.P2:
+			Game.mode=Game.gameMode.DOUBLE
 		var scene=temp.instance()
 		scene.selectLevel=true
 		get_tree().root.add_child(scene)

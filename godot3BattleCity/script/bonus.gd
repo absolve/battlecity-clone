@@ -28,4 +28,4 @@ func setRandomType():
 	Game.bonusType.GRENADE,Game.bonusType.GUN,Game.bonusType.HELMET,
 	Game.bonusType.SHOVEL,Game.bonusType.STAR,Game.bonusType.TANK]
 	type=arr[randi()%arr.size()]
-	type=Game.bonusType.BOAT	
+#	type=Game.bonusType.BOAT	
