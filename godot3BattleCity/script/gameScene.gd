@@ -8,6 +8,7 @@ onready var produceTimer=$produceTimer
 onready var nextLevel=$nextLevel
 onready var shovelTimer=$shovelTimer
 onready var clockTimer=$clockTimer
+onready var player=$player
 
 var minEnemyCount=4		#最小同屏敌人数量 2人就6个
 var scoreLabel=preload("res://scene/scoreLabel.tscn")
@@ -18,6 +19,7 @@ var changeBrickTime=0
 var changeBrickDelay=30
 var brickType=Game.brickType.WALL
 var gameOver=true
+var autoHideLabel=preload("res://scene/autoHideLabel.tscn")
 
 func _ready():
 	randomize()
@@ -26,8 +28,10 @@ func _ready():
 	map.loadMap(mapDir+"/"+'1992.json')
 	map.loadEnemyCount()
 	map.setLevelName(Game.gameLevel+1)
-	map.addPlayer(1,Game.p1Data)
-	map.setP1LiveNum(Game.p1Data.lives)
+	if Game.p1Data['lives']>0:
+		map.addPlayer(1,Game.p1Data)
+		map.setP1LiveNum(Game.p1Data.lives)
+	
 	if Game.mode==Game.gameMode.DOUBLE:
 		if Game.p2Data['lives']>0:
 			map.addPlayer(2,Game.p2Data)
@@ -50,7 +54,8 @@ func _ready():
 #基地爆炸
 func baseDestroyed():
 	print('baseDestroyed')
-	gameOver()
+	if !gameOver:
+		gameOver()
 	
 #添加物品
 func addBonus():
@@ -118,6 +123,10 @@ func hitPlayer(playerId):
 	elif Game.mode==Game.gameMode.DOUBLE:
 		if Game.p1Data.lives<=0&&Game.p2Data.lives<=0:
 			gameOver()
+		if playerId==Game.playerId.p1&&Game.p1Data.lives==0:
+			addPlayerGameOverLabel(playerId)
+		if playerId==Game.playerId.p2&&	Game.p2Data.lives==0:
+			addPlayerGameOverLabel(playerId)
 			
 #添加分数
 func addScore(s,pos):
@@ -197,9 +206,19 @@ func getBonus(type,objType,playerId):
 func gameOver():
 	gameOver=true
 	map.setPlayerFreeze()
+	player.play("gameover")
+	yield(player,"animation_finished")
 	nextLevel.start()
-			
-			
+
+#添加一个标志			
+func addPlayerGameOverLabel(id):
+	var temp=autoHideLabel.instance()
+	if id==Game.playerId.p1:
+		temp.rect_position=map.player1[0]*map.cellSize
+	elif id==Game.playerId.p2:
+		temp.rect_position=map.player2[0]*map.cellSize	
+	add_child(temp)
+				
 			
 func _physics_process(delta):
 	if state==Game.gameState.START:

@@ -84,13 +84,12 @@ func _physics_process(delta):
 			areas=topArea.get_overlapping_areas()
 		elif dir==Game.dir.DOWN:
 			areas=bottomArea.get_overlapping_areas()
-		
+
 		isOnIce=false	
 		for i in areas:
 			if i == leftArea||i ==rightArea||i==topArea\
 			||i==bottomArea||i==self:
 				continue
-#			print(areas)	
 			if i.get('objType') in [Game.objType.BRICK,Game.objType.BASE]:
 				var type=i.get('type')
 				if type==Game.brickType.BUSH||type==Game.brickType.ICE:
@@ -188,7 +187,6 @@ func addExplosion(isBig=true):
 		
 #开始初始化
 func startInit():
-#	bodyShape.call_deferred('set_disabled',true)
 	monitorable=false
 	monitoring=false
 	initTimer.start()
@@ -278,7 +276,6 @@ func _on_initTimer_timeout():
 		state=Game.tankstate.START
 	else:
 		animation(dir,Vector2.ZERO)	
-#	bodyShape.disabled=false
 	set_deferred('monitorable',true)
 	set_deferred('monitoring',true)
 	startinvincible(3)

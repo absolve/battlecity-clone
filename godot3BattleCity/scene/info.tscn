@@ -18,7 +18,7 @@ margin_bottom = 448.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer"]
 margin_right = 500.0
-margin_bottom = 1133.0
+margin_bottom = 1117.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -34,14 +34,11 @@ Remake with 2025.
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control/ScrollContainer/VBoxContainer"]
 margin_right = 500.0
-margin_bottom = 1133.0
+margin_bottom = 1117.0
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[color=#409eff]BONUS ITEMS[/color]
-[table=2]
-[cell][img=center]res://sprite/enemy_a.png[/img] [/cell]
-[cell][center]ENEMY A:SPEED: NORMAL ARMOR: NORMAL[/center][/cell]
-[/table]
+[table=2][cell][img=16]res://sprite/bonus_grenade.png[/img][/cell][cell]Hello World[/cell][/table]
 [img]res://sprite/bonus_grenade.png[/img] 
 GRENADE: ALL ENEMIES ARE DESTROYED
 [img]res://sprite/bonus_helmet.png[/img] 
@@ -81,7 +78,7 @@ WATER: IT IS NATURAL OBSTACLE UNLESS YOU COLLECT BOAT BONUS
 [img]res://sprite/ice.png[/img]
 ICE: TANKS ARE SLIPPING ON IT"
 text = "BONUS ITEMS
- ENEMY A:SPEED: NORMAL ARMOR: NORMAL
+Hello World
  
 GRENADE: ALL ENEMIES ARE DESTROYED
  

@@ -214,7 +214,12 @@ func nextLevel():
 		gameOver()
 		return
 	if Game.gameLevel>=Game.mapList.size()-1:
-		Game.changeScene("res://scene/info.tscn")
+		var temp=load("res://scene/info.tscn")
+		var scene=temp.instance()
+		scene.disableInput=true
+		get_tree().root.add_child(scene)
+		get_tree().current_scene=scene
+		queue_free()
 	else:
 		Game.gameLevel+=1
 		var temp=load("res://scene/splash.tscn")
