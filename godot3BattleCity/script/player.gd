@@ -9,7 +9,7 @@ var objType=Game.objType.PLAYER
 var level=Game.level.MIN  #玩家坦克级别
 var keymap={"up":0,"down":0,"left":0,"right":0,'shoot':0}
 var greenColor=['#0d472f','#d9ffe7','#5ea77b']  #外表颜色
-var rayLength=16  #射线长度
+#var rayLength=16  #射线长度
 
 onready var fireSound=$fire
 onready var hitSound=$hit

@@ -1,0 +1,101 @@
+[gd_scene load_steps=11 format=3 uid="uid://c7wxacaat6sif"]
+
+[ext_resource type="Script" path="res://script/tank.gd" id="1_u7tid"]
+[ext_resource type="Texture2D" uid="uid://bx3txkm7d1ade" path="res://sprite/invincible1.png" id="2_mu170"]
+[ext_resource type="Texture2D" uid="uid://4e6d71jxpotg" path="res://sprite/invincible2.png" id="3_d2mu2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy445"]
+size = Vector2(28, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xbdt6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mu170")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d2mu2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrhw7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwnvs"]
+size = Vector2(6, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jw614"]
+size = Vector2(6, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe3dp"]
+size = Vector2(28, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6tro"]
+size = Vector2(28, 6)
+
+[node name="tank" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_u7tid")
+
+[node name="ani" type="AnimatedSprite2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gy445")
+
+[node name="invincible" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_xbdt6")
+
+[node name="ship" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_xrhw7")
+
+[node name="shootTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="invincibleTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="initTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="left" type="Area2D" parent="."]
+position = Vector2(-12, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="left"]
+shape = SubResource("RectangleShape2D_bwnvs")
+
+[node name="right" type="Area2D" parent="."]
+position = Vector2(12, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="right"]
+shape = SubResource("RectangleShape2D_jw614")
+
+[node name="top" type="Area2D" parent="."]
+position = Vector2(0, -12)
+collision_layer = 0
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="top"]
+shape = SubResource("RectangleShape2D_qe3dp")
+
+[node name="bottom" type="Area2D" parent="."]
+position = Vector2(0, 12)
+collision_layer = 0
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="bottom"]
+shape = SubResource("RectangleShape2D_j6tro")
+
+[connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="invincibleTimer" to="." method="_on_invincible_timer_timeout"]

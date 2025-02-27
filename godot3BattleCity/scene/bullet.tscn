@@ -5,7 +5,7 @@
 [ext_resource path="res://sound/bullet_hit_1.ogg" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 4 )
+extents = Vector2( 3, 3 )
 
 [node name="bullet" type="Area2D"]
 collision_layer = 16

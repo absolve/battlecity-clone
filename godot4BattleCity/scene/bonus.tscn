@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://2djq2yi0g1at"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpbu5"]
+size = Vector2(10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_clqnd"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"5",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"6",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"7",
+"speed": 5.0
+}]
+
+[node name="bonus" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rpbu5")
+
+[node name="ani" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_clqnd")
+animation = &"7"

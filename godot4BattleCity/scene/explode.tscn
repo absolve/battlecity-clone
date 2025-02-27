@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://0ttnqok87yva"]
+
+[ext_resource type="Script" path="res://script/explode.gd" id="1_g0f7a"]
+[ext_resource type="AudioStream" uid="uid://kiwhsc6otprx" path="res://sound/tankDestroy.ogg" id="2_jr6nb"]
+[ext_resource type="AudioStream" uid="uid://cjtqqyiua7btn" path="res://sound/explosion_1.ogg" id="3_tlk7e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6prr2"]
+
+[node name="explode" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_6prr2")
+script = ExtResource("1_g0f7a")
+
+[node name="player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jr6nb")
+
+[node name="enemy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tlk7e")

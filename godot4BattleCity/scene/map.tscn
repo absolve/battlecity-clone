@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://pn880e5ss888"]
+
+[ext_resource type="Script" path="res://script/map.gd" id="1_y6klf"]
+
+[node name="map" type="Node2D"]
+script = ExtResource("1_y6klf")
+
+[node name="child" type="Node2D" parent="."]
+
+[node name="brick" type="Node2D" parent="child"]
+
+[node name="bullets" type="Node2D" parent="child"]
+
+[node name="tanks" type="Node2D" parent="child"]
+
+[node name="other" type="Node2D" parent="child"]
+
+[node name="gui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

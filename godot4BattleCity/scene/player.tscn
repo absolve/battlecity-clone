@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://byy266digvt5g"]
+
+[ext_resource type="PackedScene" uid="uid://c7wxacaat6sif" path="res://scene/tank.tscn" id="1_8woun"]
+[ext_resource type="Script" path="res://script/player.gd" id="2_rftgp"]
+[ext_resource type="Texture2D" uid="uid://ckkh8qaks5epy" path="res://sprite/appear_1.png" id="3_lqvh3"]
+[ext_resource type="Texture2D" uid="uid://15sn2vd0eify" path="res://sprite/appear_2.png" id="4_wka44"]
+[ext_resource type="Texture2D" uid="uid://m6vhp5ifsvb2" path="res://sprite/appear_3.png" id="5_igln5"]
+[ext_resource type="Texture2D" uid="uid://dw60wkodg86ao" path="res://sprite/appear_4.png" id="6_8by4h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1xhp6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lqvh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wka44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_igln5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8by4h")
+}],
+"loop": true,
+"name": &"flash",
+"speed": 10.0
+}]
+
+[node name="tank" instance=ExtResource("1_8woun")]
+script = ExtResource("2_rftgp")
+
+[node name="ani" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_1xhp6")
+animation = &"flash"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="initTimer" to="." method="_on_init_timer_timeout"]

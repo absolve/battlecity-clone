@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dku4ghdoc7m7d"]
+
+[ext_resource type="Script" path="res://script/base.gd" id="1_qv8tt"]
+[ext_resource type="Texture2D" uid="uid://c0kmv3e1i1wrt" path="res://sprite/base1.png" id="2_ey16f"]
+[ext_resource type="Texture2D" uid="uid://bjplh6p0pv4j0" path="res://sprite/base2.png" id="3_eukpk"]
+[ext_resource type="AudioStream" uid="uid://ba8mq2n1jc1sw" path="res://sound/explosion_2.ogg" id="4_b03i0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sylaj"]
+size = Vector2(8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rjeyf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ey16f")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_eukpk")
+}],
+"loop": false,
+"name": &"destroy",
+"speed": 5.0
+}]
+
+[node name="base" type="Area2D"]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_qv8tt")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sylaj")
+
+[node name="ani" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rjeyf")
+
+[node name="explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_b03i0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

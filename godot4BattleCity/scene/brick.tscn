@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://byal30nbvyuaj"]
+
+[ext_resource type="Script" path="res://script/brick.gd" id="1_6vugh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fi0a"]
+size = Vector2(8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pkvqv"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"4",
+"speed": 5.0
+}]
+
+[node name="brick" type="Area2D"]
+collision_layer = 4
+collision_mask = 16
+script = ExtResource("1_6vugh")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6fi0a")
+
+[node name="ani" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pkvqv")
+animation = &"4"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
