@@ -9,10 +9,11 @@ enum mode{
 var selectedMode=mode.P1
 
 onready var tankAni=$main/tankAni
+onready var player=$player
 
 func _ready():
 	VisualServer.set_default_clear_color('#000')
-	
+	player.play("move")
 
 func setMode(index):
 	tankAni.position.y=posY[index]
@@ -51,5 +52,8 @@ func _input(event):
 			index+=1
 			setMode(index)
 	if Input.is_action_just_pressed("select"):
+		if player.is_playing():
+			player.play("RESET")
+			return
 		startGame()
 	

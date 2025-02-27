@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e6h3mcf5otmk"]
+
+[ext_resource type="Script" path="res://script/sounds_util.gd" id="1_dd0hm"]
+
+[node name="soundsUtil" type="Node2D"]
+script = ExtResource("1_dd0hm")

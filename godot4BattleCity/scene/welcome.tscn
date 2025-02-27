@@ -1,6 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddv6gbbnbw6vg"]
+[gd_scene load_steps=6 format=3 uid="uid://ddv6gbbnbw6vg"]
 
 [ext_resource type="Script" path="res://script/welcome.gd" id="1_04a3m"]
+[ext_resource type="Texture2D" uid="uid://b6u2r3v1lnoyj" path="res://sprite/battle_city.png" id="2_r5w1e"]
+[ext_resource type="Texture2D" uid="uid://dhmpxs1upfbvl" path="res://sprite/tank_main1.png" id="3_8enbu"]
+[ext_resource type="Texture2D" uid="uid://c8one8cijcpaf" path="res://sprite/tank_main2.png" id="4_ap5kp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jgil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8enbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ap5kp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="welcome" type="Node2D"]
 script = ExtResource("1_04a3m")
+
+[node name="main" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="main"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="main"]
+position = Vector2(256, 125)
+texture = ExtResource("2_r5w1e")
+
+[node name="tankAni" type="AnimatedSprite2D" parent="main"]
+position = Vector2(171, 240)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_0jgil")
+
+[node name="payer" type="AnimationPlayer" parent="."]

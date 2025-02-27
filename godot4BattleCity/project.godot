@@ -13,11 +13,12 @@ config_version=5
 config/name="Battle city"
 run/main_scene="res://scene/welcome.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://sprite/tank_main1.png"
 
 [autoload]
 
 Game="*res://autoload/game.gd"
+SoundsUtil="*res://scene/sounds_util.tscn"
 
 [display]
 

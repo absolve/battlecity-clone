@@ -90,17 +90,18 @@ script = ExtResource( 1 )
 nextScene = ExtResource( 3 )
 
 [node name="top" type="ColorRect" parent="."]
+margin_top = -224.0
 margin_right = 512.0
-margin_bottom = 224.0
 color = Color( 0.392157, 0.392157, 0.392157, 1 )
 
 [node name="bottom" type="ColorRect" parent="."]
-margin_top = 224.0
+margin_top = 449.0
 margin_right = 512.0
-margin_bottom = 448.0
+margin_bottom = 673.0
 color = Color( 0.392157, 0.392157, 0.392157, 1 )
 
 [node name="name" type="Label" parent="."]
+visible = false
 margin_left = 202.0
 margin_top = 208.0
 margin_right = 202.0

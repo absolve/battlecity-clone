@@ -1,31 +1,56 @@
 extends Node2D
 
+var posY=[240,265,295,320,350] #选择是坦克的位置
+var index=0 #
+enum mode{
+	P1,P2,CONFIGMAP,SETTING,MAPVIEW
+}
 
-@onready var ani=$ani
-
-var objType=Game.objType.BONUS
-var type=Game.bonusType.STAR
+var selectedMode=mode.P1
+@onready var tankAni=$main/tankAni
+@onready var player=$payer	
 
 func _ready():
-	if type==Game.bonusType.BOAT:
-		ani.play("0")
-	elif type==Game.bonusType.CLOCK:
-		ani.play("1")
-	elif type==Game.bonusType.GRENADE:
-		ani.play("2")
-	elif type==Game.bonusType.GUN:
-		ani.play("3")
-	elif type==Game.bonusType.HELMET:
-		ani.play("4")	
-	elif type==Game.bonusType.SHOVEL:
-		ani.play("5")	
-	elif type==Game.bonusType.STAR:
-		ani.play("6")	
-	elif type==Game.bonusType.TANK:	
-		ani.play("7")
+	RenderingServer.set_default_clear_color('#000')
+
+func setMode(index):
+	tankAni.position.y=posY[index]
+	if index==0:
+		selectedMode=mode.P1
+	elif index==1:
+		selectedMode=mode.P2
+	elif index==2:
+		selectedMode=mode.CONFIGMAP
+	elif index==3:
+		selectedMode=mode.SETTING
+	elif index==4:
+		selectedMode=mode.MAPVIEW	
+
+func startGame():
+	if selectedMode in [mode.P1,mode.P2]:
+		var temp=load("res://scene/splash.tscn")
+		Game.resetData()
+		if selectedMode==mode.P1:
+			Game.mode=Game.gameMode.SINGLE
+		elif selectedMode==mode.P2:
+			Game.mode=Game.gameMode.DOUBLE
+		var scene=temp.instance()
+		scene.selectLevel=true
+		get_tree().root.add_child(scene)
+		get_tree().current_scene=scene
+		queue_free()
 		
-func setRandomType():
-	var arr=[Game.bonusType.BOAT,Game.bonusType.CLOCK,
-	Game.bonusType.GRENADE,Game.bonusType.GUN,Game.bonusType.HELMET,
-	Game.bonusType.SHOVEL,Game.bonusType.STAR,Game.bonusType.TANK]
-	type=arr[randi()%arr.size()]		
+func _input(event):
+	if Input.is_action_just_pressed("p1_up"):
+		if index>0:
+			index-=1
+			setMode(index)
+	elif Input.is_action_just_pressed("p1_down"):
+		if index<posY.size()-1:
+			index+=1
+			setMode(index)
+	if Input.is_action_just_pressed("select"):
+		if player.is_playing():
+			player.play("RESET")
+			return
+		startGame()

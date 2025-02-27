@@ -1,47 +1,81 @@
-[gd_scene load_steps=3 format=3 uid="uid://2djq2yi0g1at"]
+[gd_scene load_steps=12 format=3 uid="uid://2djq2yi0g1at"]
+
+[ext_resource type="Script" path="res://script/bonus.gd" id="1_t0y4r"]
+[ext_resource type="Texture2D" uid="uid://cl78j8nki7w6c" path="res://sprite/bonus_boat.png" id="2_wag74"]
+[ext_resource type="Texture2D" uid="uid://p1ooxvej2wei" path="res://sprite/bonus_clock.png" id="3_7mfur"]
+[ext_resource type="Texture2D" uid="uid://b13x6r5pgu61c" path="res://sprite/bonus_grenade.png" id="4_2argh"]
+[ext_resource type="Texture2D" uid="uid://bk0jy50wug8y2" path="res://sprite/bonus_gun.png" id="5_hwin5"]
+[ext_resource type="Texture2D" uid="uid://cbgbv5q73xptf" path="res://sprite/bonus_helmet.png" id="6_dgse8"]
+[ext_resource type="Texture2D" uid="uid://bmbmuae2b5u7" path="res://sprite/bonus_shovel.png" id="7_6grsb"]
+[ext_resource type="Texture2D" uid="uid://s5pa1odtvg7r" path="res://sprite/bonus_star.png" id="8_nwcwb"]
+[ext_resource type="Texture2D" uid="uid://bbutrs6jrfssw" path="res://sprite/bonus_tank.png" id="9_627h3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpbu5"]
 size = Vector2(10, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_clqnd"]
 animations = [{
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wag74")
+}],
+"loop": false,
 "name": &"0",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7mfur")
+}],
+"loop": false,
 "name": &"1",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2argh")
+}],
+"loop": false,
 "name": &"2",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_hwin5")
+}],
+"loop": false,
 "name": &"3",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_dgse8")
+}],
+"loop": false,
 "name": &"4",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_6grsb")
+}],
+"loop": false,
 "name": &"5",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_nwcwb")
+}],
+"loop": false,
 "name": &"6",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_627h3")
+}],
+"loop": false,
 "name": &"7",
 "speed": 5.0
 }]
@@ -49,10 +83,11 @@ animations = [{
 [node name="bonus" type="Area2D"]
 collision_layer = 8
 collision_mask = 0
+script = ExtResource("1_t0y4r")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rpbu5")
 
 [node name="ani" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_clqnd")
-animation = &"7"
+animation = &"0"
