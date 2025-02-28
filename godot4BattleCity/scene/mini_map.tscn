@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://8rbx64oavui6"]
+
+[ext_resource type="Script" path="res://script/mini_map.gd" id="1_u2p2c"]
+
+[node name="miniMap" type="Node2D"]
+script = ExtResource("1_u2p2c")
+
+[node name="bg" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="child" type="Node2D" parent="."]

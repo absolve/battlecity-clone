@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdc3yqlg78p68"]
+
+[ext_resource type="Script" path="res://script/tile.gd" id="1_p1m6s"]
+[ext_resource type="Texture2D" uid="uid://ca33e0qn6piw3" path="res://sprite/brick.png" id="2_qqknu"]
+[ext_resource type="Texture2D" uid="uid://dx8tuugng1563" path="res://sprite/stone.png" id="3_4li4f"]
+[ext_resource type="Texture2D" uid="uid://c3tuijkkrrids" path="res://sprite/water1.png" id="4_mcnwx"]
+[ext_resource type="Texture2D" uid="uid://erynqbwc1r2r" path="res://sprite/bush.png" id="5_41v5k"]
+[ext_resource type="Texture2D" uid="uid://ctde60d5jybxu" path="res://sprite/ice.png" id="6_r26u7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3s4a5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qqknu")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4li4f")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mcnwx")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_41v5k")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_r26u7")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
+
+[node name="tile" type="Node2D"]
+script = ExtResource("1_p1m6s")
+
+[node name="ani" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3s4a5")
+animation = &"4"

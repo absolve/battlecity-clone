@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddv6gbbnbw6vg"]
+[gd_scene load_steps=7 format=3 uid="uid://ddv6gbbnbw6vg"]
 
 [ext_resource type="Script" path="res://script/welcome.gd" id="1_04a3m"]
+[ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="2_07xfm"]
 [ext_resource type="Texture2D" uid="uid://b6u2r3v1lnoyj" path="res://sprite/battle_city.png" id="2_r5w1e"]
 [ext_resource type="Texture2D" uid="uid://dhmpxs1upfbvl" path="res://sprite/tank_main1.png" id="3_8enbu"]
 [ext_resource type="Texture2D" uid="uid://c8one8cijcpaf" path="res://sprite/tank_main2.png" id="4_ap5kp"]
@@ -29,8 +30,97 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("2_07xfm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="main/Control"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 20.0
+offset_right = 364.0
+offset_bottom = 60.0
+
+[node name="Label" type="Label" parent="main/Control/HBoxContainer"]
+layout_mode = 2
+text = "HI - "
+
+[node name="Label2" type="Label" parent="main/Control/HBoxContainer"]
+layout_mode = 2
+text = "000000"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="main/Control"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 233.0
+offset_right = 247.0
+offset_bottom = 309.0
+
+[node name="MarginContainer" type="MarginContainer" parent="main/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="main/Control/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "1 player"
+uppercase = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="main/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="main/Control/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+text = "2 player2"
+uppercase = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="main/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="main/Control/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+text = "construction"
+uppercase = true
+
+[node name="MarginContainer5" type="MarginContainer" parent="main/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="main/Control/VBoxContainer/MarginContainer5"]
+layout_mode = 2
+text = "setting"
+uppercase = true
+
+[node name="MarginContainer6" type="MarginContainer" parent="main/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="main/Control/VBoxContainer/MarginContainer6"]
+layout_mode = 2
+text = "map view"
+uppercase = true
+
+[node name="Label" type="Label" parent="main/Control"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 371.0
+offset_right = 303.0
+offset_bottom = 387.0
+theme_override_colors/font_color = Color(0.988235, 0.211765, 0.109804, 1)
+text = "namcot"
+uppercase = true
+
+[node name="copyright" type="Label" parent="main/Control"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 410.0
+offset_right = 456.0
+offset_bottom = 445.0
+text = "(c) 1980 1985 NAMCO ltd.
+all right reserved"
+horizontal_alignment = 1
+uppercase = true
 
 [node name="Sprite2D" type="Sprite2D" parent="main"]
+visible = false
 position = Vector2(256, 125)
 texture = ExtResource("2_r5w1e")
 

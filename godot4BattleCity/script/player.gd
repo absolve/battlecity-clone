@@ -31,8 +31,74 @@ func _ready():
 		#ani.material.set_shader_param('ischange',true)
 
 func _physics_process(delta):
+	var areas=[]
+	if dir==Game.dir.LEFT:
+		areas=leftArea.get_overlapping_areas()
+	elif dir==Game.dir.RIGHT:
+		areas=rightArea.get_overlapping_areas()
+	elif dir==Game.dir.UP:
+		areas=topArea.get_overlapping_areas()
+	elif dir==Game.dir.DOWN:
+		areas=bottomArea.get_overlapping_areas()
+	isOnIce=false	
+	for i in areas:
+		if i == leftArea||i ==rightArea||i==topArea\
+		||i==bottomArea||i==self:
+			continue
+		if i.get('objType') in [Game.objType.BRICK,Game.objType.BASE]:
+			var type=i.get('type')
+			if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+				if type==Game.brickType.ICE:
+					isOnIce=true
+				continue
+			if type==Game.brickType.WATER&&hasShip:
+				continue	
+			isStop=true
+		if i.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+			if global_position.distance_to(i.global_position)<14:
+				continue
+			isStop=true
 	
-	pass
+	if vec!=Vector2.ZERO:
+		slideTime=20
+		#if !walkSound.playing:
+			#walkSound.play()
+		#if idleSound.playing:
+			#idleSound.stop()
+	else:
+		#if walkSound.playing:
+			#walkSound.stop()
+		#if !idleSound.playing:
+			#idleSound.play()	
+		pass	
+			
+	if isOnIce&&slideTime>0&&vec==Vector2.ZERO: #冰块上继续滑行
+		if dir==Game.dir.LEFT:
+			vec=Vector2(-speed,0)
+		elif dir==Game.dir.RIGHT:
+			vec=Vector2(speed,0)
+		elif dir==Game.dir.UP:
+			vec=Vector2(0,-speed)
+		elif dir==Game.dir.DOWN:
+			vec=Vector2(0,speed)
+		slideTime-=1
+		
+	if !isStop:
+		position+=vec*delta			
+		
+	#调整一下位置
+	if position.x<=tankSize/2:
+		position.x=tankSize/2
+	if position.x>=mapSize.x-tankSize/2:	
+		position.x=mapSize.x-tankSize/2
+
+	if position.y<=tankSize/2:
+		position.y=tankSize/2
+	if position.y>=mapSize.y-tankSize/2:	
+		position.y=mapSize.y-tankSize/2
+
+
+
 
 #开始初始化
 func startInit():
@@ -52,6 +118,25 @@ func turnDirection():
 func fire():
 	if canShoot:
 		var del=[]
+		for i in bullets: #清理无效对象
+			if not is_instance_valid(i):
+				del.append(i)
+		for i in del:
+			bullets.remove(bullets.find(i))	
+		if bullets.size()>=bulletMax:
+			return
+		canShoot=false
+		shootTimer.start()
+		var temp=bullet.instantiate()
+		temp.position=position
+		temp.dir=dir
+		temp.playerId=playerId
+		temp.own=Game.objType.PLAYER
+		temp.setPower(bulletPower)
+		temp.ownId=get_instance_id()
+		bullets.append(temp)
+		Game.map.addBullet(temp)
+		#fireSound.play()
 		
 func addExplosion(isBig=true):
 	var temp=explode.instantiate()
@@ -156,3 +241,28 @@ func _on_init_timer_timeout():
 func _on_area_entered(area):
 	if isDestroy||area==null:
 		return
+	if area!=null&&area.get('objType')==Game.objType.BULLET:
+		if isInvincible:
+			return
+		if area.get('own')==Game.objType.ENEMY:
+			if hasShip:
+				setShip(false)
+				return
+			if armour>0:
+				armour-=1
+				if level==Game.level.SUPER:
+					level=Game.level.LARGE
+					bulletPower=Game.bulletPower.FAST
+				#hitSound.play()
+			else:
+				isDestroy=true
+				state=Game.tankstate.DEAD
+				set_deferred('monitorable',false)
+				set_deferred('monitoring',false)
+				Game.emit_signal("hitPlayer",playerId)
+				visible=false
+				addExplosion()
+				call_deferred('queue_free')	
+	if area!=null&&area.get('objType')==Game.objType.BONUS:
+		Game.emit_signal("getBonus",area.get('type'),objType,playerId)
+		area.call_deferred('queue_free')			

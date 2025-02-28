@@ -24,8 +24,8 @@ var autoHideLabel=preload("res://scene/autoHideLabel.tscn")
 func _ready():
 	randomize()
 	Game.map=map
-#	map.loadMap(mapDir+"/"+Game.mapList[Game.gameLevel])
-	map.loadMap(mapDir+"/"+'1992.json')
+	map.loadMap(mapDir+"/"+Game.mapList[Game.gameLevel])
+#	map.loadMap(mapDir+"/"+'1992.json')
 	map.loadEnemyCount()
 	map.setLevelName(Game.gameLevel+1)
 	if Game.p1Data['lives']>=0:  #坦克数量为0表示最后一辆，小于0就是没有了
