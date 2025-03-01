@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://xvtsrf40h73y"]
+[gd_scene load_steps=4 format=3 uid="uid://xvtsrf40h73y"]
 
 [ext_resource type="PackedScene" uid="uid://c7wxacaat6sif" path="res://scene/tank.tscn" id="1_gjwc5"]
 [ext_resource type="Script" path="res://script/enemy.gd" id="2_piya8"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pcpl"]
+
 [node name="tank" instance=ExtResource("1_gjwc5")]
 script = ExtResource("2_piya8")
+
+[node name="ani" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_5pcpl")
