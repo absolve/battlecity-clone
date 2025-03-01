@@ -178,7 +178,9 @@ func showScore():
 				SoundsUtil.playAward()
 				Game.p2Data['score']+=1000	
 				rewardNode.visible=true
-				rewardNode.set_position(Vector2(8,400))
+				rewardNode.set_position(Vector2(392,400))
+		for i in range(60):
+			yield(get_tree(),"physics_frame")		
 		timer.start()	
 			
 #
