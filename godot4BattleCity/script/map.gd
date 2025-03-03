@@ -34,29 +34,57 @@ var bonus=preload("res://scene/bonus.tscn")
 @onready var bulletsNode=$child/bullets
 @onready var tanksNode=$child/tanks
 @onready var otherNode=$child/other
+@onready var enemyList=$gui/enemyList
+@onready var levelName=$gui/vbox/name
+@onready var p1Num=$gui/p1Num
+@onready var p2Num=$gui/p2Num
+@onready var p1Count=$gui/p1Num/hbox/Label
+@onready var p2Count=$gui/p2Num/hbox/Label
 
-func _ready():
-	pass # Replace with function body.
+
 
 #载入文件
 func loadMap(filePath:String):
-	pass
+	var file = FileAccess.open(filePath, FileAccess.READ)
+	if file:
+		var json=JSON.new()
+		#print(file.get_as_text())
+		var currentLevel=json.parse_string(file.get_as_text())
+		#print(currentLevel)
+		file.close()
+		for i in currentLevel['data']:
+			if int(i['type']) in [0,1,2,3,4]:
+				var temp=brick.instantiate()
+				temp.position.x=int(i['x'])*cellSize+cellSize/2
+				temp.position.y=int(i['y'])*cellSize+cellSize/2
+				temp.type=int(i['type'])
+#				temp.mapPos=Vector2(int(i['x']),int(i['y']))
+				brickNode.add_child(temp)
+		#删除玩家复活点和敌人复活点的砖块
+		delPlayerPosBrick()
+		delEnemyPosBrick()
+		
+#		delBasePlaceBrick()
+		createBase()
+	else:
+		printerr('file not exists')	
+	
+	
 	
 #加载敌人数量
 func loadEnemyCount():
-	#for i in enemyList.get_children():
-		#i.queue_free()
-	#for i in range(enemyCount):
-		#var temp=enemyLogo.instance()
-		#enemyList.add_child(temp)
-	pass	
+	for i in enemyList.get_children():
+		i.queue_free()
+	for i in range(enemyCount):
+		var temp=enemyLogo.instantiate()
+		enemyList.add_child(temp)
+
 
 #移除排在最后一个敌人图标
 func removeEnemyLogo():
-	#var e=enemyList.get_children()	
-	#if e.size()>0:
-		#enemyList.remove_child(e.pop_back())
-	pass
+	var e=enemyList.get_children()	
+	if e.size()>0:
+		enemyList.remove_child(e.pop_back())
 	
 #删除玩家复活点方块	
 func delPlayerPosBrick():
@@ -93,7 +121,7 @@ func setPlayerFreeze(flag=true):
 
 #创建基地	
 func createBase():
-	var temp=base.instance()
+	var temp=base.instantiate()
 	temp.position=Vector2(basePos.x*cellSize+cellSize,basePos.y*cellSize+cellSize)
 	otherNode.add_child(temp)		
 
@@ -150,7 +178,7 @@ func delBasePlaceBrick():
 #添加基地周边石头
 func addBasePlaceStone():
 	for i in baseBrickPos:
-		var temp=brick.instance()
+		var temp=brick.instantiate()
 		temp.type=Game.brickType.STONE
 		temp.position=i*cellSize+Vector2(cellSize/2,cellSize/2)
 #		brickNode.add_child(temp)
@@ -165,20 +193,19 @@ func addOther(obj):
 	otherNode.add_child(obj)
 
 func setP1LiveNum(num):
-	#p1Num.visible=true
-	#p1LiveNum=num
-	#p1Count.text=str(num)
-	pass
+	p1Num.visible=true
+	p1LiveNum=num
+	p1Count.text=str(num)
+
 	
 func setP2LiveNum(num):
-	#p2Num.visible=true
-	#p2LiveNUm=num
-	#p2Count.text=str(num)
-	pass
+	p2Num.visible=true
+	p2LiveNUm=num
+	p2Count.text=str(num)
+
 
 func setLevelName(name):
-	#levelName.text='%d'%name
-	pass
+	levelName.text='%d'%name
 				
 #获取敌人总数
 func getEnemyCount():

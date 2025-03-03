@@ -1,12 +1,87 @@
-[gd_scene load_steps=4 format=3 uid="uid://xvtsrf40h73y"]
+[gd_scene load_steps=9 format=3 uid="uid://xvtsrf40h73y"]
 
 [ext_resource type="PackedScene" uid="uid://c7wxacaat6sif" path="res://scene/tank.tscn" id="1_gjwc5"]
 [ext_resource type="Script" path="res://script/enemy.gd" id="2_piya8"]
+[ext_resource type="Texture2D" uid="uid://dw60wkodg86ao" path="res://sprite/appear_4.png" id="3_8lrd7"]
+[ext_resource type="Texture2D" uid="uid://m6vhp5ifsvb2" path="res://sprite/appear_3.png" id="4_uopqp"]
+[ext_resource type="Texture2D" uid="uid://15sn2vd0eify" path="res://sprite/appear_2.png" id="5_km5ns"]
+[ext_resource type="Texture2D" uid="uid://ckkh8qaks5epy" path="res://sprite/appear_1.png" id="6_j85kt"]
+[ext_resource type="AudioStream" uid="uid://dj477eanmdtbv" path="res://sound/hit.ogg" id="7_7rmxm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5pcpl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8lrd7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uopqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_km5ns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j85kt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uopqp")
+}],
+"loop": true,
+"name": &"flash",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"typeA",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"typeA_run",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"typeB",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"typeB_run",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"typeC",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"typeC_run",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"typeD",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"typeD_run",
+"speed": 5.0
+}]
 
 [node name="tank" instance=ExtResource("1_gjwc5")]
 script = ExtResource("2_piya8")
 
 [node name="ani" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5pcpl")
+animation = &"typeA"
+
+[node name="hit" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource("7_7rmxm")
+
+[node name="player" type="AnimationPlayer" parent="." index="12"]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="initTimer" to="." method="_on_init_timer_timeout"]

@@ -5,7 +5,6 @@ onready var timer=$Timer
 onready var sound=$sound
 
 func _ready():
-	
 	timer.start()
 
 

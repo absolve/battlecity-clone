@@ -15,7 +15,7 @@ var armourColor1=['#1b3f5f','#d8f2b9','#7f963b']
 var armourColor2=['#0d472f','#d9ffe7','#5ea77b']
 var armourColor3=['#8f0077','#ffffff','#db2b00']
 var hasItem=false #有物品
-var rayLength=16  #射线长度
+#var rayLength=16  #射线长度
 
 onready var player=$player
 onready var hitSound=$hit

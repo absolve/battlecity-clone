@@ -1,0 +1,135 @@
+[gd_scene load_steps=7 format=3 uid="uid://6ddgaxq5v8qr"]
+
+[ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="1_n6dgq"]
+[ext_resource type="Script" path="res://script/settlement.gd" id="1_urgip"]
+[ext_resource type="Texture2D" uid="uid://bf067jstyafnx" path="res://sprite/enemy_a.png" id="3_qmb3w"]
+[ext_resource type="Texture2D" uid="uid://bjahs0o5pem8d" path="res://sprite/enemy_b.png" id="4_ijq0t"]
+[ext_resource type="Texture2D" uid="uid://cr0pw23atc241" path="res://sprite/enemy_c.png" id="5_02uoe"]
+[ext_resource type="Texture2D" uid="uid://6ssttbg00y13" path="res://sprite/enemy_d.png" id="6_50e3j"]
+
+[node name="settlement" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_n6dgq")
+script = ExtResource("1_urgip")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 16.0
+offset_right = 305.0
+offset_bottom = 56.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988235, 0.211765, 0.109804, 1)
+text = "hi-score "
+uppercase = true
+
+[node name="highScore" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988235, 0.572549, 0.360784, 1)
+text = "0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 292.0
+offset_bottom = 104.0
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+text = "stage"
+uppercase = true
+
+[node name="level" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+text = "1"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 174.0
+offset_right = 280.0
+offset_bottom = 362.0
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_qmb3w")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_ijq0t")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_02uoe")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_50e3j")
+stretch_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="startTimer" type="Timer" parent="."]
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 104.0
+offset_right = 144.0
+offset_bottom = 144.0
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988235, 0.211765, 0.109804, 1)
+text = "I-player"
+uppercase = true
+
+[node name="p1Score" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988235, 0.572549, 0.360784, 1)
+text = "000000"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+offset_left = 328.0
+offset_top = 104.0
+offset_right = 472.0
+offset_bottom = 144.0
+
+[node name="Label" type="Label" parent="VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988235, 0.211765, 0.109804, 1)
+text = "II-player"
+uppercase = true
+
+[node name="p2Score" type="Label" parent="VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988235, 0.572549, 0.360784, 1)
+text = "000000"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 376.0
+offset_right = 316.0
+offset_bottom = 379.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 390.0
+offset_right = 184.0
+offset_bottom = 406.0
+text = "total"
+uppercase = true

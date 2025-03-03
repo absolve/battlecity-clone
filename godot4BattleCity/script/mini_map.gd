@@ -14,10 +14,10 @@ func loadMap(filePath:String):
 		var currentLevel=json.parse(file.get_as_text())
 		file.close()
 		for i in currentLevel['data']:
-			if i['type'] in [0,1,2,3,4]:
+			if int(i['type']) in [0,1,2,3,4]:
 				var temp=tile.instantiate()
-				temp.position.x=i['x']*cellSize+cellSize/2
-				temp.position.y=i['y']*cellSize+cellSize/2
-				temp.type=i['type']
+				temp.position.x=int(i['x'])*cellSize+cellSize/2
+				temp.position.y=int(i['y'])*cellSize+cellSize/2
+				temp.type=int(i['type'])
 				childNode.add_child(temp)
 		childNode.scale=mapScale

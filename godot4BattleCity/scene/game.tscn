@@ -1,6 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwcvesg7003t2"]
+[gd_scene load_steps=3 format=3 uid="uid://cwcvesg7003t2"]
 
 [ext_resource type="Script" path="res://script/gameScene.gd" id="1_pcuhv"]
+[ext_resource type="PackedScene" uid="uid://pn880e5ss888" path="res://scene/map.tscn" id="2_x0pom"]
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_pcuhv")
+
+[node name="map" parent="." instance=ExtResource("2_x0pom")]
+
+[node name="produceTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.0
+
+[node name="nextLevel" type="Timer" parent="."]
+process_callback = 0
+wait_time = 1.5
+one_shot = true
+
+[node name="shovelTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 12.0
+one_shot = true
+
+[node name="clockTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 8.0
+one_shot = true
+
+[node name="other" type="Node2D" parent="."]
+
+[node name="player" type="AnimationPlayer" parent="."]
+
+[connection signal="timeout" from="produceTimer" to="." method="_on_produce_timer_timeout"]
+[connection signal="timeout" from="nextLevel" to="." method="_on_next_level_timeout"]
+[connection signal="timeout" from="shovelTimer" to="." method="_on_shovel_timer_timeout"]
+[connection signal="timeout" from="clockTimer" to="." method="_on_clock_timer_timeout"]

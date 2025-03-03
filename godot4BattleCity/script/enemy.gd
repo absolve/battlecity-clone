@@ -15,7 +15,10 @@ var armourColor1=['#1b3f5f','#d8f2b9','#7f963b']
 var armourColor2=['#0d472f','#d9ffe7','#5ea77b']
 var armourColor3=['#8f0077','#ffffff','#db2b00']
 var hasItem=false #有物品
-var rayLength=16  #射线长度
+#var rayLength=16  #射线长度
+
+@onready var hitSound=$hit
+@onready var player=$player
 
 func _ready():
 	dir=Game.dir.DOWN
@@ -39,6 +42,7 @@ func _ready():
 			armour+=1
 		hasItem=true
 	keepMoveTime=randi()%300+80
+	startInit()
 	
 func _physics_process(delta):
 	
@@ -81,7 +85,16 @@ func getNewDir(dir):
 #开火
 func fire():
 	if canShoot:
-		canShoot=false	
+		canShoot=false
+		shootTimer.start()
+		var temp=bullet.instance()
+		temp.position=position
+		temp.dir=dir
+		temp.own=Game.objType.ENEMY
+		temp.setPower(bulletPower)
+		temp.ownId=get_instance_id()
+#		bullets.append(temp)
+		Game.map.addBullet(temp)
 
 func addExplosion(isBig=true):
 	var temp=explode.instance()
@@ -96,3 +109,125 @@ func startInit():
 	monitoring=false
 	initTimer.start()
 	ani.play('flash')
+
+#设置停止移动
+func setFreeze(flag=true):
+	if flag:
+		isFreeze=flag
+		state=Game.tankstate.FREEZE
+		if ani.animation!='flash':
+			ani.stop()
+	else:
+		isFreeze=false
+		if initTimer.is_stopped():
+			state=Game.tankstate.START
+
+func animation(dir,vec):
+	if dir==Game.dir.UP:
+		ani.flip_v=true
+		ani.flip_h=false
+		ani.rotation_degrees=0
+	elif dir==Game.dir.DOWN:
+		ani.flip_v=false
+		ani.flip_h=false
+		ani.rotation_degrees=0
+	elif dir==Game.dir.LEFT:
+		ani.flip_v=false
+		ani.flip_h=false
+		ani.rotation_degrees=90		
+	elif dir==Game.dir.RIGHT:	
+		ani.flip_v=false
+		ani.flip_h=true
+		ani.rotation_degrees=-90
+	
+	if type==Game.enemyType.TYPEA:
+		if vec!=Vector2.ZERO:	
+			ani.play('typeA_run')
+		else:
+			ani.play("typeA")	
+	elif type==Game.enemyType.TYPEB:
+		if vec!=Vector2.ZERO:	
+			ani.play('typeB_run')
+		else:
+			ani.play("typeB")	
+	elif type==Game.enemyType.TYPEC:
+		if vec!=Vector2.ZERO:	
+			ani.play('typeC_run')
+		else:
+			ani.play("typeC")	
+	elif type==Game.enemyType.TYPED:
+		if vec!=Vector2.ZERO:	
+			ani.play('typeD_run')
+		else:
+			ani.play("typeD")	
+
+#设置颜色
+func setColor():
+	if armour>0:
+		ani.material.set_shader_param('ischange',true)
+		
+	if hasItem:	
+		if armour>0:
+			ani.material.set_shader_param('newColor1',Color(armourColor3[0]))
+			ani.material.set_shader_param('newColor2',Color(armourColor3[1]))
+			ani.material.set_shader_param('newColor3',Color(armourColor3[2]))
+			player.play("blink")
+		else:
+			if ani.material.get_shader_param('ischange'):
+				ani.material.set_shader_param('ischange',false)		
+			player.play("RESET")	
+	else:	
+		if armour>=3:
+			ani.material.set_shader_param('newColor1',Color(armourColor2[0]))
+			ani.material.set_shader_param('newColor2',Color(armourColor2[1]))
+			ani.material.set_shader_param('newColor3',Color(armourColor2[2]))
+		elif armour==2:	
+			ani.material.set_shader_param('newColor1',Color(armourColor1[0]))
+			ani.material.set_shader_param('newColor2',Color(armourColor1[1]))
+			ani.material.set_shader_param('newColor3',Color(armourColor1[2]))
+		elif armour==1:	
+			ani.material.set_shader_param('newColor1',Color(armourColor[0]))
+			ani.material.set_shader_param('newColor2',Color(armourColor[1]))
+			ani.material.set_shader_param('newColor3',Color(armourColor[2]))
+		else:
+			if ani.material.get_shader_param('ischange'):
+				ani.material.set_shader_param('ischange',false)	
+
+
+#设置爆炸
+func setExplosion():
+	addExplosion()
+	set_deferred('monitorable',false)
+	set_deferred('monitoring',false)
+	call_deferred('queue_free')	
+
+func _on_init_timer_timeout():
+	if !isFreeze:
+		state=Game.tankstate.START
+	else:
+		animation(dir,Vector2.ZERO)	
+	set_deferred('monitorable',true)
+	set_deferred('monitoring',true)
+	setColor()
+
+
+func _on_area_entered(area):
+	if isDestroy||area==null:
+		return
+	if area!=null&&area.get('objType')==Game.objType.BULLET:	
+		if area.get('own')==Game.objType.PLAYER:
+			if armour>0:
+				armour-=1
+				if hasItem: #添加物品
+					Game.emit_signal("addBonus")
+				setColor()	
+				hitSound.play()
+			else:
+				isDestroy=true	
+				state=Game.tankstate.DEAD
+				addExplosion()
+				visible=false
+				set_deferred('monitorable',false)
+				set_deferred('monitoring',false)
+				Game.emit_signal("destroyEnemy",type,area.get('playerId'),position)
+				call_deferred('queue_free')	

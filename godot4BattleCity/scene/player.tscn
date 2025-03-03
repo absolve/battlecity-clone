@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://byy266digvt5g"]
+[gd_scene load_steps=21 format=3 uid="uid://byy266digvt5g"]
 
 [ext_resource type="PackedScene" uid="uid://c7wxacaat6sif" path="res://scene/tank.tscn" id="1_8woun"]
 [ext_resource type="Script" path="res://script/player.gd" id="2_rftgp"]
@@ -14,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://c8one8cijcpaf" path="res://sprite/tank_main2.png" id="9_5x7qg"]
 [ext_resource type="Texture2D" uid="uid://d4efh6d13m6af" path="res://sprite/tank_main7.png" id="13_370p8"]
 [ext_resource type="Texture2D" uid="uid://ca45aj7q8ygxk" path="res://sprite/tank_main8.png" id="14_bkj5x"]
+[ext_resource type="AudioStream" uid="uid://b6njrrwxpnt87" path="res://sound/idle.wav" id="15_upwd4"]
+[ext_resource type="AudioStream" uid="uid://fc0tdh3u7lbf" path="res://sound/walk.wav" id="16_x4piy"]
+[ext_resource type="AudioStream" uid="uid://dj477eanmdtbv" path="res://sound/hit.ogg" id="17_ibr1t"]
+[ext_resource type="AudioStream" uid="uid://dq2gqeca3aibc" path="res://sound/bullet_shot.ogg" id="18_k5w60"]
+[ext_resource type="AudioStream" uid="uid://vhdqned633i3" path="res://sound/slide.wav" id="19_3hin4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1xhp6"]
 animations = [{
@@ -116,7 +121,25 @@ script = ExtResource("2_rftgp")
 
 [node name="ani" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_1xhp6")
-animation = &"super_run"
+animation = &"flash"
+
+[node name="ship" parent="." index="3"]
+animation = &"0"
+
+[node name="idle" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource("15_upwd4")
+
+[node name="walk" type="AudioStreamPlayer" parent="." index="12"]
+stream = ExtResource("16_x4piy")
+
+[node name="hit" type="AudioStreamPlayer" parent="." index="13"]
+stream = ExtResource("17_ibr1t")
+
+[node name="fire" type="AudioStreamPlayer" parent="." index="14"]
+stream = ExtResource("18_k5w60")
+
+[node name="slide" type="AudioStreamPlayer" parent="." index="15"]
+stream = ExtResource("19_3hin4")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="initTimer" to="." method="_on_init_timer_timeout"]

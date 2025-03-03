@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpe81dg4opaj7"]
+
+[ext_resource type="Script" path="res://script/gameover.gd" id="1_ounwo"]
+[ext_resource type="Texture2D" uid="uid://cydoonjnrtom6" path="res://sprite/game_over.png" id="2_1c78y"]
+[ext_resource type="AudioStream" uid="uid://cxq5lhxj54hkn" path="res://sound/game_over.ogg" id="2_n6bl3"]
+
+[node name="gameover" type="Node2D"]
+script = ExtResource("1_ounwo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(256, 224)
+texture = ExtResource("2_1c78y")
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_n6bl3")
+bus = &"bg"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

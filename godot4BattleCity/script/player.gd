@@ -9,7 +9,11 @@ var level=Game.level.MIN  #玩家坦克级别
 var keymap={"up":0,"down":0,"left":0,"right":0,'shoot':0}
 var greenColor=['#0d472f','#d9ffe7','#5ea77b']  #外表颜色
 
-
+@onready var fireSound=$fire
+@onready var hitSound=$hit
+@onready var idleSound=$idle
+@onready var walkSound=$walk
+@onready var slideSound=$slide
 
 func _ready():
 	collision_layer=1
@@ -31,71 +35,104 @@ func _ready():
 		#ani.material.set_shader_param('ischange',true)
 
 func _physics_process(delta):
-	var areas=[]
-	if dir==Game.dir.LEFT:
-		areas=leftArea.get_overlapping_areas()
-	elif dir==Game.dir.RIGHT:
-		areas=rightArea.get_overlapping_areas()
-	elif dir==Game.dir.UP:
-		areas=topArea.get_overlapping_areas()
-	elif dir==Game.dir.DOWN:
-		areas=bottomArea.get_overlapping_areas()
-	isOnIce=false	
-	for i in areas:
-		if i == leftArea||i ==rightArea||i==topArea\
-		||i==bottomArea||i==self:
-			continue
-		if i.get('objType') in [Game.objType.BRICK,Game.objType.BASE]:
-			var type=i.get('type')
-			if type==Game.brickType.BUSH||type==Game.brickType.ICE:
-				if type==Game.brickType.ICE:
-					isOnIce=true
-				continue
-			if type==Game.brickType.WATER&&hasShip:
-				continue	
-			isStop=true
-		if i.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-			if global_position.distance_to(i.global_position)<14:
-				continue
-			isStop=true
+	if state==Game.tankstate.START:
+		lastDir=dir
+		isStop=false
 	
-	if vec!=Vector2.ZERO:
-		slideTime=20
-		#if !walkSound.playing:
-			#walkSound.play()
-		#if idleSound.playing:
-			#idleSound.stop()
-	else:
-		#if walkSound.playing:
-			#walkSound.stop()
-		#if !idleSound.playing:
-			#idleSound.play()	
-		pass	
-			
-	if isOnIce&&slideTime>0&&vec==Vector2.ZERO: #冰块上继续滑行
-		if dir==Game.dir.LEFT:
-			vec=Vector2(-speed,0)
-		elif dir==Game.dir.RIGHT:
-			vec=Vector2(speed,0)
-		elif dir==Game.dir.UP:
-			vec=Vector2(0,-speed)
-		elif dir==Game.dir.DOWN:
+		if Input.is_action_pressed(keymap["down"]):
+			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
+				slideSound.play()
 			vec=Vector2(0,speed)
-		slideTime-=1
+			dir=Game.dir.DOWN
+		elif Input.is_action_pressed(keymap["up"]):
+			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
+				slideSound.play()
+			vec=Vector2(0,-speed)
+			dir=Game.dir.UP
+		elif Input.is_action_pressed(keymap["left"]):
+			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
+				slideSound.play()
+			vec=Vector2(-speed,0)
+			dir=Game.dir.LEFT
+		elif Input.is_action_pressed(keymap["right"]):
+			if vec==Vector2.ZERO&&isOnIce: #之前的是停下来并且在冰上
+				slideSound.play()
+			vec=Vector2(speed,0)
+			dir=Game.dir.RIGHT
+		else:
+			vec=Vector2.ZERO	
+			
+		if lastDir!=dir:	#转向的需要修改位置
+			turnDirection()
 		
-	if !isStop:
-		position+=vec*delta			
+		if Input.is_action_pressed(keymap["shoot"]):
+			fire()
 		
-	#调整一下位置
-	if position.x<=tankSize/2:
-		position.x=tankSize/2
-	if position.x>=mapSize.x-tankSize/2:	
-		position.x=mapSize.x-tankSize/2
+		animation(dir,vec)	
+		var areas=[]
+		if dir==Game.dir.LEFT:
+			areas=leftArea.get_overlapping_areas()
+		elif dir==Game.dir.RIGHT:
+			areas=rightArea.get_overlapping_areas()
+		elif dir==Game.dir.UP:
+			areas=topArea.get_overlapping_areas()
+		elif dir==Game.dir.DOWN:
+			areas=bottomArea.get_overlapping_areas()
+		isOnIce=false	
+		for i in areas:
+			if i == leftArea||i ==rightArea||i==topArea\
+			||i==bottomArea||i==self:
+				continue
+			if i.get('objType') in [Game.objType.BRICK,Game.objType.BASE]:
+				var type=i.get('type')
+				if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+					if type==Game.brickType.ICE:
+						isOnIce=true
+					continue
+				if type==Game.brickType.WATER&&hasShip:
+					continue	
+				isStop=true
+			if i.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+				if global_position.distance_to(i.global_position)<14:
+					continue
+				isStop=true
+		
+		if vec!=Vector2.ZERO:
+			slideTime=20
+			if !walkSound.playing:
+				walkSound.play()
+			if idleSound.playing:
+				idleSound.stop()
+		else:
+			if walkSound.playing:
+				walkSound.stop()
+			if !idleSound.playing:
+				idleSound.play()		
+				
+		if isOnIce&&slideTime>0&&vec==Vector2.ZERO: #冰块上继续滑行
+			if dir==Game.dir.LEFT:
+				vec=Vector2(-speed,0)
+			elif dir==Game.dir.RIGHT:
+				vec=Vector2(speed,0)
+			elif dir==Game.dir.UP:
+				vec=Vector2(0,-speed)
+			elif dir==Game.dir.DOWN:
+				vec=Vector2(0,speed)
+			slideTime-=1
+			
+		if !isStop:
+			position+=vec*delta			
+			
+		#调整一下位置
+		if position.x<=tankSize/2:
+			position.x=tankSize/2
+		if position.x>=mapSize.x-tankSize/2:	
+			position.x=mapSize.x-tankSize/2
 
-	if position.y<=tankSize/2:
-		position.y=tankSize/2
-	if position.y>=mapSize.y-tankSize/2:	
-		position.y=mapSize.y-tankSize/2
+		if position.y<=tankSize/2:
+			position.y=tankSize/2
+		if position.y>=mapSize.y-tankSize/2:	
+			position.y=mapSize.y-tankSize/2
 
 
 
@@ -179,8 +216,8 @@ func setFreeze(flag=true):
 		state=Game.tankstate.FREEZE
 		if ani.animation!='flash':
 			ani.stop()
-			#idleSound.stop()
-			#walkSound.stop()
+			idleSound.stop()
+			walkSound.stop()
 	else:
 		isFreeze=false
 		if initTimer.is_stopped():
@@ -253,7 +290,7 @@ func _on_area_entered(area):
 				if level==Game.level.SUPER:
 					level=Game.level.LARGE
 					bulletPower=Game.bulletPower.FAST
-				#hitSound.play()
+				hitSound.play()
 			else:
 				isDestroy=true
 				state=Game.tankstate.DEAD

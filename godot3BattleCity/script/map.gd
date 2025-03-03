@@ -35,9 +35,9 @@ onready var tanksNode=$child/tanks
 onready var otherNode=$child/other
 onready var enemyList=$gui/enemyList
 onready var levelName=$gui/vbox/name
-onready var p1Num=$gui/p1NUm
+onready var p1Num=$gui/p1Num
 onready var p2Num=$gui/p2Num
-onready var p1Count=$gui/p1NUm/hbox/Label
+onready var p1Count=$gui/p1Num/hbox/Label
 onready var p2Count=$gui/p2Num/hbox/Label
 
 func _ready():

@@ -6,8 +6,8 @@
 script = ExtResource("1_u2p2c")
 
 [node name="bg" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 416.0
+offset_bottom = 416.0
 color = Color(0, 0, 0, 1)
 
 [node name="child" type="Node2D" parent="."]
