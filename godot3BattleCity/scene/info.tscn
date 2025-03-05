@@ -18,7 +18,7 @@ margin_bottom = 448.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer"]
 margin_right = 500.0
-margin_bottom = 1117.0
+margin_bottom = 711.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -34,87 +34,64 @@ Remake with 2025.
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control/ScrollContainer/VBoxContainer"]
 margin_right = 500.0
-margin_bottom = 1117.0
+margin_bottom = 711.0
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[color=#409eff]BONUS ITEMS[/color]
-[table=2][cell][img=16]res://sprite/bonus_grenade.png[/img][/cell][cell]Hello World[/cell][/table]
-[img]res://sprite/bonus_grenade.png[/img] 
-GRENADE: ALL ENEMIES ARE DESTROYED
-[img]res://sprite/bonus_helmet.png[/img] 
-HELMET: ACTIVE PLAYER SHIELD FOR 10 SECONDS
-[img]res://sprite/bonus_clock.png[/img] 
-CLOCK: FREEZE ALL ENEMIES FOR 8 SECONDS
-[img]res://sprite/bonus_shovel.png[/img] 
-SHOVEL: CREATE STONE WALL AROUND EAGLE FOR 15 SECONDS
-[img]res://sprite/bonus_tank.png[/img] 
-TANK: INCREASE PLAYER LIVES COUNT
-[img]res://sprite/bonus_star.png[/img] 
-STAR: INCREASE PLAYER SPEED, EACH NEXT ONE INCREASE MAX BULLETS COUNT
-[img]res://sprite/bonus_gun.png[/img] 
-GUN: ARMOR+1,BULLET MAXIMUM POWER
-[img]res://sprite/bonus_boat.png[/img] 
-BOAT: ALLOWS TO MOVE ON THE WATER
+[table=2][cell][img=16]res://sprite/bonus_grenade.png[/img][/cell][cell]GRENADE: ALL ENEMIES ARE DESTROYED[/cell][/table]
+[table=2][cell][img=16]res://sprite/bonus_helmet.png[/img][/cell][cell]HELMET: ACTIVE PLAYER SHIELD FOR 10 SECONDS[/cell][/table]
+[table=2][cell][img=16]res://sprite/bonus_clock.png[/img][/cell][cell]CLOCK: FREEZE ALL ENEMIES FOR 8 SECONDS[/cell][/table]
+[table=2][cell][img=16]res://sprite/bonus_shovel.png[/img][/cell][cell]SHOVEL: CREATE STONE WALL AROUND EAGLE FOR 15 SECONDS[/cell][/table]
+[table=2][cell][img=16]res://sprite/bonus_tank.png[/img][/cell][cell]TANK: INCREASE PLAYER LIVES COUNT[/cell][/table]
+[table=2][cell][img=16]res://sprite/bonus_star.png[/img][/cell][cell]STAR: INCREASE PLAYER SPEED, EACH NEXT ONE INCREASE MAX BULLETS COUNT[/cell][/table]
+[table=2][cell][img=16]res://sprite/bonus_gun.png[/img][/cell][cell]GUN: ARMOR+1,BULLET MAXIMUM POWER[/cell][/table]
+[table=2][cell][img=16]res://sprite/bonus_boat.png[/img][/cell][cell]BOAT: ALLOWS TO MOVE ON THE WATER[/cell][/table]
+
 
 [color=#409eff]ENEMY TYPES[/color]
-[img]res://sprite/enemy_a.png[/img] 
-ENEMY A:SPEED: NORMAL ARMOR: NORMAL
-[img]res://sprite/enemy_b.png[/img] 
-ENEMY B:SPEED: FAST ARMOR: NORMAL
-[img]res://sprite/enemy_c.png[/img] 
-ENEMY C:SPEED: NORMAL ARMOR: NORMAL
-[img]res://sprite/enemy_d.png[/img] 
-ENEMY D:SPEED: NORMAL ARMOR: NORMAL+1
+[table=2][cell][img=16]res://sprite/enemy_a.png[/img][/cell]
+[cell]ENEMY A:SPEED: NORMAL ARMOR: NORMAL[/cell][/table]
+[table=2][cell][img=16]res://sprite/enemy_b.png[/img][/cell]
+[cell]ENEMY B:SPEED: FAST ARMOR: NORMAL[/cell][/table]
+[table=2][cell][img=16]res://sprite/enemy_c.png[/img][/cell]
+[cell]ENEMY C:SPEED: NORMAL ARMOR: NORMAL[/cell][/table]
+[table=2][cell][img=16]res://sprite/enemy_d.png[/img][/cell]
+[cell]ENEMY D:SPEED: NORMAL ARMOR: NORMAL+1[/cell][/table]
+
 
 [color=#409eff]LEVEL[/color]
-[img]res://sprite/brick.png[/img] 
-BRICK WALL: IT CAN BE DESTROYED WITH TWO BULLETS OR ONE IF YOU COLLECT THREE STARS OR GUN
-[img]res://sprite/stone.png[/img] 
-STONE WALL: IT CAN BE DESTROYED ONLY IF YOU COLLECT THREE STARS OR GUN BONUS
-[img]res://sprite/bush.png[/img] 
-BUSH: GRASS CAN BE WALKED THROUGH
-[img]res://sprite/water1.png[/img]
-WATER: IT IS NATURAL OBSTACLE UNLESS YOU COLLECT BOAT BONUS
-[img]res://sprite/ice.png[/img]
-ICE: TANKS ARE SLIPPING ON IT"
+[table=2][cell][img=16]res://sprite/brick.png[/img][/cell]
+[cell]BRICK WALL: IT CAN BE DESTROYED WITH TWO BULLETS OR ONE IF YOU COLLECT THREE STARS OR GUN[/cell][/table]
+[table=2][cell][img=16]res://sprite/stone.png[/img][/cell]
+[cell]STONE WALL: IT CAN BE DESTROYED ONLY IF YOU COLLECT THREE STARS OR GUN BONUS[/cell][/table]
+[table=2][cell][img=16]res://sprite/bush.png[/img][/cell]
+[cell]BUSH: GRASS CAN BE WALKED THROUGH[/cell][/table]
+[table=2][cell][img=16]res://sprite/water1.png[/img][/cell]
+[cell]WATER: IT IS NATURAL OBSTACLE UNLESS YOU COLLECT BOAT BONUS[/cell][/table]
+[table=2][cell][img=16]res://sprite/ice.png[/img][/cell]
+[cell]ICE: TANKS ARE SLIPPING ON IT[/cell][/table]"
 text = "BONUS ITEMS
-Hello World
- 
 GRENADE: ALL ENEMIES ARE DESTROYED
- 
 HELMET: ACTIVE PLAYER SHIELD FOR 10 SECONDS
- 
 CLOCK: FREEZE ALL ENEMIES FOR 8 SECONDS
- 
 SHOVEL: CREATE STONE WALL AROUND EAGLE FOR 15 SECONDS
- 
 TANK: INCREASE PLAYER LIVES COUNT
- 
 STAR: INCREASE PLAYER SPEED, EACH NEXT ONE INCREASE MAX BULLETS COUNT
- 
 GUN: ARMOR+1,BULLET MAXIMUM POWER
- 
 BOAT: ALLOWS TO MOVE ON THE WATER
 
+
 ENEMY TYPES
- 
 ENEMY A:SPEED: NORMAL ARMOR: NORMAL
- 
 ENEMY B:SPEED: FAST ARMOR: NORMAL
- 
 ENEMY C:SPEED: NORMAL ARMOR: NORMAL
- 
 ENEMY D:SPEED: NORMAL ARMOR: NORMAL+1
 
+
 LEVEL
- 
 BRICK WALL: IT CAN BE DESTROYED WITH TWO BULLETS OR ONE IF YOU COLLECT THREE STARS OR GUN
- 
 STONE WALL: IT CAN BE DESTROYED ONLY IF YOU COLLECT THREE STARS OR GUN BONUS
- 
 BUSH: GRASS CAN BE WALKED THROUGH
-
 WATER: IT IS NATURAL OBSTACLE UNLESS YOU COLLECT BOAT BONUS
-
 ICE: TANKS ARE SLIPPING ON IT"
 fit_content_height = true
