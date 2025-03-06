@@ -32,7 +32,7 @@ func _ready():
 		keymap["left"]="p2_left"
 		keymap["right"]="p2_right"
 		keymap["shoot"]="p2_shoot"	
-		#ani.material.set_shader_param('ischange',true)
+		ani.material.set_shader_param('ischange',true)
 
 func _physics_process(delta):
 	if state==Game.tankstate.START:
@@ -173,7 +173,7 @@ func fire():
 		temp.ownId=get_instance_id()
 		bullets.append(temp)
 		Game.map.addBullet(temp)
-		#fireSound.play()
+		fireSound.play()
 		
 func addExplosion(isBig=true):
 	var temp=explode.instantiate()

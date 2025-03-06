@@ -73,6 +73,7 @@ text = "0"
 
 [node name="p2Num" type="VBoxContainer" parent="gui"]
 visible = false
+layout_mode = 0
 offset_left = 456.0
 offset_top = 288.0
 offset_right = 496.0

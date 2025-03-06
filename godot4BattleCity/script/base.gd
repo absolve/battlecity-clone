@@ -8,11 +8,13 @@ extends Area2D
 
 var destroy=false #是否摧毁
 var objType=Game.objType.BASE
-
+var explode=preload("res://scene/explode.tscn")
 
 func addexplode():
-	
-	pass
+	var temp = explode.instance()
+	temp.position=position
+	temp.big=true
+	Game.map.addOther(temp)
 
 
 func _on_area_entered(area):

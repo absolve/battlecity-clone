@@ -1,13 +1,54 @@
-[gd_scene load_steps=5 format=3 uid="uid://0ttnqok87yva"]
+[gd_scene load_steps=10 format=3 uid="uid://0ttnqok87yva"]
 
 [ext_resource type="Script" path="res://script/explode.gd" id="1_g0f7a"]
+[ext_resource type="Texture2D" uid="uid://xey5gy1yubrt" path="res://sprite/big_explosion_1.png" id="1_smbfr"]
+[ext_resource type="Texture2D" uid="uid://dvkudc3y867eg" path="res://sprite/big_explosion_2.png" id="2_3ont3"]
 [ext_resource type="AudioStream" uid="uid://kiwhsc6otprx" path="res://sound/tankDestroy.ogg" id="2_jr6nb"]
+[ext_resource type="Texture2D" uid="uid://dm0mv3wqxw87h" path="res://sprite/big_explosion_3.png" id="3_qic78"]
 [ext_resource type="AudioStream" uid="uid://cjtqqyiua7btn" path="res://sound/explosion_1.ogg" id="3_tlk7e"]
+[ext_resource type="Texture2D" uid="uid://33sdqf31irqs" path="res://sprite/big_explosion_4.png" id="4_5n3g4"]
+[ext_resource type="Texture2D" uid="uid://djh5p527fpqui" path="res://sprite/big_explosion_5.png" id="5_skm5s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6prr2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_smbfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3ont3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qic78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5n3g4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_skm5s")
+}],
+"loop": false,
+"name": &"big",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_smbfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3ont3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qic78")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="explode" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_6prr2")
+animation = &"big"
 script = ExtResource("1_g0f7a")
 
 [node name="player" type="AudioStreamPlayer" parent="."]

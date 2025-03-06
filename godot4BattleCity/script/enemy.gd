@@ -45,8 +45,100 @@ func _ready():
 	startInit()
 	
 func _physics_process(delta):
-	
-	pass
+	if state==Game.tankstate.START:
+		lastDir=dir
+		isStop=false
+		if dir==Game.dir.DOWN:
+			vec=Vector2(0,speed)
+		elif dir==Game.dir.UP:
+			vec=Vector2(0,-speed)
+		elif dir==Game.dir.LEFT:
+			vec=Vector2(-speed,0)
+		elif dir==Game.dir.RIGHT:
+			vec=Vector2(speed,0)
+		
+		moveTime+=1
+		fireTime+=1
+
+		if moveTime>keepMoveTime: #改变方向
+			moveTime=0
+			keepMoveTime=randi()%300+60
+			var p=randf() #随机概率值
+			if type==Game.enemyType.TYPEA:
+				if p>0.3:
+					targetEagle(p)
+				else:
+					var temp=getNewDir(lastDir)
+					dir	= temp[randi()%temp.size()]
+			elif type==Game.enemyType.TYPEB||type==Game.enemyType.TYPEC:		
+				if p>0.5:
+					targetEagle(p)
+				else:
+					var temp=getNewDir(lastDir)
+					dir	= temp[randi()%temp.size()]
+			elif type==Game.enemyType.TYPED:
+				if p>0.1:	
+					targetEagle(p)
+				else:
+					var temp=getNewDir(lastDir)
+					dir	= temp[randi()%temp.size()]	
+					
+		if fireTime>fireDelay:
+			fireTime=0
+			fireDelay=randi()%140+100
+			fire()
+				
+		if lastDir!=dir:	#转向的需要修改位置
+			turnDirection()
+		animation(dir,vec)
+
+
+		var areas=[]
+		if dir==Game.dir.LEFT:
+			areas=leftArea.get_overlapping_areas()
+		elif dir==Game.dir.RIGHT:
+			areas=rightArea.get_overlapping_areas()
+		elif dir==Game.dir.UP:
+			areas=topArea.get_overlapping_areas()
+		elif dir==Game.dir.DOWN:
+			areas=bottomArea.get_overlapping_areas()
+		
+		
+		for i in areas:
+			if i == leftArea||i ==rightArea||i==topArea\
+			||i==bottomArea||i==self:
+				continue	
+			if i.get('objType') in [Game.objType.BRICK,Game.objType.BASE]:
+				var type=i.get('type')
+				if type==Game.brickType.BUSH||type==Game.brickType.ICE:
+					if type==Game.brickType.ICE:
+						isOnIce=true
+					continue
+				isStop=true
+			if i.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
+				if global_position.distance_to(i.global_position)<14:
+					continue
+				isStop=true
+		
+		if !isStop:
+			position+=vec*delta	
+		else:
+			keepMoveTime-=25
+
+		#调整一下位置
+		if position.x<=tankSize/2:
+			position.x=tankSize/2
+			keepMoveTime-=20
+		if position.x>=mapSize.x-tankSize/2:	
+			position.x=mapSize.x-tankSize/2
+			keepMoveTime-=20
+		if position.y<=tankSize/2:
+			position.y=tankSize/2
+			keepMoveTime-=20
+		if position.y>=mapSize.y-tankSize/2:	
+			position.y=mapSize.y-tankSize/2
+			keepMoveTime-=20
+
 	
 #改变方向的时候调整位置
 func turnDirection():

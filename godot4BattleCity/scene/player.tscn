@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://byy266digvt5g"]
+[gd_scene load_steps=23 format=3 uid="uid://byy266digvt5g"]
 
 [ext_resource type="PackedScene" uid="uid://c7wxacaat6sif" path="res://scene/tank.tscn" id="1_8woun"]
 [ext_resource type="Script" path="res://script/player.gd" id="2_rftgp"]
 [ext_resource type="Texture2D" uid="uid://ckkh8qaks5epy" path="res://sprite/appear_1.png" id="3_lqvh3"]
+[ext_resource type="Shader" path="res://shader/enemyColor.gdshader" id="3_n1wfc"]
 [ext_resource type="Texture2D" uid="uid://15sn2vd0eify" path="res://sprite/appear_2.png" id="4_wka44"]
 [ext_resource type="Texture2D" uid="uid://m6vhp5ifsvb2" path="res://sprite/appear_3.png" id="5_igln5"]
 [ext_resource type="Texture2D" uid="uid://dw60wkodg86ao" path="res://sprite/appear_4.png" id="6_8by4h"]
@@ -19,6 +20,17 @@
 [ext_resource type="AudioStream" uid="uid://dj477eanmdtbv" path="res://sound/hit.ogg" id="17_ibr1t"]
 [ext_resource type="AudioStream" uid="uid://dq2gqeca3aibc" path="res://sound/bullet_shot.ogg" id="18_k5w60"]
 [ext_resource type="AudioStream" uid="uid://vhdqned633i3" path="res://sound/slide.wav" id="19_3hin4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5c6r6"]
+resource_local_to_scene = true
+shader = ExtResource("3_n1wfc")
+shader_parameter/ischange = false
+shader_parameter/oldColor1 = Color(1, 0.901961, 0.639216, 1)
+shader_parameter/oldColor2 = Color(1, 0.607843, 0.231373, 1)
+shader_parameter/oldColor3 = Color(0.545098, 0.447059, 0, 1)
+shader_parameter/newColor1 = Color(0.701961, 1, 0.811765, 1)
+shader_parameter/newColor2 = Color(0, 0.576471, 0.231373, 1)
+shader_parameter/newColor3 = Color(0, 0.317647, 0, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1xhp6"]
 animations = [{
@@ -120,8 +132,9 @@ animations = [{
 script = ExtResource("2_rftgp")
 
 [node name="ani" parent="." index="0"]
+material = SubResource("ShaderMaterial_5c6r6")
 sprite_frames = SubResource("SpriteFrames_1xhp6")
-animation = &"flash"
+animation = &"large"
 
 [node name="ship" parent="." index="3"]
 animation = &"0"

@@ -1,14 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8b3fsed6wjfd"]
+[gd_scene load_steps=5 format=3 uid="uid://b8b3fsed6wjfd"]
 
+[ext_resource type="Script" path="res://script/bullet.gd" id="1_nfjb6"]
 [ext_resource type="Texture2D" uid="uid://71o2ebkdfiam" path="res://sprite/bullet_down.png" id="1_pccw0"]
+[ext_resource type="AudioStream" uid="uid://5t0rmp3x8d3b" path="res://sound/bullet_hit_1.ogg" id="3_s5oy5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_juqya"]
 size = Vector2(3, 4)
 
 [node name="bullet" type="Area2D"]
+collision_layer = 16
+collision_mask = 31
+script = ExtResource("1_nfjb6")
 
 [node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_juqya")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_pccw0")
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_s5oy5")
+bus = &"sfx"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
