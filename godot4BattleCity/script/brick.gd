@@ -28,7 +28,7 @@ func setType(value):
 func changeType(value):
 	self.type=value
 	blockMask=[1,1,1,1]
-	ani.material.set_shader_param('block',Color(blockMask[0],
+	ani.material.set_shader_parameter('block',Color(blockMask[0],
 				blockMask[1],blockMask[2],blockMask[3]))	
 	setType(value)	
 
@@ -75,9 +75,8 @@ func _on_area_entered(area):
 				if all==0:
 					queue_free()
 					return
-
-				#ani.material.set_shader_param('block',Color(blockMask[0],
-				#blockMask[1],blockMask[2],blockMask[3]))							
+				ani.material.set_shader_parameter('block',Color(blockMask[0],
+				blockMask[1],blockMask[2],blockMask[3]))							
 		elif type==Game.brickType.STONE:
 			if area.get('power')!=null && area.power==Game.bulletPower.SUPER:
 				queue_free()

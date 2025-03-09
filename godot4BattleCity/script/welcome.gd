@@ -12,6 +12,7 @@ var selectedMode=mode.P1
 
 func _ready():
 	RenderingServer.set_default_clear_color('#000')
+	player.play("move")
 
 func setMode(index):
 	tankAni.position.y=posY[index]
@@ -34,7 +35,7 @@ func startGame():
 			Game.mode=Game.gameMode.SINGLE
 		elif selectedMode==mode.P2:
 			Game.mode=Game.gameMode.DOUBLE
-		var scene=temp.instance()
+		var scene=temp.instantiate()
 		scene.selectLevel=true
 		get_tree().root.add_child(scene)
 		get_tree().current_scene=scene

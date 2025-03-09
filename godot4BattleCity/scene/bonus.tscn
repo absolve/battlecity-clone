@@ -1,14 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://2djq2yi0g1at"]
+[gd_scene load_steps=15 format=3 uid="uid://2djq2yi0g1at"]
 
 [ext_resource type="Script" path="res://script/bonus.gd" id="1_t0y4r"]
-[ext_resource type="Texture2D" uid="uid://cl78j8nki7w6c" path="res://sprite/bonus_boat.png" id="2_wag74"]
-[ext_resource type="Texture2D" uid="uid://p1ooxvej2wei" path="res://sprite/bonus_clock.png" id="3_7mfur"]
-[ext_resource type="Texture2D" uid="uid://b13x6r5pgu61c" path="res://sprite/bonus_grenade.png" id="4_2argh"]
-[ext_resource type="Texture2D" uid="uid://bk0jy50wug8y2" path="res://sprite/bonus_gun.png" id="5_hwin5"]
-[ext_resource type="Texture2D" uid="uid://cbgbv5q73xptf" path="res://sprite/bonus_helmet.png" id="6_dgse8"]
-[ext_resource type="Texture2D" uid="uid://bmbmuae2b5u7" path="res://sprite/bonus_shovel.png" id="7_6grsb"]
-[ext_resource type="Texture2D" uid="uid://s5pa1odtvg7r" path="res://sprite/bonus_star.png" id="8_nwcwb"]
-[ext_resource type="Texture2D" uid="uid://bbutrs6jrfssw" path="res://sprite/bonus_tank.png" id="9_627h3"]
+[ext_resource type="Texture2D" uid="uid://brdpot1hk0ccu" path="res://sprite/bonus_boat.png" id="2_wag74"]
+[ext_resource type="Texture2D" uid="uid://c8h8dn1or730a" path="res://sprite/bonus_clock.png" id="3_7mfur"]
+[ext_resource type="Texture2D" uid="uid://c2cenjheydwhd" path="res://sprite/bonus_grenade.png" id="4_2argh"]
+[ext_resource type="Texture2D" uid="uid://dgsrg62ub7cq7" path="res://sprite/bonus_gun.png" id="5_hwin5"]
+[ext_resource type="Texture2D" uid="uid://c6gji8ecn1yo1" path="res://sprite/bonus_helmet.png" id="6_dgse8"]
+[ext_resource type="Texture2D" uid="uid://ba5qvuycfqxbr" path="res://sprite/bonus_shovel.png" id="7_6grsb"]
+[ext_resource type="Texture2D" uid="uid://cf0hpegadogpo" path="res://sprite/bonus_star.png" id="8_nwcwb"]
+[ext_resource type="Texture2D" uid="uid://br7rf3hpxedlg" path="res://sprite/bonus_tank.png" id="9_627h3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpbu5"]
 size = Vector2(10, 10)
@@ -80,7 +80,46 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_jgrm5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ani:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_1mm5m"]
+resource_name = "blink"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ani:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dheqe"]
+_data = {
+"RESET": SubResource("Animation_jgrm5"),
+"blink": SubResource("Animation_1mm5m")
+}
+
 [node name="bonus" type="Area2D"]
+z_index = 2
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_t0y4r")
@@ -91,3 +130,9 @@ shape = SubResource("RectangleShape2D_rpbu5")
 [node name="ani" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_clqnd")
 animation = &"0"
+
+[node name="player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dheqe")
+}
+autoplay = "blink"

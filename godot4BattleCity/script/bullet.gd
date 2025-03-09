@@ -34,6 +34,7 @@ func _ready():
 		vec=Vector2(speed,0)
 		sprite.rotation_degrees=-90
 		shape.rotation_degrees=-90
+
 		
 func setPower(value):
 	if value==Game.bulletPower.NORMAL:
@@ -65,7 +66,7 @@ func addexplode(playSound=false):
 	visible=false
 	set_deferred('monitorable',false)
 	set_deferred('monitoring',false)
-	var temp = explode.instance()
+	var temp = explode.instantiate()
 	temp.position=position
 	Game.map.addOther(temp)
 	if playSound:

@@ -11,7 +11,7 @@ var objType=Game.objType.BASE
 var explode=preload("res://scene/explode.tscn")
 
 func addexplode():
-	var temp = explode.instance()
+	var temp = explode.instantiate()
 	temp.position=position
 	temp.big=true
 	Game.map.addOther(temp)

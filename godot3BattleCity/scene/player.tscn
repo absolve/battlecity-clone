@@ -81,25 +81,25 @@ animation = "small"
 [node name="ship" parent="." index="3"]
 animation = "0"
 
-[node name="fire" type="AudioStreamPlayer" parent="." index="7"]
+[node name="left" parent="." index="7"]
+collision_mask = 7
+
+[node name="right" parent="." index="8"]
+collision_mask = 7
+
+[node name="top" parent="." index="9"]
+collision_mask = 7
+
+[node name="bottom" parent="." index="10"]
+collision_mask = 7
+
+[node name="fire" type="AudioStreamPlayer" parent="." index="11"]
 stream = ExtResource( 15 )
 bus = "sfx"
 
-[node name="hit" type="AudioStreamPlayer" parent="." index="8"]
+[node name="hit" type="AudioStreamPlayer" parent="." index="12"]
 stream = ExtResource( 16 )
 bus = "sfx"
-
-[node name="left" parent="." index="9"]
-collision_mask = 7
-
-[node name="right" parent="." index="10"]
-collision_mask = 7
-
-[node name="top" parent="." index="11"]
-collision_mask = 7
-
-[node name="bottom" parent="." index="12"]
-collision_mask = 7
 
 [node name="idle" type="AudioStreamPlayer" parent="." index="13"]
 stream = ExtResource( 19 )

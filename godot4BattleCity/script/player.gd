@@ -17,7 +17,7 @@ var greenColor=['#0d472f','#d9ffe7','#5ea77b']  #外表颜色
 
 func _ready():
 	collision_layer=1
-	collision_mask=8
+	collision_mask=16+8
 	speed=80	
 	startInit()
 	if playerId==Game.playerId.p1:
@@ -32,7 +32,7 @@ func _ready():
 		keymap["left"]="p2_left"
 		keymap["right"]="p2_right"
 		keymap["shoot"]="p2_shoot"	
-		ani.material.set_shader_param('ischange',true)
+		ani.material.set_shader_parameter('ischange',true)
 
 func _physics_process(delta):
 	if state==Game.tankstate.START:
@@ -159,7 +159,7 @@ func fire():
 			if not is_instance_valid(i):
 				del.append(i)
 		for i in del:
-			bullets.remove(bullets.find(i))	
+			bullets.remove_at(bullets.find(i))	
 		if bullets.size()>=bulletMax:
 			return
 		canShoot=false
@@ -198,9 +198,13 @@ func upgrade():
 		level=Game.level.MEDIUM
 		bulletPower=Game.bulletPower.FAST
 	elif level==Game.level.MEDIUM:
+		level=Game.level.LARGE
+		bulletPower=Game.bulletPower.FAST
+		bulletMax=2
+	elif level==Game.level.LARGE:
 		level=Game.level.SUPER
 		bulletPower=Game.bulletPower.SUPER
-		bulletMax=2		
+		bulletMax=2
 		
 #升级成肥坦克
 func upgrade2Max():

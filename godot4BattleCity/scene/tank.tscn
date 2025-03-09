@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://c7wxacaat6sif"]
 
 [ext_resource type="Script" path="res://script/tank.gd" id="1_u7tid"]
-[ext_resource type="Texture2D" uid="uid://bx3txkm7d1ade" path="res://sprite/invincible1.png" id="2_mu170"]
-[ext_resource type="Texture2D" uid="uid://4e6d71jxpotg" path="res://sprite/invincible2.png" id="3_d2mu2"]
-[ext_resource type="Texture2D" uid="uid://bhaqc5sp603be" path="res://sprite/ship1.png" id="4_0xle1"]
-[ext_resource type="Texture2D" uid="uid://ctvnn7lany1yb" path="res://sprite/ship2.png" id="5_u3d60"]
+[ext_resource type="Texture2D" uid="uid://dmwiqtsb88gse" path="res://sprite/invincible1.png" id="2_mu170"]
+[ext_resource type="Texture2D" uid="uid://cbogohopkvaom" path="res://sprite/invincible2.png" id="3_d2mu2"]
+[ext_resource type="Texture2D" uid="uid://dgiuf385ox4qo" path="res://sprite/ship1.png" id="4_0xle1"]
+[ext_resource type="Texture2D" uid="uid://d2x6kn2drrdf0" path="res://sprite/ship2.png" id="5_u3d60"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy445"]
 size = Vector2(28, 28)
@@ -74,7 +74,7 @@ sprite_frames = SubResource("SpriteFrames_xrhw7")
 animation = &"1"
 
 [node name="shootTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="invincibleTimer" type="Timer" parent="."]

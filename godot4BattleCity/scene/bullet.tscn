@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8b3fsed6wjfd"]
 
 [ext_resource type="Script" path="res://script/bullet.gd" id="1_nfjb6"]
-[ext_resource type="Texture2D" uid="uid://71o2ebkdfiam" path="res://sprite/bullet_down.png" id="1_pccw0"]
-[ext_resource type="AudioStream" uid="uid://5t0rmp3x8d3b" path="res://sound/bullet_hit_1.ogg" id="3_s5oy5"]
+[ext_resource type="Texture2D" uid="uid://d08b873sj7gct" path="res://sprite/bullet_down.png" id="1_pccw0"]
+[ext_resource type="AudioStream" uid="uid://bldtnoumaslx" path="res://sound/bullet_hit_1.ogg" id="3_s5oy5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_juqya"]
 size = Vector2(3, 4)
 
 [node name="bullet" type="Area2D"]
 collision_layer = 16
-collision_mask = 31
+collision_mask = 23
 script = ExtResource("1_nfjb6")
 
 [node name="shape" type="CollisionShape2D" parent="."]

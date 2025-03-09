@@ -1,15 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://byal30nbvyuaj"]
+[gd_scene load_steps=12 format=3 uid="uid://byal30nbvyuaj"]
 
 [ext_resource type="Script" path="res://script/brick.gd" id="1_6vugh"]
-[ext_resource type="Texture2D" uid="uid://ca33e0qn6piw3" path="res://sprite/brick.png" id="2_yey8w"]
-[ext_resource type="Texture2D" uid="uid://dx8tuugng1563" path="res://sprite/stone.png" id="3_uwn2w"]
-[ext_resource type="Texture2D" uid="uid://c3tuijkkrrids" path="res://sprite/water1.png" id="4_ch0qi"]
-[ext_resource type="Texture2D" uid="uid://n0mqr27x676y" path="res://sprite/water2.png" id="5_m8kj2"]
-[ext_resource type="Texture2D" uid="uid://erynqbwc1r2r" path="res://sprite/bush.png" id="6_oxgxv"]
-[ext_resource type="Texture2D" uid="uid://ctde60d5jybxu" path="res://sprite/ice.png" id="7_2m3rl"]
+[ext_resource type="Shader" path="res://shader/texture.gdshader" id="2_xk4d0"]
+[ext_resource type="Texture2D" uid="uid://dh5c586cqxsgp" path="res://sprite/brick.png" id="2_yey8w"]
+[ext_resource type="Texture2D" uid="uid://whvokkscjyur" path="res://sprite/stone.png" id="3_uwn2w"]
+[ext_resource type="Texture2D" uid="uid://cg1f1au3t8a85" path="res://sprite/water1.png" id="4_ch0qi"]
+[ext_resource type="Texture2D" uid="uid://dw7w1ben57q6y" path="res://sprite/water2.png" id="5_m8kj2"]
+[ext_resource type="Texture2D" uid="uid://cgw7quqbe5i7p" path="res://sprite/bush.png" id="6_oxgxv"]
+[ext_resource type="Texture2D" uid="uid://dtydmnmlend2s" path="res://sprite/ice.png" id="7_2m3rl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fi0a"]
-size = Vector2(8, 8)
+size = Vector2(16, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2087h"]
+resource_local_to_scene = true
+shader = ExtResource("2_xk4d0")
+shader_parameter/block = Color(0.1, 0.1, 0.1, 0.1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pkvqv"]
 animations = [{
@@ -66,7 +72,8 @@ script = ExtResource("1_6vugh")
 shape = SubResource("RectangleShape2D_6fi0a")
 
 [node name="ani" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_2087h")
 sprite_frames = SubResource("SpriteFrames_pkvqv")
-animation = &"4"
+animation = &"0"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

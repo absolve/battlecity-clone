@@ -209,6 +209,10 @@ func upgrade():
 		level=Game.level.MEDIUM
 		bulletPower=Game.bulletPower.FAST
 	elif level==Game.level.MEDIUM:
+		level=Game.level.LARGE
+		bulletPower=Game.bulletPower.FAST
+		bulletMax=2
+	elif level==Game.level.LARGE:
 		level=Game.level.SUPER
 		bulletPower=Game.bulletPower.SUPER
 		bulletMax=2

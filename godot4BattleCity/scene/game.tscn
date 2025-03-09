@@ -1,7 +1,69 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwcvesg7003t2"]
+[gd_scene load_steps=7 format=3 uid="uid://cwcvesg7003t2"]
 
 [ext_resource type="Script" path="res://script/gameScene.gd" id="1_pcuhv"]
 [ext_resource type="PackedScene" uid="uid://pn880e5ss888" path="res://scene/map.tscn" id="2_x0pom"]
+[ext_resource type="PackedScene" uid="uid://cy1ks8l72tmpl" path="res://scene/auto_hide_label.tscn" id="3_b47cw"]
+
+[sub_resource type="Animation" id="Animation_u5g6g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("other/autoHideLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("other/autoHideLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(199, 452)]
+}
+
+[sub_resource type="Animation" id="Animation_owrr2"]
+resource_name = "gameover"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("other/autoHideLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("other/autoHideLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.333333, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(199, 452), Vector2(199, 195)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_80y2n"]
+_data = {
+"RESET": SubResource("Animation_u5g6g"),
+"gameover": SubResource("Animation_owrr2")
+}
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_pcuhv")
@@ -28,8 +90,20 @@ wait_time = 8.0
 one_shot = true
 
 [node name="other" type="Node2D" parent="."]
+z_index = 11
+
+[node name="autoHideLabel" parent="other" instance=ExtResource("3_b47cw")]
+visible = false
+offset_left = 199.0
+offset_top = 452.0
+offset_right = 199.0
+offset_bottom = 452.0
+autoHide = false
 
 [node name="player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_80y2n")
+}
 
 [connection signal="timeout" from="produceTimer" to="." method="_on_produce_timer_timeout"]
 [connection signal="timeout" from="nextLevel" to="." method="_on_next_level_timeout"]

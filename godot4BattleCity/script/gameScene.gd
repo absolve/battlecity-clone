@@ -43,7 +43,7 @@ func _ready():
 	Game.hitPlayer.connect(hitPlayer)
 	Game.getBonus.connect(getBonus)
 	Game.resetPlayerScore() #重新设置分数
-	#produceTimer.start()
+	produceTimer.start()
 	state=Game.gameState.START
 
 
@@ -128,7 +128,7 @@ func hitPlayer(playerId):
 			
 #添加分数
 func addScore(s,pos):
-	var temp=scoreLabel.instance()
+	var temp=scoreLabel.instantiate()
 	map.addOther(temp)
 	temp.setScore(s)
 	temp.position=pos+Vector2(-14,-14)
@@ -213,7 +213,7 @@ func _gameOver():
 
 #添加一个标志			
 func addPlayerGameOverLabel(id):
-	var temp=autoHideLabel.instance()
+	var temp=autoHideLabel.instantiate()
 	if id==Game.playerId.p1:
 		temp.rect_position=map.player1[0]*map.cellSize
 	elif id==Game.playerId.p2:

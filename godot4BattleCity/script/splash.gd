@@ -13,10 +13,10 @@ func _ready():
 	level.text="stage %d"%(Game.gameLevel+1)
 	if !selectLevel:
 		await  get_tree().create_timer(1.5).timeout
-		var temp=nextScene.instance()
+		var temp=nextScene.instantiate()
 		get_tree().root.add_child(temp)
 		player.play("out")
-		#SoundsUtil.playMusic()
+		SoundsUtil.playMusic()
 		await player.animation_finished
 		get_tree().current_scene=temp
 		queue_free()		
@@ -25,10 +25,10 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_pressed("select"):
-		var temp=nextScene.instance()
+		var temp=nextScene.instantiate()
 		get_tree().root.add_child(temp)
 		player.play("out")
-		#SoundsUtil.playMusic()
+		SoundsUtil.playMusic()
 		set_process_input(false)
 		await player.animation_finished
 		set_physics_process(true)

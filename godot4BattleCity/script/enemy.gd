@@ -23,7 +23,7 @@ var hasItem=false #有物品
 func _ready():
 	dir=Game.dir.DOWN
 	collision_layer=2
-	
+	collision_mask=16
 	if type==Game.enemyType.TYPEA:
 		armour=randi()%2
 	elif type==Game.enemyType.TYPEB:
@@ -41,6 +41,7 @@ func _ready():
 		if armour<3:
 			armour+=1
 		hasItem=true
+	#hasItem=true
 	keepMoveTime=randi()%300+80
 	startInit()
 	
@@ -179,7 +180,7 @@ func fire():
 	if canShoot:
 		canShoot=false
 		shootTimer.start()
-		var temp=bullet.instance()
+		var temp=bullet.instantiate()
 		temp.position=position
 		temp.dir=dir
 		temp.own=Game.objType.ENEMY
@@ -189,7 +190,7 @@ func fire():
 		Game.map.addBullet(temp)
 
 func addExplosion(isBig=true):
-	var temp=explode.instance()
+	var temp=explode.instantiate()
 	temp.big=isBig
 	temp.position=position
 	temp.playSound=true
@@ -256,34 +257,34 @@ func animation(dir,vec):
 #设置颜色
 func setColor():
 	if armour>0:
-		ani.material.set_shader_param('ischange',true)
+		ani.material.set_shader_parameter('ischange',true)
 		
 	if hasItem:	
 		if armour>0:
-			ani.material.set_shader_param('newColor1',Color(armourColor3[0]))
-			ani.material.set_shader_param('newColor2',Color(armourColor3[1]))
-			ani.material.set_shader_param('newColor3',Color(armourColor3[2]))
+			ani.material.set_shader_parameter('newColor1',Color(armourColor3[0]))
+			ani.material.set_shader_parameter('newColor2',Color(armourColor3[1]))
+			ani.material.set_shader_parameter('newColor3',Color(armourColor3[2]))
 			player.play("blink")
 		else:
-			if ani.material.get_shader_param('ischange'):
-				ani.material.set_shader_param('ischange',false)		
+			if ani.material.get_shader_parameter('ischange'):
+				ani.material.set_shader_parameter('ischange',false)		
 			player.play("RESET")	
 	else:	
 		if armour>=3:
-			ani.material.set_shader_param('newColor1',Color(armourColor2[0]))
-			ani.material.set_shader_param('newColor2',Color(armourColor2[1]))
-			ani.material.set_shader_param('newColor3',Color(armourColor2[2]))
+			ani.material.set_shader_parameter('newColor1',Color(armourColor2[0]))
+			ani.material.set_shader_parameter('newColor2',Color(armourColor2[1]))
+			ani.material.set_shader_parameter('newColor3',Color(armourColor2[2]))
 		elif armour==2:	
-			ani.material.set_shader_param('newColor1',Color(armourColor1[0]))
-			ani.material.set_shader_param('newColor2',Color(armourColor1[1]))
-			ani.material.set_shader_param('newColor3',Color(armourColor1[2]))
+			ani.material.set_shader_parameter('newColor1',Color(armourColor1[0]))
+			ani.material.set_shader_parameter('newColor2',Color(armourColor1[1]))
+			ani.material.set_shader_parameter('newColor3',Color(armourColor1[2]))
 		elif armour==1:	
-			ani.material.set_shader_param('newColor1',Color(armourColor[0]))
-			ani.material.set_shader_param('newColor2',Color(armourColor[1]))
-			ani.material.set_shader_param('newColor3',Color(armourColor[2]))
+			ani.material.set_shader_parameter('newColor1',Color(armourColor[0]))
+			ani.material.set_shader_parameter('newColor2',Color(armourColor[1]))
+			ani.material.set_shader_parameter('newColor3',Color(armourColor[2]))
 		else:
-			if ani.material.get_shader_param('ischange'):
-				ani.material.set_shader_param('ischange',false)	
+			if ani.material.get_shader_parameter('ischange'):
+				ani.material.set_shader_parameter('ischange',false)	
 
 
 #设置爆炸
@@ -304,6 +305,7 @@ func _on_init_timer_timeout():
 
 
 func _on_area_entered(area):
+	print(1)
 	if isDestroy||area==null:
 		return
 	if area!=null&&area.get('objType')==Game.objType.BULLET:	

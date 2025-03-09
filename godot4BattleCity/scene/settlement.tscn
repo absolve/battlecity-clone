@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://6ddgaxq5v8qr"]
+[gd_scene load_steps=8 format=3 uid="uid://6ddgaxq5v8qr"]
 
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="1_n6dgq"]
 [ext_resource type="Script" path="res://script/settlement.gd" id="1_urgip"]
-[ext_resource type="Texture2D" uid="uid://bf067jstyafnx" path="res://sprite/enemy_a.png" id="3_qmb3w"]
-[ext_resource type="Texture2D" uid="uid://bjahs0o5pem8d" path="res://sprite/enemy_b.png" id="4_ijq0t"]
-[ext_resource type="Texture2D" uid="uid://cr0pw23atc241" path="res://sprite/enemy_c.png" id="5_02uoe"]
-[ext_resource type="Texture2D" uid="uid://6ssttbg00y13" path="res://sprite/enemy_d.png" id="6_50e3j"]
+[ext_resource type="Texture2D" uid="uid://3e5y27hilkl5" path="res://sprite/enemy_a.png" id="3_qmb3w"]
+[ext_resource type="Texture2D" uid="uid://bhp1h6741iua6" path="res://sprite/enemy_b.png" id="4_ijq0t"]
+[ext_resource type="Texture2D" uid="uid://dute08r5qq7fi" path="res://sprite/enemy_c.png" id="5_02uoe"]
+[ext_resource type="Texture2D" uid="uid://00c85iajo0q4" path="res://sprite/enemy_d.png" id="6_50e3j"]
+[ext_resource type="Texture2D" uid="uid://c8lgeodpa2h4m" path="res://sprite/arrow.png" id="7_bgw13"]
 
 [node name="settlement" type="Control"]
 layout_mode = 3
@@ -16,6 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_n6dgq")
 script = ExtResource("1_urgip")
+metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -79,10 +81,6 @@ layout_mode = 2
 texture = ExtResource("6_50e3j")
 stretch_mode = 2
 
-[node name="Timer" type="Timer" parent="."]
-
-[node name="startTimer" type="Timer" parent="."]
-
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 16.0
@@ -102,6 +100,7 @@ theme_override_colors/font_color = Color(0.988235, 0.572549, 0.360784, 1)
 text = "000000"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 328.0
 offset_top = 104.0
 offset_right = 472.0
@@ -124,6 +123,7 @@ offset_left = 196.0
 offset_top = 376.0
 offset_right = 316.0
 offset_bottom = 379.0
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -133,3 +133,329 @@ offset_right = 184.0
 offset_bottom = 406.0
 text = "total"
 uppercase = true
+
+[node name="p1ScoreList" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="typeA" type="HBoxContainer" parent="p1ScoreList"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 183.0
+offset_right = 228.0
+offset_bottom = 199.0
+
+[node name="typeAScore" type="Label" parent="p1ScoreList/typeA"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="p1ScoreList/typeA"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pts"
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p1ScoreList/typeA"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="typeANum" type="Label" parent="p1ScoreList/typeA/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="p1ScoreList/typeA/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_bgw13")
+stretch_mode = 2
+
+[node name="typeB" type="HBoxContainer" parent="p1ScoreList"]
+offset_left = 28.0
+offset_top = 234.0
+offset_right = 228.0
+offset_bottom = 250.0
+
+[node name="typeBScore" type="Label" parent="p1ScoreList/typeB"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="p1ScoreList/typeB"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pts"
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p1ScoreList/typeB"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="typeBNum" type="Label" parent="p1ScoreList/typeB/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="p1ScoreList/typeB/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_bgw13")
+stretch_mode = 2
+
+[node name="typeC" type="HBoxContainer" parent="p1ScoreList"]
+offset_left = 28.0
+offset_top = 288.0
+offset_right = 228.0
+offset_bottom = 304.0
+
+[node name="typeCScore" type="Label" parent="p1ScoreList/typeC"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="p1ScoreList/typeC"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pts"
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p1ScoreList/typeC"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="typeCNum" type="Label" parent="p1ScoreList/typeC/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="p1ScoreList/typeC/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_bgw13")
+stretch_mode = 2
+
+[node name="typeD" type="HBoxContainer" parent="p1ScoreList"]
+offset_left = 28.0
+offset_top = 337.0
+offset_right = 228.0
+offset_bottom = 353.0
+
+[node name="typeDScore" type="Label" parent="p1ScoreList/typeD"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="p1ScoreList/typeD"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pts"
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p1ScoreList/typeD"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="typeDNum" type="Label" parent="p1ScoreList/typeD/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="p1ScoreList/typeD/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_bgw13")
+stretch_mode = 2
+
+[node name="p2ScoreList" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="typeA" type="HBoxContainer" parent="p2ScoreList"]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 183.0
+offset_right = 484.0
+offset_bottom = 199.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p2ScoreList/typeA"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="p2ScoreList/typeA/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_bgw13")
+stretch_mode = 2
+flip_h = true
+
+[node name="typeANum" type="Label" parent="p2ScoreList/typeA/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="p2ScoreList/typeA"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pts"
+uppercase = true
+
+[node name="typeAScore" type="Label" parent="p2ScoreList/typeA"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="typeB" type="HBoxContainer" parent="p2ScoreList"]
+offset_left = 284.0
+offset_top = 234.0
+offset_right = 484.0
+offset_bottom = 250.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p2ScoreList/typeB"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="p2ScoreList/typeB/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_bgw13")
+stretch_mode = 2
+flip_h = true
+
+[node name="typeBNum" type="Label" parent="p2ScoreList/typeB/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="p2ScoreList/typeB"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pts"
+uppercase = true
+
+[node name="typeBScore" type="Label" parent="p2ScoreList/typeB"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="typeC" type="HBoxContainer" parent="p2ScoreList"]
+offset_left = 284.0
+offset_top = 288.0
+offset_right = 484.0
+offset_bottom = 304.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p2ScoreList/typeC"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="p2ScoreList/typeC/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_bgw13")
+stretch_mode = 2
+flip_h = true
+
+[node name="typeCNum" type="Label" parent="p2ScoreList/typeC/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="p2ScoreList/typeC"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pts"
+uppercase = true
+
+[node name="typeCScore" type="Label" parent="p2ScoreList/typeC"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="typeD" type="HBoxContainer" parent="p2ScoreList"]
+offset_left = 284.0
+offset_top = 337.0
+offset_right = 484.0
+offset_bottom = 353.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="p2ScoreList/typeD"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="p2ScoreList/typeD/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_bgw13")
+stretch_mode = 2
+flip_h = true
+
+[node name="typeDNum" type="Label" parent="p2ScoreList/typeD/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="p2ScoreList/typeD"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "pts"
+uppercase = true
+
+[node name="typeDScore" type="Label" parent="p2ScoreList/typeD"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="totalResultNode" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 390.0
+offset_right = 316.0
+offset_bottom = 406.0
+
+[node name="p1Total" type="Label" parent="totalResultNode"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="p2Total" type="Label" parent="totalResultNode"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 2
+
+[node name="reward" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 392.0
+offset_top = 400.0
+offset_right = 504.0
+offset_bottom = 440.0
+
+[node name="Label" type="Label" parent="reward"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988235, 0.211765, 0.109804, 1)
+text = "bouns"
+uppercase = true
+
+[node name="Label2" type="Label" parent="reward"]
+layout_mode = 2
+text = "1000pts"
+uppercase = true
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="startTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="startTimer" to="." method="_on_start_timer_timeout"]

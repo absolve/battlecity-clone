@@ -9,8 +9,7 @@ onready var award=$award
 onready var point=$point
 onready var music=$music
 
-func _ready():
-	pass
+
 
 
 func playBouns():

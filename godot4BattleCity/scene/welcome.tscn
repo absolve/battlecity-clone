@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddv6gbbnbw6vg"]
+[gd_scene load_steps=10 format=3 uid="uid://ddv6gbbnbw6vg"]
 
 [ext_resource type="Script" path="res://script/welcome.gd" id="1_04a3m"]
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="2_07xfm"]
@@ -19,6 +19,67 @@ animations = [{
 "name": &"default",
 "speed": 10.0
 }]
+
+[sub_resource type="Animation" id="Animation_7g7pq"]
+resource_name = "move"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(512, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("main/tankAni:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ses8y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("main/tankAni:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osfex"]
+_data = {
+"RESET": SubResource("Animation_ses8y"),
+"move": SubResource("Animation_7g7pq")
+}
 
 [node name="welcome" type="Node2D"]
 script = ExtResource("1_04a3m")
@@ -127,5 +188,9 @@ texture = ExtResource("2_r5w1e")
 position = Vector2(171, 240)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_0jgil")
+autoplay = "default"
 
 [node name="payer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_osfex")
+}

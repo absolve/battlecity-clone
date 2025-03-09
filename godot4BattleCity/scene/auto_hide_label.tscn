@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy1ks8l72tmpl"]
+[gd_scene load_steps=3 format=3 uid="uid://cy1ks8l72tmpl"]
 
 [ext_resource type="Script" path="res://script/auto_hide_label.gd" id="1_k0ogi"]
+[ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="1_ptrny"]
 
 [node name="autoHideLabel" type="Control"]
 layout_mode = 3
@@ -9,12 +10,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ptrny")
 script = ExtResource("1_k0ogi")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.72549, 0.133333, 0.0588235, 1)
+text = "game
+over"
+uppercase = true
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0

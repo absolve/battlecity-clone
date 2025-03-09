@@ -108,6 +108,7 @@ margin_right = 202.0
 margin_bottom = 224.0
 theme = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "00000"
 uppercase = true
 
 [node name="player" type="AnimationPlayer" parent="."]

@@ -1,6 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://e6h3mcf5otmk"]
+[gd_scene load_steps=10 format=3 uid="uid://e6h3mcf5otmk"]
 
 [ext_resource type="Script" path="res://script/sounds_util.gd" id="1_dd0hm"]
+[ext_resource type="AudioStream" uid="uid://nhni12pt6lxg" path="res://sound/bouns.ogg" id="2_lur8p"]
+[ext_resource type="AudioStream" uid="uid://cxhcc3ger2h8j" path="res://sound/life.ogg" id="3_nhkl0"]
+[ext_resource type="AudioStream" uid="uid://dffhsv4lble4l" path="res://sound/eat.ogg" id="4_x50ey"]
+[ext_resource type="AudioStream" uid="uid://c0w1s3jmdk7lp" path="res://sound/powerup_pick.ogg" id="5_nfbw1"]
+[ext_resource type="AudioStream" uid="uid://dke72hi400ry0" path="res://sound/powerup_appear.ogg" id="6_a4y3r"]
+[ext_resource type="AudioStream" uid="uid://63hbukofa0o3" path="res://sound/award.ogg" id="7_jvvs8"]
+[ext_resource type="AudioStream" uid="uid://vmho3xodxsqk" path="res://sound/statistics_1.ogg" id="8_h4akx"]
+[ext_resource type="AudioStream" uid="uid://xrd4vdwbxniw" path="res://sound/stage_start.ogg" id="9_66w6r"]
 
 [node name="soundsUtil" type="Node2D"]
 script = ExtResource("1_dd0hm")
+
+[node name="bouns" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lur8p")
+bus = &"sfx"
+
+[node name="addLives" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nhkl0")
+bus = &"sfx"
+
+[node name="eatBouns" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_x50ey")
+bus = &"sfx"
+
+[node name="GetBouns" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_nfbw1")
+bus = &"sfx"
+
+[node name="bomb" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_a4y3r")
+bus = &"sfx"
+
+[node name="award" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_jvvs8")
+bus = &"sfx"
+
+[node name="point" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_h4akx")
+bus = &"sfx"
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_66w6r")
+bus = &"bg"

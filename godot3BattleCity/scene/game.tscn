@@ -78,9 +78,9 @@ z_index = 10
 [node name="autoHideLabel" parent="oter" instance=ExtResource( 3 )]
 visible = false
 margin_left = 199.0
-margin_top = 451.979
+margin_top = 452.0
 margin_right = 199.0
-margin_bottom = 451.979
+margin_bottom = 452.0
 autoHide = false
 
 [node name="player" type="AnimationPlayer" parent="."]
