@@ -1,0 +1,141 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://script/mapView.gd" type="Script" id=1]
+[ext_resource path="res://theme/theme.tres" type="Theme" id=2]
+[ext_resource path="res://scene/miniMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://font/prstartk.tres" type="DynamicFont" id=4]
+
+[node name="mapView" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 2 )
+
+[node name="hbox" type="HBoxContainer" parent="Control"]
+margin_left = 64.0
+margin_top = 407.0
+margin_right = 440.0
+margin_bottom = 447.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="mapCount" type="Label" parent="Control/hbox"]
+margin_top = 12.0
+margin_right = 160.0
+margin_bottom = 28.0
+text = "mapcount:0"
+uppercase = true
+
+[node name="page" type="OptionButton" parent="Control/hbox"]
+margin_left = 164.0
+margin_right = 280.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Control/hbox"]
+margin_left = 284.0
+margin_right = 376.0
+margin_bottom = 40.0
+text = "CLOSE"
+
+[node name="miniMap" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1, 1 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Label" type="Label" parent="miniMap"]
+margin_left = 120.0
+margin_top = 440.0
+margin_right = 216.0
+margin_bottom = 456.0
+grow_horizontal = 2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "1.json"
+align = 1
+uppercase = true
+
+[node name="miniMap2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 171, 1 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Label" type="Label" parent="miniMap2"]
+margin_left = 120.0
+margin_top = 440.0
+margin_right = 216.0
+margin_bottom = 456.0
+grow_horizontal = 2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "1.json"
+align = 1
+uppercase = true
+
+[node name="miniMap3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 343, 1 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Label" type="Label" parent="miniMap3"]
+margin_left = 120.0
+margin_top = 440.0
+margin_right = 216.0
+margin_bottom = 456.0
+grow_horizontal = 2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "1.json"
+align = 1
+uppercase = true
+
+[node name="miniMap4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1, 192 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Label" type="Label" parent="miniMap4"]
+margin_left = 120.0
+margin_top = 440.0
+margin_right = 216.0
+margin_bottom = 456.0
+grow_horizontal = 2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "1.json"
+align = 1
+uppercase = true
+
+[node name="miniMap5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 171, 192 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Label" type="Label" parent="miniMap5"]
+margin_left = 120.0
+margin_top = 440.0
+margin_right = 216.0
+margin_bottom = 456.0
+grow_horizontal = 2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "1.json"
+align = 1
+uppercase = true
+
+[node name="miniMap6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 343, 192 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Label" type="Label" parent="miniMap6"]
+margin_left = 120.0
+margin_top = 440.0
+margin_right = 216.0
+margin_bottom = 456.0
+grow_horizontal = 2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "1.json"
+align = 1
+uppercase = true
+
+[connection signal="item_selected" from="Control/hbox/page" to="." method="_on_page_item_selected"]
+[connection signal="pressed" from="Control/hbox/Button" to="." method="_on_Button_pressed"]

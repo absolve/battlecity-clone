@@ -6,11 +6,15 @@ export var mapScale=Vector2(1,1)
 var tile=preload("res://scene/tile.tscn")
 onready var childNode=$child
 
-func _ready():
-	pass # Replace with function body.
+
+#func _ready():
+#	loadMap('res://level/31.json')
 
 func loadMap(filePath:String):
+	for i in childNode.get_children():
+		childNode.remove_child(i)
 	var file = File.new()
+	print(filePath)
 	if file.file_exists(filePath):
 		file.open(filePath, File.READ)
 		var currentLevel=parse_json(file.get_as_text())
@@ -22,4 +26,8 @@ func loadMap(filePath:String):
 				temp.position.y=i['y']*cellSize+cellSize/2
 				temp.type=i['type']
 				childNode.add_child(temp)
-		childNode.scale=mapScale
+	else:
+		print('文件不存在')			
+#		childNode.scale=mapScale
+
+
