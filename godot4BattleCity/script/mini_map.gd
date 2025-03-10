@@ -8,11 +8,14 @@ var tile=preload("res://scene/tile.tscn")
 
 
 func loadMap(filePath:String):
+	for i in childNode.get_children():
+		childNode.remove_child(i)
 	var file = FileAccess.open(filePath, FileAccess.READ)
 	if file:
 		var json=JSON.new()
-		var currentLevel=json.parse(file.get_as_text())
+		var currentLevel=json.parse_string(file.get_as_text())
 		file.close()
+		#print(filePath)
 		for i in currentLevel['data']:
 			if int(i['type']) in [0,1,2,3,4]:
 				var temp=tile.instantiate()

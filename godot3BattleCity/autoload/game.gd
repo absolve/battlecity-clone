@@ -80,7 +80,7 @@ func _ready():
 	OS.center_window()
 	printFont()
 	loadBuiltInMap()
-
+	mapList.sort_custom(self,"sort")
 
 func changeScene(stagePath):
 	set_process_input(false)
@@ -100,6 +100,14 @@ func loadBuiltInMap():
 			file_name = dir.get_next()	
 	else:
 		print("An error occurred when trying to access the path.")	
+
+func sort(a:String,b:String):
+	var flag=true
+	var aname=a.get_basename()
+	var bname=b.get_basename()
+	if aname.to_int()>=bname.to_int():
+		flag=false
+	return flag
 
 func resetData():
 	p1Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}

@@ -40,6 +40,9 @@ func startGame():
 		get_tree().root.add_child(scene)
 		get_tree().current_scene=scene
 		queue_free()
+	elif selectedMode==	mode.MAPVIEW:
+		Game.changeScene("res://scene/map_view.tscn")
+		
 		
 func _input(event):
 	if Input.is_action_just_pressed("p1_up"):

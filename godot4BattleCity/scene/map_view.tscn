@@ -1,0 +1,126 @@
+[gd_scene load_steps=4 format=3 uid="uid://y44dsx8j845y"]
+
+[ext_resource type="Script" path="res://script/map_view.gd" id="1_uy4qy"]
+[ext_resource type="PackedScene" uid="uid://8rbx64oavui6" path="res://scene/mini_map.tscn" id="2_pgedu"]
+[ext_resource type="FontFile" uid="uid://dhbxwggug8gc7" path="res://font/prstartk.ttf" id="3_65lvm"]
+
+[node name="mapView" type="Node2D"]
+script = ExtResource("1_uy4qy")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="hbox" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 407.0
+offset_right = 440.0
+offset_bottom = 447.0
+
+[node name="mapCount" type="Label" parent="Control/hbox"]
+layout_mode = 2
+text = "mapcount:0"
+
+[node name="page" type="OptionButton" parent="Control/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Control/hbox"]
+layout_mode = 2
+text = "CLOSE"
+
+[node name="miniMap" parent="." instance=ExtResource("2_pgedu")]
+position = Vector2(1, 1)
+scale = Vector2(0.4, 0.4)
+
+[node name="Label" type="Label" parent="miniMap"]
+offset_left = 117.5
+offset_top = 437.5
+offset_right = 213.5
+offset_bottom = 453.5
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_65lvm")
+text = "9.json"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="miniMap2" parent="." instance=ExtResource("2_pgedu")]
+position = Vector2(171, 1)
+scale = Vector2(0.4, 0.4)
+
+[node name="Label" type="Label" parent="miniMap2"]
+offset_left = 117.5
+offset_top = 437.5
+offset_right = 213.5
+offset_bottom = 453.5
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_65lvm")
+text = "9.json"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="miniMap3" parent="." instance=ExtResource("2_pgedu")]
+position = Vector2(343, 1)
+scale = Vector2(0.4, 0.4)
+
+[node name="Label" type="Label" parent="miniMap3"]
+offset_left = 117.5
+offset_top = 437.5
+offset_right = 213.5
+offset_bottom = 453.5
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_65lvm")
+text = "9.json"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="miniMap4" parent="." instance=ExtResource("2_pgedu")]
+position = Vector2(1, 192)
+scale = Vector2(0.4, 0.4)
+
+[node name="Label" type="Label" parent="miniMap4"]
+offset_left = 117.5
+offset_top = 437.5
+offset_right = 213.5
+offset_bottom = 453.5
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_65lvm")
+text = "9.json"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="miniMap5" parent="." instance=ExtResource("2_pgedu")]
+position = Vector2(171, 192)
+scale = Vector2(0.4, 0.4)
+
+[node name="Label" type="Label" parent="miniMap5"]
+offset_left = 117.5
+offset_top = 437.5
+offset_right = 213.5
+offset_bottom = 453.5
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_65lvm")
+text = "9.json"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="miniMap6" parent="." instance=ExtResource("2_pgedu")]
+position = Vector2(343, 192)
+scale = Vector2(0.4, 0.4)
+
+[node name="Label" type="Label" parent="miniMap6"]
+offset_left = 117.5
+offset_top = 437.5
+offset_right = 213.5
+offset_bottom = 453.5
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_65lvm")
+text = "9.json"
+horizontal_alignment = 1
+uppercase = true
+
+[connection signal="item_selected" from="Control/hbox/page" to="." method="_on_page_item_selected"]
+[connection signal="pressed" from="Control/hbox/Button" to="." method="_on_button_pressed"]

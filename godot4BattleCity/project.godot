@@ -25,7 +25,6 @@ SoundsUtil="*res://scene/sounds_util.tscn"
 window/size/viewport_width=512
 window/size/viewport_height=448
 window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
 
 [input]
 

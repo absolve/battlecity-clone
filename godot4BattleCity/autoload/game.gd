@@ -80,10 +80,11 @@ var mapList=[] #地图名字
 func _ready():
 	printFont()
 	loadBuiltInMap()
+	mapList.sort_custom(sort)
 
 func changeScene(stagePath):
 	set_process_input(false)
-	get_tree().change_scene(stagePath)
+	get_tree().change_scene_to_file(stagePath)
 	set_process_input(true)
 	
 #获取内置地图
@@ -100,6 +101,14 @@ func loadBuiltInMap():
 	else:
 		print("An error occurred when trying to access the path.")	
 
+func sort(a:String,b:String):
+	var flag=true
+	var aname=a.get_basename()
+	var bname=b.get_basename()
+	if aname.to_int()>=bname.to_int():
+		flag=false
+	return flag
+	
 func resetData():
 	p1Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}
 	p2Data={'score':0,'lives':2,'level':level.MIN,'armour':0,'hasShip':false}

@@ -2,11 +2,11 @@
 
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="1_n6dgq"]
 [ext_resource type="Script" path="res://script/settlement.gd" id="1_urgip"]
-[ext_resource type="Texture2D" uid="uid://3e5y27hilkl5" path="res://sprite/enemy_a.png" id="3_qmb3w"]
-[ext_resource type="Texture2D" uid="uid://bhp1h6741iua6" path="res://sprite/enemy_b.png" id="4_ijq0t"]
-[ext_resource type="Texture2D" uid="uid://dute08r5qq7fi" path="res://sprite/enemy_c.png" id="5_02uoe"]
-[ext_resource type="Texture2D" uid="uid://00c85iajo0q4" path="res://sprite/enemy_d.png" id="6_50e3j"]
-[ext_resource type="Texture2D" uid="uid://c8lgeodpa2h4m" path="res://sprite/arrow.png" id="7_bgw13"]
+[ext_resource type="Texture2D" uid="uid://bf067jstyafnx" path="res://sprite/enemy_a.png" id="3_qmb3w"]
+[ext_resource type="Texture2D" uid="uid://bjahs0o5pem8d" path="res://sprite/enemy_b.png" id="4_ijq0t"]
+[ext_resource type="Texture2D" uid="uid://cr0pw23atc241" path="res://sprite/enemy_c.png" id="5_02uoe"]
+[ext_resource type="Texture2D" uid="uid://6ssttbg00y13" path="res://sprite/enemy_d.png" id="6_50e3j"]
+[ext_resource type="Texture2D" uid="uid://brr3lgp4woqxw" path="res://sprite/arrow.png" id="7_bgw13"]
 
 [node name="settlement" type="Control"]
 layout_mode = 3
@@ -174,6 +174,7 @@ texture = ExtResource("7_bgw13")
 stretch_mode = 2
 
 [node name="typeB" type="HBoxContainer" parent="p1ScoreList"]
+layout_mode = 0
 offset_left = 28.0
 offset_top = 234.0
 offset_right = 228.0
@@ -207,6 +208,7 @@ texture = ExtResource("7_bgw13")
 stretch_mode = 2
 
 [node name="typeC" type="HBoxContainer" parent="p1ScoreList"]
+layout_mode = 0
 offset_left = 28.0
 offset_top = 288.0
 offset_right = 228.0
@@ -240,6 +242,7 @@ texture = ExtResource("7_bgw13")
 stretch_mode = 2
 
 [node name="typeD" type="HBoxContainer" parent="p1ScoreList"]
+layout_mode = 0
 offset_left = 28.0
 offset_top = 337.0
 offset_right = 228.0
@@ -312,6 +315,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="typeB" type="HBoxContainer" parent="p2ScoreList"]
+layout_mode = 0
 offset_left = 284.0
 offset_top = 234.0
 offset_right = 484.0
@@ -344,6 +348,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="typeC" type="HBoxContainer" parent="p2ScoreList"]
+layout_mode = 0
 offset_left = 284.0
 offset_top = 288.0
 offset_right = 484.0
@@ -376,6 +381,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="typeD" type="HBoxContainer" parent="p2ScoreList"]
+layout_mode = 0
 offset_left = 284.0
 offset_top = 337.0
 offset_right = 484.0
