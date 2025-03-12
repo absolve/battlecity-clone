@@ -14,7 +14,7 @@ func loadMap(filePath:String):
 	for i in childNode.get_children():
 		childNode.remove_child(i)
 	var file = File.new()
-	print(filePath)
+#	print(filePath)
 	if file.file_exists(filePath):
 		file.open(filePath, File.READ)
 		var currentLevel=parse_json(file.get_as_text())
