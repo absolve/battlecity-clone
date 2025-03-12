@@ -43,6 +43,7 @@ func _ready():
 		temp.position.y=i['y']*cellSize+cellSize/2+offset.y
 		temp.mapPos=Vector2(i['x'],i['y'])
 		childNode.add_child(temp)
+	var del=load("res://sprite/del.png")
 	var wall=load("res://sprite/brick.png")
 	var stone=load("res://sprite/stone.png")
 	var water=load("res://sprite/water1.png")
@@ -53,6 +54,7 @@ func _ready():
 	var water1=load("res://sprite/water4.png")
 	var bush1=load("res://sprite/bush1.png")
 	var ice1=load("res://sprite/ice1.png")
+	itemList.add_icon_item(del)	
 	itemList.add_icon_item(wall)	
 	itemList.add_icon_item(stone)
 	itemList.add_icon_item(water)
@@ -63,6 +65,8 @@ func _ready():
 	itemList.add_icon_item(water1)		
 	itemList.add_icon_item(bush1)		
 	itemList.add_icon_item(ice1)		
+
+
 		
 #载入地图
 func loadMap(filePath:String):
@@ -91,9 +95,17 @@ func addItem(pos):
 	pass
 
 #检查方块
-func checkItem(pos):
-	
-	pass
+func checkItem(pos:Vector2):
+	var node=null
+	pos-=offset
+	var indexX=int(pos.x)/cellSize
+	var indexY=int(pos.y)/cellSize
+	for i in childNode.get_children():
+		if i.mapPos.x==indexX&&i.mapPos.y==indexY:
+			node=i
+			break
+	return 	node	
+
 
 #删除方块
 func clearItem():
@@ -121,3 +133,7 @@ func _draw():
 	for i in range(27):
 		draw_line(Vector2(0,i*cellSize)+offset,Vector2(cellSize*26,i*cellSize)+offset,Color.gray,0.5,true)
 	
+
+
+func _on_ItemList_item_selected(index):
+	pass # Replace with function body.

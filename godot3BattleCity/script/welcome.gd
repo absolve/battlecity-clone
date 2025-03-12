@@ -46,11 +46,11 @@ func startGame():
 		
 
 func _input(event):
-	if Input.is_action_just_pressed("p1_up"):
+	if Input.is_action_just_pressed("p1_up")||Input.is_action_just_pressed("p2_up"):
 		if index>0:
 			index-=1
 			setMode(index)
-	elif Input.is_action_just_pressed("p1_down"):
+	elif Input.is_action_just_pressed("p1_down")||Input.is_action_just_pressed("p2_down"):
 		if index<posY.size()-1:
 			index+=1
 			setMode(index)

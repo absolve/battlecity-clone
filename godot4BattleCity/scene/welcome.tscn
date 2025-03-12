@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://script/welcome.gd" id="1_04a3m"]
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="2_07xfm"]
-[ext_resource type="Texture2D" uid="uid://b6u2r3v1lnoyj" path="res://sprite/battle_city.png" id="2_r5w1e"]
-[ext_resource type="Texture2D" uid="uid://dhmpxs1upfbvl" path="res://sprite/tank_main1.png" id="3_8enbu"]
-[ext_resource type="Texture2D" uid="uid://c8one8cijcpaf" path="res://sprite/tank_main2.png" id="4_ap5kp"]
+[ext_resource type="Texture2D" uid="uid://c1w7k1u7i0q8y" path="res://sprite/battle_city.png" id="2_r5w1e"]
+[ext_resource type="Texture2D" uid="uid://didr4k777db1g" path="res://sprite/tank_main1.png" id="3_8enbu"]
+[ext_resource type="Texture2D" uid="uid://dwukf2fonspxf" path="res://sprite/tank_main2.png" id="4_ap5kp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0jgil"]
 animations = [{

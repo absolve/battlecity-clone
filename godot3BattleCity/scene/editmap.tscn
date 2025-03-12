@@ -18,3 +18,37 @@ margin_right = 504.0
 margin_bottom = 240.0
 custom_constants/vseparation = 10
 max_columns = 2
+
+[node name="vbox" type="VBoxContainer" parent="Control"]
+margin_left = 456.0
+margin_top = 248.0
+margin_right = 507.0
+margin_bottom = 420.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="load" type="Button" parent="Control/vbox"]
+margin_right = 51.0
+margin_bottom = 20.0
+text = "load"
+
+[node name="save" type="Button" parent="Control/vbox"]
+margin_top = 24.0
+margin_right = 51.0
+margin_bottom = 44.0
+text = "save"
+
+[node name="clear" type="Button" parent="Control/vbox"]
+margin_top = 48.0
+margin_right = 51.0
+margin_bottom = 68.0
+text = "clear"
+
+[node name="return" type="Button" parent="Control/vbox"]
+margin_top = 72.0
+margin_right = 51.0
+margin_bottom = 92.0
+text = "retrun"
+
+[connection signal="item_selected" from="Control/ItemList" to="." method="_on_ItemList_item_selected"]
