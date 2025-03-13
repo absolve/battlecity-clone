@@ -51,4 +51,32 @@ margin_right = 51.0
 margin_bottom = 92.0
 text = "retrun"
 
+[node name="FileDialog" type="FileDialog" parent="Control"]
+margin_right = 456.0
+margin_bottom = 216.0
+rect_min_size = Vector2( 300, 105 )
+popup_exclusive = true
+window_title = "保存文件"
+resizable = true
+dialog_text = "save data to file"
+access = 2
+filters = PoolStringArray( ".json" )
+
+[node name="loadDialog" type="FileDialog" parent="Control"]
+margin_right = 456.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 300, 105 )
+popup_exclusive = true
+window_title = "打开文件"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( ".json" )
+
 [connection signal="item_selected" from="Control/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="Control/vbox/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Control/vbox/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Control/vbox/clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="Control/vbox/return" to="." method="_on_return_pressed"]
+[connection signal="confirmed" from="Control/FileDialog" to="." method="_on_FileDialog_confirmed"]
+[connection signal="file_selected" from="Control/loadDialog" to="." method="_on_loadDialog_file_selected"]
