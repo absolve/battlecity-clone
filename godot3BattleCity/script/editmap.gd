@@ -98,6 +98,10 @@ func addItem(pos):
 		if node:
 			node.queue_free()
 	for i in list:
+		if i['x']+indexX<0||i['x']+indexX>25:
+			continue
+		if i['y']+indexY<0||i['y']+indexY>25:
+			continue
 		var temp=tile.instance()
 		temp.position.x=(i['x']+indexX)*cellSize+cellSize/2+offset.x
 		temp.position.y=(i['y']+indexY)*cellSize+cellSize/2+offset.y
