@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 export var disableInput=false
 onready var label=$Control/ScrollContainer/VBoxContainer/Label
