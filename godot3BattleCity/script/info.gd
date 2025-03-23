@@ -1,8 +1,8 @@
-extends Control
+extends VBoxContainer
 
 export var disableInput=false
-onready var label=$Control/ScrollContainer/VBoxContainer/Label
-onready var content=$Control/ScrollContainer/VBoxContainer/RichTextLabel
+onready var label=$ScrollContainer/VBoxContainer/Label
+onready var content=$ScrollContainer/VBoxContainer/RichTextLabel
 
 func _ready():
 	if disableInput:

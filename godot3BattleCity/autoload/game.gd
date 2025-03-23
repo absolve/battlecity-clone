@@ -75,10 +75,17 @@ signal getBonus
 
 var map
 var mapList=[] #地图名字
+var configFile="battleCity.ini"
+var useExtensionMap=false
+var config={'Base':{'useExtensionMap':false},
+				'Volume':{'Master':1,'Bg':0.5,'Sfx':0.5}}
+
 
 func _ready():
 	OS.center_window()
 	printFont()
+#	loadConfig()
+	
 	loadBuiltInMap()
 	mapList.sort_custom(self,"sort")
 
@@ -119,6 +126,38 @@ func resetData():
 func resetPlayerScore():
 	p1Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 	p2Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
+
+#载入配置
+func loadConfig():
+	var baseDir=OS.get_executable_path().get_base_dir()
+	var cfg = ConfigFile.new()
+	var err = cfg.load(baseDir+"/"+configFile)
+	if err == OK:
+		for i in cfg.get_sections():
+			if i =='Base':
+				config.Base.useExtensionMap=cfg.get_value(i,'useExtensionMap',false)
+			elif i =='Volume':
+				config.Volume.Master=cfg.get_value(i,'Master')
+				config.Volume.Bg=cfg.get_value(i,'Bg')
+				config.Volume.Sfx=cfg.get_value(i,'Sfx')
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Master'), linear2db(config.Volume.Master))
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('bg'), linear2db(config.Volume.Bg))
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('sfx'), linear2db(config.Volume.Sfx))
+	
+	else:
+		newGameConfigFile()
+				
+#新建一个配置文件				
+func newGameConfigFile():
+	var cfg = ConfigFile.new()
+	cfg.set_value("Base","useExtensionMap",false)
+		
+	cfg.set_value("Volume","Master",1)
+	cfg.set_value("Volume","Bg",0.5)
+	cfg.set_value("Volume","Sfx",0.5)
+	
+	cfg.save(OS.get_executable_path().get_base_dir()+"/"+configFile)	
+		
 
 #打印提示信息
 func printFont():

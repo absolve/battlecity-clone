@@ -2,6 +2,7 @@ extends Control
 
 
 func _ready():
-	pass
+	VisualServer.set_default_clear_color('#000')
+
 
 
