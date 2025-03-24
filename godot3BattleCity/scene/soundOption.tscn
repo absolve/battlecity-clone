@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://script/soundOption.gd" type="Script" id=1]
+[ext_resource path="res://sound/statistics_1.ogg" type="AudioStream" id=2]
 
 [node name="soundOption" type="VBoxContainer"]
 margin_right = 40.0
@@ -18,5 +19,8 @@ uppercase = true
 margin_top = 18.0
 margin_right = 50.0
 margin_bottom = 34.0
+step = 10.0
+value = 50.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )

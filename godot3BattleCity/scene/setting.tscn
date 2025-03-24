@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://script/setting.gd" type="Script" id=1]
 [ext_resource path="res://scene/info.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/soundOption.tscn" type="PackedScene" id=3]
 
 [node name="setting" type="Control"]
 anchor_right = 1.0
@@ -27,7 +28,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/general"]
-margin_right = 388.0
+margin_right = 454.0
 margin_bottom = 172.0
 
 [node name="CheckButton" type="CheckButton" parent="TabContainer/general/VBoxContainer"]
@@ -38,9 +39,24 @@ text = "use ExtensionMap"
 
 [node name="Label" type="Label" parent="TabContainer/general/VBoxContainer"]
 margin_top = 44.0
-margin_right = 388.0
+margin_right = 454.0
 margin_bottom = 58.0
 text = "Volume"
+
+[node name="master" parent="TabContainer/general/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 62.0
+margin_right = 454.0
+margin_bottom = 96.0
+
+[node name="bg" parent="TabContainer/general/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 100.0
+margin_right = 454.0
+margin_bottom = 134.0
+
+[node name="sfx" parent="TabContainer/general/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 138.0
+margin_right = 454.0
+margin_bottom = 172.0
 
 [node name="control" type="Control" parent="TabContainer"]
 visible = false

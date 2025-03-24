@@ -76,7 +76,7 @@ signal getBonus
 var map
 var mapList=[] #地图名字
 var configFile="battleCity.ini"
-var useExtensionMap=false
+#var useExtensionMap=false
 var config={'Base':{'useExtensionMap':false},
 				'Volume':{'Master':1,'Bg':0.5,'Sfx':0.5}}
 
@@ -85,8 +85,11 @@ func _ready():
 	OS.center_window()
 	printFont()
 #	loadConfig()
-	
-	loadBuiltInMap()
+	if !config.Base.useExtensionMap:
+		loadBuiltInMap()
+	else:
+		loadExtensionMap()	
+		
 	mapList.sort_custom(self,"sort")
 
 func changeScene(stagePath):
@@ -107,6 +110,25 @@ func loadBuiltInMap():
 			file_name = dir.get_next()	
 	else:
 		print("An error occurred when trying to access the path.")	
+
+#载入扩展地图
+func loadExtensionMap():
+	mapList.clear()
+	var baseDir=OS.get_executable_path().get_base_dir()
+	var mapPath=baseDir+"/levels"
+	var dir = Directory.new()
+	if dir.dir_exists(mapPath):
+		if dir.open(mapPath) == OK:
+			dir.list_dir_begin()
+			var file_name = dir.get_next()
+			while file_name != "":
+				if !dir.current_is_dir():
+					mapList.append(file_name)
+				file_name = dir.get_next()
+	else:
+		print("Directory not exist ",mapPath)
+		var err=dir.make_dir_recursive(mapPath) #新建一个
+				
 
 func sort(a:String,b:String):
 	var flag=true
