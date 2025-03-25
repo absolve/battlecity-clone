@@ -136,9 +136,12 @@ func save2File(fileName):
 	for i in childNode.get_children():
 		var temp={'x':i.mapPos.x,'y':i.mapPos.y,'type':i.type}
 		data['data'].append(temp)
+	print(fileName)
+	print(data)
 	var file = File.new()
 	file.open(fileName, File.WRITE)
 	file.store_string(to_json(data))
+	file.flush()
 	file.close()
 
 
@@ -181,8 +184,9 @@ func _on_ItemList_item_selected(index):
 func _on_FileDialog_confirmed():
 	var path=fileDialog.current_dir	
 	print(path)
+	print(fileDialog.current_path)
 	if fileDialog.current_file:
-		save2File(fileDialog.current_file)
+		save2File(fileDialog.current_path)
 
 
 func _on_loadDialog_file_selected(path):
@@ -216,3 +220,8 @@ func _on_clear_pressed():
 
 func _on_return_pressed():
 	Game.changeScene("res://scene/welcome.tscn")
+
+
+func _on_FileDialog_file_selected(path):
+	if fileDialog.current_file:
+		save2File(fileDialog.current_path)
