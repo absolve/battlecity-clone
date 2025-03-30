@@ -17,6 +17,7 @@ func setName(busName):
 	sound.bus=self.busName
 
 func setVolume(volume:float):
+#	print(volume)
 	self.volume=volume
-	slider.value=volume*100
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(busName), linear2db(self.volume))
+#	slider.value=volume*100
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(busName), linear2db(self.volume/100))

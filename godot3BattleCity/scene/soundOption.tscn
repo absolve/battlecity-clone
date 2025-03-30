@@ -4,8 +4,8 @@
 [ext_resource path="res://sound/statistics_1.ogg" type="AudioStream" id=2]
 
 [node name="soundOption" type="VBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 50.0
+margin_bottom = 34.0
 script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]

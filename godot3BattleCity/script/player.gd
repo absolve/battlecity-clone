@@ -145,7 +145,7 @@ func _physics_process(delta):
 
 
 
-#改变方向的时候调整位置
+#改变方向的时候调整位置 设置成16px的倍数
 func turnDirection():
 #	position.y=round((position.y)/16)*16
 #	position.x=round((position.x)/16)*16
