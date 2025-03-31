@@ -179,7 +179,19 @@ func newGameConfigFile():
 	cfg.set_value("Volume","Sfx",0.5)
 	
 	cfg.save(OS.get_executable_path().get_base_dir()+"/"+configFile)	
+
+#保存设置		
+func saveConfig():
+	var baseDir=OS.get_executable_path().get_base_dir()
+	var cfg = ConfigFile.new()
+	cfg.set_value("Base","useExtensionMap",config.Base.useExtensionMap)
 		
+	cfg.set_value("Volume","Master",config.Volume.Master)
+	cfg.set_value("Volume","Bg",config.Volume.Bg)
+	cfg.set_value("Volume","Sfx",config.Volume.Sfx)
+	cfg.save(OS.get_executable_path().get_base_dir()+"/"+configFile)	
+
+
 
 #打印提示信息
 func printFont():

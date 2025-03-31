@@ -1,42 +1,102 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://script/info.gd" type="Script" id=1]
 [ext_resource path="res://theme/theme.tres" type="Theme" id=2]
 [ext_resource path="res://font/label.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scene/itemInfo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sprite/bonus_grenade.png" type="Texture" id=5]
+[ext_resource path="res://sprite/bonus_clock.png" type="Texture" id=6]
+[ext_resource path="res://sprite/bonus_shovel.png" type="Texture" id=7]
+[ext_resource path="res://sprite/bonus_helmet.png" type="Texture" id=8]
+[ext_resource path="res://sprite/bonus_tank.png" type="Texture" id=9]
+[ext_resource path="res://sprite/bonus_star.png" type="Texture" id=10]
+[ext_resource path="res://sprite/bonus_boat.png" type="Texture" id=11]
+[ext_resource path="res://sprite/enemy_a.png" type="Texture" id=12]
+[ext_resource path="res://sprite/enemy_b.png" type="Texture" id=13]
+[ext_resource path="res://sprite/enemy_d.png" type="Texture" id=14]
+[ext_resource path="res://sprite/enemy_c.png" type="Texture" id=15]
+[ext_resource path="res://sprite/brick.png" type="Texture" id=16]
+[ext_resource path="res://sprite/bush.png" type="Texture" id=17]
+[ext_resource path="res://sprite/ice.png" type="Texture" id=18]
+[ext_resource path="res://sprite/stone.png" type="Texture" id=19]
+[ext_resource path="res://sprite/water1.png" type="Texture" id=20]
 
 [node name="info" type="VBoxContainer"]
-margin_right = 390.0
-margin_bottom = 320.0
+margin_right = 508.0
+margin_bottom = 414.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_right = 390.0
-margin_bottom = 320.0
+margin_right = 508.0
+margin_bottom = 414.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 378.0
-margin_bottom = 1086.0
+margin_right = 496.0
+margin_bottom = 436.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
 visible = false
-margin_right = 511.0
+margin_right = 416.0
 margin_bottom = 73.0
 size_flags_vertical = 0
 text = "The game was completed on 
 March 25, 2021.
 Remake with 2025.
 "
+uppercase = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+margin_right = 496.0
+margin_bottom = 36.0
+custom_constants/margin_top = 10
+custom_constants/margin_bottom = 10
+
+[node name="itemInfo19" parent="ScrollContainer/VBoxContainer/MarginContainer" instance=ExtResource( 4 )]
+margin_top = 10.0
+margin_right = 496.0
+margin_bottom = 26.0
+text = "BONUS ITEMS"
+
+[node name="itemInfo" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 40.0
+margin_right = 496.0
+margin_bottom = 56.0
+img = ExtResource( 5 )
+text = "ALL ENEMIES ARE DESTROYED"
+
+[node name="itemInfo2" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 60.0
+margin_right = 496.0
+margin_bottom = 76.0
+img = ExtResource( 8 )
+text = "ACTIVE PLAYER SHIELD FOR 10 SECONDS"
+
+[node name="itemInfo3" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 80.0
+margin_right = 496.0
+margin_bottom = 96.0
+img = ExtResource( 6 )
+text = "FREEZE ALL ENEMIES FOR 8 SECONDS"
+
+[node name="itemInfo4" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 100.0
+margin_right = 496.0
+margin_bottom = 116.0
+img = ExtResource( 7 )
+text = "CREATE STONE WALL AROUND EAGLE FOR 15 SECONDS"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+visible = false
+margin_top = 80.0
 margin_right = 378.0
-margin_bottom = 1086.0
+margin_bottom = 1166.0
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[color=#409eff]BONUS ITEMS[/color]
@@ -97,3 +157,113 @@ BUSH: GRASS CAN BE WALKED THROUGH
 WATER: IT IS NATURAL OBSTACLE UNLESS YOU COLLECT BOAT BONUS
 ICE: TANKS ARE SLIPPING ON IT"
 fit_content_height = true
+
+[node name="itemInfo5" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 120.0
+margin_right = 496.0
+margin_bottom = 136.0
+img = ExtResource( 9 )
+text = "INCREASE PLAYER LIVES COUNT"
+
+[node name="itemInfo6" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 140.0
+margin_right = 496.0
+margin_bottom = 156.0
+img = ExtResource( 10 )
+text = "INCREASE PLAYER SPEED, EACH NEXT ONE INCREASE MAX BULLETS COUNT"
+
+[node name="itemInfo7" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 160.0
+margin_right = 496.0
+margin_bottom = 176.0
+img = ExtResource( 11 )
+text = "ALLOWS TO MOVE ON THE WATER"
+
+[node name="MarginContainer3" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 180.0
+margin_right = 496.0
+margin_bottom = 216.0
+custom_constants/margin_top = 10
+custom_constants/margin_bottom = 10
+
+[node name="itemInfo8" parent="ScrollContainer/VBoxContainer/MarginContainer3" instance=ExtResource( 4 )]
+margin_top = 10.0
+margin_right = 496.0
+margin_bottom = 26.0
+text = "ENEMY TYPES"
+
+[node name="itemInfo9" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 220.0
+margin_right = 496.0
+margin_bottom = 236.0
+img = ExtResource( 12 )
+text = "SPEED: NORMAL ARMOR: NORMAL"
+
+[node name="itemInfo10" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 240.0
+margin_right = 496.0
+margin_bottom = 256.0
+img = ExtResource( 13 )
+text = "SPEED: FAST ARMOR: NORMAL"
+
+[node name="itemInfo11" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 260.0
+margin_right = 496.0
+margin_bottom = 276.0
+img = ExtResource( 15 )
+text = "NORMAL ARMOR: NORMAL"
+
+[node name="itemInfo12" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 280.0
+margin_right = 496.0
+margin_bottom = 296.0
+img = ExtResource( 14 )
+text = "SPEED: NORMAL ARMOR: NORMAL+1"
+
+[node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 300.0
+margin_right = 496.0
+margin_bottom = 336.0
+custom_constants/margin_top = 10
+custom_constants/margin_bottom = 10
+
+[node name="itemInfo13" parent="ScrollContainer/VBoxContainer/MarginContainer2" instance=ExtResource( 4 )]
+margin_top = 10.0
+margin_right = 496.0
+margin_bottom = 26.0
+text = "LEVEL"
+
+[node name="itemInfo14" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 340.0
+margin_right = 496.0
+margin_bottom = 356.0
+img = ExtResource( 16 )
+text = "IT CAN BE DESTROYED WITH TWO BULLETS OR ONE IF YOU COLLECT THREE STARS OR GUN"
+
+[node name="itemInfo15" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 360.0
+margin_right = 496.0
+margin_bottom = 376.0
+img = ExtResource( 19 )
+text = "IT CAN BE DESTROYED ONLY IF YOU COLLECT THREE STARS OR GUN BONUS"
+
+[node name="itemInfo16" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 380.0
+margin_right = 496.0
+margin_bottom = 396.0
+img = ExtResource( 17 )
+text = "GRASS CAN BE WALKED THROUGH"
+
+[node name="itemInfo17" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 400.0
+margin_right = 496.0
+margin_bottom = 416.0
+img = ExtResource( 20 )
+text = "IT IS NATURAL OBSTACLE UNLESS YOU COLLECT BOAT BONUS"
+
+[node name="itemInfo18" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 420.0
+margin_right = 496.0
+margin_bottom = 436.0
+img = ExtResource( 18 )
+text = "TANKS ARE SLIPPING ON IT"

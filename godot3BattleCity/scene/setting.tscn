@@ -21,7 +21,7 @@ margin_top = -194.5
 margin_right = 233.5
 margin_bottom = 194.5
 
-[node name="general" type="Control" parent="TabContainer"]
+[node name="General" type="VBoxContainer" parent="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 12.0
@@ -31,55 +31,51 @@ margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/general"]
-margin_right = 440.0
-margin_bottom = 300.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="CheckButton" type="CheckButton" parent="TabContainer/general/VBoxContainer"]
+[node name="CheckButton" type="CheckButton" parent="TabContainer/General"]
 margin_right = 305.0
 margin_bottom = 46.0
 size_flags_horizontal = 0
 text = "use ExtensionMap"
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/general/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/General"]
 margin_top = 50.0
-margin_right = 440.0
+margin_right = 443.0
 margin_bottom = 106.0
 custom_constants/margin_top = 20
 custom_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="TabContainer/general/VBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="TabContainer/General/MarginContainer"]
 margin_top = 20.0
-margin_right = 440.0
+margin_right = 443.0
 margin_bottom = 36.0
 text = "Volume"
 align = 1
 uppercase = true
 
-[node name="master" parent="TabContainer/general/VBoxContainer" instance=ExtResource( 3 )]
+[node name="master" parent="TabContainer/General" instance=ExtResource( 3 )]
 margin_top = 110.0
-margin_right = 440.0
+margin_right = 443.0
 margin_bottom = 172.0
 
-[node name="bg" parent="TabContainer/general/VBoxContainer" instance=ExtResource( 3 )]
+[node name="bg" parent="TabContainer/General" instance=ExtResource( 3 )]
 margin_top = 176.0
-margin_right = 440.0
+margin_right = 443.0
 margin_bottom = 238.0
 
-[node name="sfx" parent="TabContainer/general/VBoxContainer" instance=ExtResource( 3 )]
+[node name="sfx" parent="TabContainer/General" instance=ExtResource( 3 )]
 margin_top = 242.0
-margin_right = 440.0
+margin_right = 443.0
 margin_bottom = 304.0
 
-[node name="control" type="Control" parent="TabContainer"]
+[node name="Control" type="Control" parent="TabContainer"]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="info" parent="TabContainer" instance=ExtResource( 2 )]
+[node name="Info" parent="TabContainer" instance=ExtResource( 2 )]
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 disableInput = true
+
+[connection signal="toggled" from="TabContainer/General/CheckButton" to="." method="_on_CheckButton_toggled"]

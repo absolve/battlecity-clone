@@ -1,12 +1,12 @@
 extends Control
 
-onready var masterSliderNode=$TabContainer/general/VBoxContainer/master
-onready var bgSliderNode=$TabContainer/general/VBoxContainer/bg
-onready var sfxSliderNode=$TabContainer/general/VBoxContainer/sfx
+onready var masterSliderNode=$TabContainer/General/master
+onready var bgSliderNode=$TabContainer/General/bg
+onready var sfxSliderNode=$TabContainer/General/sfx
 
 
 func _ready():
-	VisualServer.set_default_clear_color('#000')
+	VisualServer.set_default_clear_color('#646464')
 	masterSliderNode.setName('Master')
 	bgSliderNode.setName('bg')
 	sfxSliderNode.setName('sfx')
@@ -22,11 +22,24 @@ func _ready():
 func _on_master_value_changed(value):
 	masterSliderNode.setVolume(value)
 	masterSliderNode.sound.play()
+	Game.config.Volume.Master=value/100
+	Game.saveConfig()
 	
 func _on_bg_value_changed(value):	
 	bgSliderNode.setVolume(value)
 	bgSliderNode.sound.play()
+	Game.config.Volume.Bg=value/100
+	Game.saveConfig()
 	
 func _on_sfx_value_changed(value):
 	sfxSliderNode.setVolume(value)
 	sfxSliderNode.sound.play()
+	Game.config.Volume.Sfx=value/100
+	Game.saveConfig()
+
+
+func _on_CheckButton_toggled(button_pressed):
+	print(button_pressed)
+	Game.config.Base.useExtensionMap=button_pressed
+	Game.saveConfig()
+
