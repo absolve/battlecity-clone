@@ -19,6 +19,7 @@ config/icon="res://sprite/tank_main1.png"
 
 Game="*res://autoload/game.gd"
 SoundsUtil="*res://scene/soundsUtil.tscn"
+InputBind="*res://addons/InputBind/InputBind.gd"
 
 [display]
 
@@ -26,6 +27,10 @@ window/size/width=512
 window/size/height=448
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/InputBind/plugin.cfg" )
 
 [gui]
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://script/setting.gd" type="Script" id=1]
 [ext_resource path="res://scene/info.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scene/soundOption.tscn" type="PackedScene" id=3]
 [ext_resource path="res://theme/theme.tres" type="Theme" id=4]
+[ext_resource path="res://addons/InputBind/Inputscene.tscn" type="PackedScene" id=5]
 
 [node name="setting" type="Control"]
 anchor_right = 1.0
@@ -67,10 +68,8 @@ margin_top = 242.0
 margin_right = 443.0
 margin_bottom = 304.0
 
-[node name="Control" type="Control" parent="TabContainer"]
+[node name="Control" parent="TabContainer" instance=ExtResource( 5 )]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="Info" parent="TabContainer" instance=ExtResource( 2 )]
 visible = false
