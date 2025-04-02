@@ -84,18 +84,23 @@ var config={'Base':{'useExtensionMap':false},
 func _ready():
 	OS.center_window()
 	printFont()
-#	loadConfig()
-	if !config.Base.useExtensionMap:
-		loadBuiltInMap()
-	else:
-		loadExtensionMap()	
+	loadConfig()
+	initMap()
 		
-	mapList.sort_custom(self,"sort")
+	
 
 func changeScene(stagePath):
 	set_process_input(false)
 	get_tree().change_scene(stagePath)
 	set_process_input(true)
+
+#初始化地图
+func initMap():
+	if !config.Base.useExtensionMap:
+		loadBuiltInMap()
+	else:
+		loadExtensionMap()	
+	mapList.sort_custom(self,"sort")
 
 #获取内置地图
 func loadBuiltInMap():

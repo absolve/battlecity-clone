@@ -196,3 +196,20 @@ playing = true
 [node name="player" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/move = SubResource( 2 )
+
+[node name="Popup" type="Popup" parent="."]
+margin_right = 480.0
+margin_bottom = 176.0
+theme = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Popup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -8.0
+margin_right = 104.0
+margin_bottom = 8.0
+text = "maps is empty"
+uppercase = true
