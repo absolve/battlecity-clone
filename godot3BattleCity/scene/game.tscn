@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://script/gameScene.gd" type="Script" id=1]
 [ext_resource path="res://scene/map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scene/autoHideLabel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/pauseManage.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "gameover"
@@ -78,14 +79,16 @@ z_index = 10
 [node name="autoHideLabel" parent="oter" instance=ExtResource( 3 )]
 visible = false
 margin_left = 199.0
-margin_top = 452.0
+margin_top = 427.524
 margin_right = 199.0
-margin_bottom = 452.0
+margin_bottom = 427.524
 autoHide = false
 
 [node name="player" type="AnimationPlayer" parent="."]
 anims/gameover = SubResource( 1 )
 anims/reset = SubResource( 2 )
+
+[node name="pauseManage" parent="." instance=ExtResource( 4 )]
 
 [connection signal="timeout" from="produceTimer" to="." method="_on_produceTimer_timeout"]
 [connection signal="timeout" from="nextLevel" to="." method="_on_nextLevel_timeout"]

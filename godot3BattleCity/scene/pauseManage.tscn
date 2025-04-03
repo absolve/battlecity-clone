@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://font/prstartk.tres" type="DynamicFont" id=1]
+[ext_resource path="res://script/pauseManage.gd" type="Script" id=2]
+[ext_resource path="res://sound/pause.ogg" type="AudioStream" id=3]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "blink"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[node name="pauseManage" type="Node2D"]
+pause_mode = 2
+z_index = 10
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 184.0
+margin_top = 232.0
+margin_right = 264.0
+margin_bottom = 248.0
+custom_colors/font_color = Color( 0.870588, 0.184314, 0.0980392, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "pause"
+uppercase = true
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="player" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/blink = SubResource( 1 )
