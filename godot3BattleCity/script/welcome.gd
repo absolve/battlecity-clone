@@ -10,10 +10,12 @@ var selectedMode=mode.P1
 
 onready var tankAni=$main/tankAni
 onready var player=$player
+onready var tipDialog=$PopupPanel
 
 func _ready():
 	VisualServer.set_default_clear_color('#000')
 	player.play("move")
+	
 
 func setMode(index):
 	tankAni.position.y=posY[index]
@@ -30,6 +32,9 @@ func setMode(index):
 
 func startGame():
 	if selectedMode in [mode.P1,mode.P2]:
+		if Game.mapList.size()==0: #地图为空进行判断
+			tipDialog.popup_centered()
+			return
 		var temp=load("res://scene/splash.tscn")
 		Game.resetData()
 		if selectedMode==mode.P1:
@@ -60,3 +65,7 @@ func _input(event):
 			return
 		startGame()
 	
+
+
+func _on_Button_pressed():
+	tipDialog.hide()

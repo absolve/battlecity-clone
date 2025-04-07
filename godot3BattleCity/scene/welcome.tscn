@@ -197,19 +197,31 @@ playing = true
 anims/RESET = SubResource( 3 )
 anims/move = SubResource( 2 )
 
-[node name="Popup" type="Popup" parent="."]
-margin_right = 480.0
-margin_bottom = 176.0
+[node name="PopupPanel" type="PopupPanel" parent="."]
+margin_right = 496.0
+margin_bottom = 192.0
 theme = ExtResource( 3 )
+popup_exclusive = true
 
-[node name="Label" type="Label" parent="Popup"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -104.0
-margin_top = -8.0
-margin_right = 104.0
-margin_bottom = 8.0
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer"]
+margin_right = 208.0
+margin_bottom = 16.0
+size_flags_vertical = 6
 text = "maps is empty"
+align = 1
 uppercase = true
+
+[node name="Button" type="Button" parent="PopupPanel/VBoxContainer"]
+margin_top = 20.0
+margin_right = 208.0
+margin_bottom = 60.0
+focus_mode = 0
+text = "OK"
+
+[connection signal="pressed" from="PopupPanel/VBoxContainer/Button" to="." method="_on_Button_pressed"]
