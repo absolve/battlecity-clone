@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="video" type="Node2D"]
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+margin_right = 512.0
+margin_bottom = 448.0
+autoplay = true
