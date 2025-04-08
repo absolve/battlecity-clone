@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://script/setting.gd" type="Script" id=1]
 [ext_resource path="res://scene/info.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scene/soundOption.tscn" type="PackedScene" id=3]
 [ext_resource path="res://theme/theme.tres" type="Theme" id=4]
 [ext_resource path="res://addons/InputBind/Inputscene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://theme/sprites1.png" type="Texture" id=6]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 6 )
+region = Rect2( 345, 345, 37, 38 )
 
 [node name="setting" type="Control"]
 anchor_right = 1.0
@@ -17,10 +22,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -233.5
-margin_top = -194.5
-margin_right = 233.5
-margin_bottom = 194.5
+margin_left = -233.0
+margin_top = -194.0
+margin_right = 234.0
+margin_bottom = 217.0
 
 [node name="General" type="VBoxContainer" parent="TabContainer"]
 anchor_right = 1.0
@@ -33,15 +38,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CheckButton" type="CheckButton" parent="TabContainer/General"]
-margin_right = 305.0
-margin_bottom = 46.0
-size_flags_horizontal = 0
+margin_right = 443.0
+margin_bottom = 62.0
 text = "use ExtensionMap"
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/General"]
-margin_top = 50.0
+margin_top = 66.0
 margin_right = 443.0
-margin_bottom = 106.0
+margin_bottom = 122.0
 custom_constants/margin_top = 20
 custom_constants/margin_bottom = 20
 
@@ -54,19 +58,19 @@ align = 1
 uppercase = true
 
 [node name="master" parent="TabContainer/General" instance=ExtResource( 3 )]
-margin_top = 110.0
+margin_top = 126.0
 margin_right = 443.0
-margin_bottom = 172.0
+margin_bottom = 188.0
 
 [node name="bg" parent="TabContainer/General" instance=ExtResource( 3 )]
-margin_top = 176.0
+margin_top = 192.0
 margin_right = 443.0
-margin_bottom = 238.0
+margin_bottom = 254.0
 
 [node name="sfx" parent="TabContainer/General" instance=ExtResource( 3 )]
-margin_top = 242.0
+margin_top = 258.0
 margin_right = 443.0
-margin_bottom = 304.0
+margin_bottom = 320.0
 
 [node name="Control" parent="TabContainer" instance=ExtResource( 5 )]
 visible = false
@@ -77,4 +81,14 @@ margin_right = 40.0
 margin_bottom = 40.0
 disableInput = true
 
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 464.0
+margin_top = 16.0
+margin_right = 501.0
+margin_bottom = 54.0
+focus_mode = 0
+texture_normal = SubResource( 1 )
+stretch_mode = 2
+
 [connection signal="toggled" from="TabContainer/General/CheckButton" to="." method="_on_CheckButton_toggled"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

@@ -48,7 +48,10 @@ func startGame():
 		queue_free()
 	elif selectedMode==	mode.MAPVIEW:
 		Game.changeScene("res://scene/mapView.tscn")
-		
+	elif selectedMode==mode.SETTING:
+		Game.changeScene("res://scene/setting.tscn")	
+	elif selectedMode==mode.CONFIGMAP:
+		Game.changeScene("res://scene/editmap.tscn")
 
 func _input(event):
 	if Input.is_action_just_pressed("p1_up")||Input.is_action_just_pressed("p2_up"):

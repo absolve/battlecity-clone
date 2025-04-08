@@ -6,7 +6,8 @@ onready var sfxSliderNode=$TabContainer/General/sfx
 
 
 func _ready():
-	VisualServer.set_default_clear_color('#646464')
+#	VisualServer.set_default_clear_color('#646464')
+	VisualServer.set_default_clear_color('#000')
 	masterSliderNode.setName('Master')
 	bgSliderNode.setName('bg')
 	sfxSliderNode.setName('sfx')
@@ -42,4 +43,8 @@ func _on_CheckButton_toggled(button_pressed):
 	print(button_pressed)
 	Game.config.Base.useExtensionMap=button_pressed
 	Game.saveConfig()
+	Game.initMap()
 
+
+func _on_TextureButton_pressed():
+	Game.changeScene("res://scene/welcome.tscn")
