@@ -28,7 +28,7 @@ func _ready():
 #	map.loadMap(mapDir+"/"+'1992.json')
 	map.loadEnemyCount()
 	map.setLevelName(Game.gameLevel+1)
-	Game.mode=Game.gameMode.DOUBLE
+#	Game.mode=Game.gameMode.DOUBLE
 	if Game.p1Data['lives']>=0:  #坦克数量为0表示最后一辆，小于0就是没有了
 		map.addPlayer(1,Game.p1Data)
 		map.setP1LiveNum(Game.p1Data.lives)
