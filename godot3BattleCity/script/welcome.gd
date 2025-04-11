@@ -7,10 +7,12 @@ enum mode{
 }
 
 var selectedMode=mode.P1
+var lastInputTime=0 #上次按键时间
 
 onready var tankAni=$main/tankAni
 onready var player=$player
 onready var tipDialog=$PopupPanel
+onready var timer=$Timer
 
 func _ready():
 	VisualServer.set_default_clear_color('#000')
@@ -53,22 +55,39 @@ func startGame():
 	elif selectedMode==mode.CONFIGMAP:
 		Game.changeScene("res://scene/editmap.tscn")
 
+func startTimer():
+	if !timer.is_stopped():
+		timer.stop()
+	timer.start()
+
 func _input(event):
 	if Input.is_action_just_pressed("p1_up")||Input.is_action_just_pressed("p2_up"):
 		if index>0:
 			index-=1
 			setMode(index)
+		lastInputTime=Time.get_ticks_msec()	
 	elif Input.is_action_just_pressed("p1_down")||Input.is_action_just_pressed("p2_down"):
 		if index<posY.size()-1:
 			index+=1
 			setMode(index)
+		lastInputTime=Time.get_ticks_msec()		
 	if Input.is_action_just_pressed("select"):
 		if player.is_playing():
 			player.play("RESET")
+			startTimer()
 			return
 		startGame()
+		lastInputTime=Time.get_ticks_msec()	
 	
 
 
 func _on_Button_pressed():
 	tipDialog.hide()
+
+
+func _on_Timer_timeout():
+	print('_on_Timer_timeout')
+	if Time.get_ticks_msec()-lastInputTime>5*1000:
+		Game.changeScene("res://scene/video.tscn")
+	else:
+		startTimer()

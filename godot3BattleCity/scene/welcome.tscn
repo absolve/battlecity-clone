@@ -68,6 +68,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "startTimer"
+} ]
+}
 
 [node name="welcome" type="Node2D"]
 script = ExtResource( 1 )
@@ -226,4 +240,9 @@ margin_bottom = 60.0
 focus_mode = 0
 text = "OK"
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
