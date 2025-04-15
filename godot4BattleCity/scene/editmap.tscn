@@ -1,3 +1,54 @@
-[gd_scene format=3 uid="uid://cd1casmt4d1do"]
+[gd_scene load_steps=2 format=3 uid="uid://cd1casmt4d1do"]
+
+[ext_resource type="Script" path="res://script/editmap.gd" id="1_p8my0"]
 
 [node name="editmap" type="Node2D"]
+script = ExtResource("1_p8my0")
+
+[node name="child" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ItemList" type="ItemList" parent="Control"]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 8.0
+offset_right = 504.0
+offset_bottom = 240.0
+
+[node name="vbox" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 248.0
+offset_right = 506.0
+offset_bottom = 384.0
+metadata/_edit_group_ = true
+
+[node name="load" type="Button" parent="Control/vbox"]
+layout_mode = 2
+text = "load"
+
+[node name="save" type="Button" parent="Control/vbox"]
+layout_mode = 2
+text = "save"
+
+[node name="clear" type="Button" parent="Control/vbox"]
+layout_mode = 2
+text = "clear"
+
+[node name="return" type="Button" parent="Control/vbox"]
+layout_mode = 2
+text = "return"
+
+[node name="FileDialog" type="FileDialog" parent="Control"]
+
+[node name="loadDialog" type="FileDialog" parent="Control"]
+
+[connection signal="pressed" from="Control/vbox/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Control/vbox/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Control/vbox/clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="Control/vbox/return" to="." method="_on_return_pressed"]

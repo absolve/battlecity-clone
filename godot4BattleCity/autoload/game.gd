@@ -75,22 +75,47 @@ signal getBonus
 
 var map
 var mapList=[] #地图名字
-
+var configFile="battleCity.ini"
+var config={'Base':{'useExtensionMap':false},
+				'Volume':{'Master':1,'Bg':0.5,'Sfx':0.5}}
 
 func _ready():
 	printFont()
-	loadBuiltInMap()
-	mapList.sort_custom(sort)
+	#loadConfig()
+	initMap()
 
 func changeScene(stagePath):
 	set_process_input(false)
 	get_tree().change_scene_to_file(stagePath)
 	set_process_input(true)
+
+#初始化地图
+func initMap():
+	if !config.Base.useExtensionMap:
+		loadBuiltInMap()
+	else:
+		loadExtensionMap()	
+	mapList.sort_custom(sort)
 	
 #获取内置地图
 func loadBuiltInMap():
 	mapList.clear()
 	var dir = DirAccess.open("res://level")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir():
+				mapList.append(file_name)
+			file_name = dir.get_next()	
+	else:
+		print("An error occurred when trying to access the path.")	
+
+#载入扩展地图
+func loadExtensionMap():
+	mapList.clear()
+	var baseDir=OS.get_executable_path().get_base_dir()
+	var dir = DirAccess.open(baseDir+"/level")
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
@@ -119,6 +144,48 @@ func resetData():
 func resetPlayerScore():
 	p1Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
 	p2Score={'typeA':0,'typeB':0,'typeC':0,'typeD':0}
+
+#载入配置
+func loadConfig():
+	var baseDir=OS.get_executable_path().get_base_dir()
+	var cfg = ConfigFile.new()
+	var err = cfg.load(baseDir+"/"+configFile)
+	if err == OK:
+		for i in cfg.get_sections():
+			if i =='Base':
+				config.Base.useExtensionMap=cfg.get_value(i,'useExtensionMap',false)
+			elif i =='Volume':
+				config.Volume.Master=cfg.get_value(i,'Master')
+				config.Volume.Bg=cfg.get_value(i,'Bg')
+				config.Volume.Sfx=cfg.get_value(i,'Sfx')
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Master'), linear_to_db(config.Volume.Master))
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('bg'), linear_to_db(config.Volume.Bg))
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('sfx'), linear_to_db(config.Volume.Sfx))
+	
+	else:
+		newGameConfigFile()
+				
+#新建一个配置文件				
+func newGameConfigFile():
+	var cfg = ConfigFile.new()
+	cfg.set_value("Base","useExtensionMap",false)
+		
+	cfg.set_value("Volume","Master",1)
+	cfg.set_value("Volume","Bg",0.5)
+	cfg.set_value("Volume","Sfx",0.5)
+	
+	cfg.save(OS.get_executable_path().get_base_dir()+"/"+configFile)	
+
+#保存设置		
+func saveConfig():
+	var baseDir=OS.get_executable_path().get_base_dir()
+	var cfg = ConfigFile.new()
+	cfg.set_value("Base","useExtensionMap",config.Base.useExtensionMap)
+		
+	cfg.set_value("Volume","Master",config.Volume.Master)
+	cfg.set_value("Volume","Bg",config.Volume.Bg)
+	cfg.set_value("Volume","Sfx",config.Volume.Sfx)
+	cfg.save(OS.get_executable_path().get_base_dir()+"/"+configFile)	
 
 
 #打印提示信息

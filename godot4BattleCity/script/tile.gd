@@ -2,6 +2,7 @@ extends Node2D
 
 @export var type=Game.brickType.WALL #类型
 @onready var ani=$ani
+var mapPos=Vector2.ZERO  #在编辑地图中的位置
 
 func _ready():
 	if type==Game.brickType.WALL:
