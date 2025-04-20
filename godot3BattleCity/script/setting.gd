@@ -1,8 +1,8 @@
 extends Control
 
-onready var masterSliderNode=$TabContainer/General/master
-onready var bgSliderNode=$TabContainer/General/bg
-onready var sfxSliderNode=$TabContainer/General/sfx
+onready var masterSliderNode=$TabContainer/General/MarginContainer3/vbox/master
+onready var bgSliderNode=$TabContainer/General/MarginContainer3/vbox/bg
+onready var sfxSliderNode=$TabContainer/General/MarginContainer3/vbox/sfx
 
 
 func _ready():
