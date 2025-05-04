@@ -16,6 +16,7 @@ func setName(busName):
 	label.text=str(busName)
 	sound.bus=self.busName
 
+
 func setVolume(volume:float):
 #	print(volume)
 	self.volume=volume

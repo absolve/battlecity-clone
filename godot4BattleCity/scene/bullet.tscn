@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8b3fsed6wjfd"]
 
-[ext_resource type="Script" path="res://script/bullet.gd" id="1_nfjb6"]
-[ext_resource type="Texture2D" uid="uid://d08b873sj7gct" path="res://sprite/bullet_down.png" id="1_pccw0"]
-[ext_resource type="AudioStream" uid="uid://bldtnoumaslx" path="res://sound/bullet_hit_1.ogg" id="3_s5oy5"]
+[ext_resource type="Script" uid="uid://b8twc0s5gteru" path="res://script/bullet.gd" id="1_nfjb6"]
+[ext_resource type="Texture2D" uid="uid://dn6dlga7keimr" path="res://sprite/bullet_down.png" id="1_pccw0"]
+[ext_resource type="AudioStream" uid="uid://j3eapv234q3" path="res://sound/bullet_hit_1.ogg" id="3_s5oy5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_juqya"]
 size = Vector2(3, 4)
@@ -20,6 +20,5 @@ texture = ExtResource("1_pccw0")
 
 [node name="sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_s5oy5")
-bus = &"sfx"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

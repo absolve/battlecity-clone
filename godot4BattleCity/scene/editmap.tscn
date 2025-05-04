@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cd1casmt4d1do"]
 
-[ext_resource type="Script" path="res://script/editmap.gd" id="1_p8my0"]
+[ext_resource type="Script" uid="uid://cpom80m5b3cxn" path="res://script/editmap.gd" id="1_p8my0"]
 
 [node name="editmap" type="Node2D"]
 script = ExtResource("1_p8my0")
@@ -22,9 +22,9 @@ offset_bottom = 240.0
 
 [node name="vbox" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = 448.0
+offset_left = 451.0
 offset_top = 248.0
-offset_right = 506.0
+offset_right = 509.0
 offset_bottom = 384.0
 metadata/_edit_group_ = true
 
@@ -45,10 +45,22 @@ layout_mode = 2
 text = "return"
 
 [node name="FileDialog" type="FileDialog" parent="Control"]
+size = Vector2i(456, 300)
+access = 2
 
 [node name="loadDialog" type="FileDialog" parent="Control"]
+title = "Open a File"
+size = Vector2i(456, 300)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json")
 
+[connection signal="item_selected" from="Control/ItemList" to="." method="_on_item_list_item_selected"]
 [connection signal="pressed" from="Control/vbox/load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="Control/vbox/save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Control/vbox/clear" to="." method="_on_clear_pressed"]
 [connection signal="pressed" from="Control/vbox/return" to="." method="_on_return_pressed"]
+[connection signal="confirmed" from="Control/FileDialog" to="." method="_on_file_dialog_confirmed"]
+[connection signal="file_selected" from="Control/FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="file_selected" from="Control/loadDialog" to="." method="_on_load_dialog_file_selected"]

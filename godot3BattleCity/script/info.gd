@@ -10,7 +10,7 @@ func _ready():
 		set_physics_process(false)
 	else:
 		label.visible=true
-		content.visible=false
+#		content.visible=false
 
 func _input(event):
 	if Input.is_action_pressed("select"):

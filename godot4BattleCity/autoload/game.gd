@@ -81,7 +81,7 @@ var config={'Base':{'useExtensionMap':false},
 
 func _ready():
 	printFont()
-	#loadConfig()
+	loadConfig()
 	initMap()
 
 func changeScene(stagePath):
@@ -159,8 +159,8 @@ func loadConfig():
 				config.Volume.Bg=cfg.get_value(i,'Bg')
 				config.Volume.Sfx=cfg.get_value(i,'Sfx')
 				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Master'), linear_to_db(config.Volume.Master))
-				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('bg'), linear_to_db(config.Volume.Bg))
-				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('sfx'), linear_to_db(config.Volume.Sfx))
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Bg'), linear_to_db(config.Volume.Bg))
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index('Sfx'), linear_to_db(config.Volume.Sfx))
 	
 	else:
 		newGameConfigFile()

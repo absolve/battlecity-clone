@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cwcvesg7003t2"]
 
-[ext_resource type="Script" path="res://script/gameScene.gd" id="1_pcuhv"]
+[ext_resource type="Script" uid="uid://c4k4q6us28kr2" path="res://script/gameScene.gd" id="1_pcuhv"]
 [ext_resource type="PackedScene" uid="uid://pn880e5ss888" path="res://scene/map.tscn" id="2_x0pom"]
 [ext_resource type="PackedScene" uid="uid://cy1ks8l72tmpl" path="res://scene/auto_hide_label.tscn" id="3_b47cw"]
 
@@ -61,8 +61,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_80y2n"]
 _data = {
-"RESET": SubResource("Animation_u5g6g"),
-"gameover": SubResource("Animation_owrr2")
+&"RESET": SubResource("Animation_u5g6g"),
+&"gameover": SubResource("Animation_owrr2")
 }
 
 [node name="game" type="Node2D"]
@@ -102,7 +102,7 @@ autoHide = false
 
 [node name="player" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_80y2n")
+&"": SubResource("AnimationLibrary_80y2n")
 }
 
 [connection signal="timeout" from="produceTimer" to="." method="_on_produce_timer_timeout"]

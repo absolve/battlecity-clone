@@ -50,6 +50,7 @@ func setMode(mode):
 		lineEdit.visible=false
 		btnContainer.visible=true
 		btnOk.disabled=false
+		btnName.text=str("joy button index")
 		label.text=str('Please confirm')
 		deviceID.clear()
 		for i in range(InputBind.DEVICE_ID_LIST.size()):
@@ -62,6 +63,7 @@ func setMode(mode):
 		lineEdit.visible=false
 		btnContainer.visible=true
 		btnOk.disabled=false
+		btnName.text=str("joy axis index")
 		label.text=str('Please confirm')
 		deviceID.clear()
 		for i in range(InputBind.DEVICE_ID_LIST.size()):

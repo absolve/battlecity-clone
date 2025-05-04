@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqa57ahpevmxs"]
+
+[ext_resource type="Script" uid="uid://cuhnj5r6rxcj5" path="res://addons/inputbind4/event.gd" id="1_ewjlo"]
+[ext_resource type="Texture2D" uid="uid://b10hpmg1yat13" path="res://addons/inputbind4/assets/close.svg" id="2_v43pi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v43pi"]
+bg_color = Color(0.450648, 0.450648, 0.450648, 1)
+
+[node name="event" type="PanelContainer"]
+offset_right = 504.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v43pi")
+script = ExtResource("1_ewjlo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="btn" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("2_v43pi")

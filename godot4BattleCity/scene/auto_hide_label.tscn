@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cy1ks8l72tmpl"]
 
-[ext_resource type="Script" path="res://script/auto_hide_label.gd" id="1_k0ogi"]
+[ext_resource type="Script" uid="uid://bwmrxdf3rvh8v" path="res://script/auto_hide_label.gd" id="1_k0ogi"]
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="1_ptrny"]
 
 [node name="autoHideLabel" type="Control"]

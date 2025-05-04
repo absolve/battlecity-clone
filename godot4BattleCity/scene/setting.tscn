@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://l7qj7mca0pka"]
+
+[ext_resource type="Script" uid="uid://dlcnukyycae1d" path="res://script/setting.gd" id="1_ahr6q"]
+[ext_resource type="PackedScene" uid="uid://b7tj5oya5x0ih" path="res://scene/info.tscn" id="1_xthoy"]
+[ext_resource type="PackedScene" uid="uid://cb45tokp7ldry" path="res://scene/sound_option.tscn" id="2_g2to7"]
+[ext_resource type="PackedScene" uid="uid://btodufmk06hk3" path="res://addons/inputbind4/control.tscn" id="4_2wb80"]
+
+[node name="setting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahr6q")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 30.0
+offset_right = 490.0
+offset_bottom = 432.0
+tab_alignment = 1
+current_tab = 0
+
+[node name="General" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/General"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CheckButton" type="CheckButton" parent="TabContainer/General/MarginContainer"]
+layout_mode = 2
+text = "use ExtensionMap"
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/General"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="TabContainer/General/MarginContainer2"]
+layout_mode = 2
+text = "Volume"
+
+[node name="MarginContainer3" type="MarginContainer" parent="TabContainer/General"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="vbox" type="VBoxContainer" parent="TabContainer/General/MarginContainer3"]
+layout_mode = 2
+
+[node name="master" parent="TabContainer/General/MarginContainer3/vbox" instance=ExtResource("2_g2to7")]
+layout_mode = 2
+
+[node name="vg" parent="TabContainer/General/MarginContainer3/vbox" instance=ExtResource("2_g2to7")]
+layout_mode = 2
+
+[node name="sfx" parent="TabContainer/General/MarginContainer3/vbox" instance=ExtResource("2_g2to7")]
+layout_mode = 2
+
+[node name="Info" parent="TabContainer" instance=ExtResource("1_xthoy")]
+visible = false
+layout_mode = 2
+disableInput = true
+metadata/_tab_index = 1
+
+[node name="Control" parent="TabContainer" instance=ExtResource("4_2wb80")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[connection signal="toggled" from="TabContainer/General/MarginContainer/CheckButton" to="." method="_on_check_button_toggled"]

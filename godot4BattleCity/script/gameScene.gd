@@ -214,11 +214,12 @@ func _gameOver():
 #添加一个标志			
 func addPlayerGameOverLabel(id):
 	var temp=autoHideLabel.instantiate()
+	add_child(temp)
 	if id==Game.playerId.p1:
 		temp.rect_position=map.player1[0]*map.cellSize
 	elif id==Game.playerId.p2:
 		temp.rect_position=map.player2[0]*map.cellSize	
-	add_child(temp)
+	
 	
 	
 func _physics_process(delta):

@@ -12,9 +12,9 @@ func _ready():
 	bgSliderNode.setName('bg')
 	sfxSliderNode.setName('sfx')
 	
-	masterSliderNode.setVolume(Game.config.Volume.Master)
-	bgSliderNode.setVolume(Game.config.Volume.Bg)
-	sfxSliderNode.setVolume(Game.config.Volume.Sfx)
+	masterSliderNode.slider.value=Game.config.Volume.Master*100
+	bgSliderNode.slider.value=Game.config.Volume.Bg*100
+	sfxSliderNode.slider.value=Game.config.Volume.Sfx*100
 	
 	masterSliderNode.slider.connect("value_changed",self,"_on_master_value_changed")
 	bgSliderNode.slider.connect("value_changed",self,"_on_bg_value_changed")

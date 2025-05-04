@@ -43,7 +43,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
 visible = false
-margin_right = 416.0
+margin_right = 496.0
 margin_bottom = 73.0
 size_flags_vertical = 0
 text = "The game was completed on 
@@ -94,9 +94,9 @@ text = "CREATE STONE WALL AROUND EAGLE FOR 15 SECONDS"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
 visible = false
-margin_top = 80.0
-margin_right = 378.0
-margin_bottom = 1166.0
+margin_top = 120.0
+margin_right = 496.0
+margin_bottom = 931.0
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[color=#409eff]BONUS ITEMS[/color]

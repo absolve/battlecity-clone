@@ -226,17 +226,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="PopupPanel/VBoxContainer"]
-margin_right = 208.0
-margin_bottom = 16.0
+margin_top = 62.0
+margin_right = 488.0
+margin_bottom = 78.0
 size_flags_vertical = 6
 text = "maps is empty"
 align = 1
 uppercase = true
 
 [node name="Button" type="Button" parent="PopupPanel/VBoxContainer"]
-margin_top = 20.0
-margin_right = 208.0
-margin_bottom = 60.0
+margin_top = 144.0
+margin_right = 488.0
+margin_bottom = 184.0
 focus_mode = 0
 text = "OK"
 

@@ -87,7 +87,11 @@ func _on_area_entered(area):
 		if area.get('objType')==Game.objType.ENEMY:
 			addexplode()		
 	if area.get('objType')==Game.objType.BULLET||area.get('objType')==Game.objType.BASE:
-		call_deferred('queue_free')	
+		if area.get('objType')==Game.objType.BULLET:
+			if area.get('own')!=own: #敌人与敌人之间子弹不抵消
+				call_deferred('queue_free')	
+		else:
+			call_deferred('queue_free')	
 	elif area.get('objType')==Game.objType.BRICK:
 		if area.get('type')==Game.brickType.WALL||area.get('type')==Game.brickType.STONE:
 			if own==Game.objType.PLAYER&&power!=Game.bulletPower.SUPER\

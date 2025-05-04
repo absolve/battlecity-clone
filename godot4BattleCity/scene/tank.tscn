@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://c7wxacaat6sif"]
 
-[ext_resource type="Script" path="res://script/tank.gd" id="1_u7tid"]
-[ext_resource type="Texture2D" uid="uid://dmwiqtsb88gse" path="res://sprite/invincible1.png" id="2_mu170"]
-[ext_resource type="Texture2D" uid="uid://cbogohopkvaom" path="res://sprite/invincible2.png" id="3_d2mu2"]
-[ext_resource type="Texture2D" uid="uid://dgiuf385ox4qo" path="res://sprite/ship1.png" id="4_0xle1"]
-[ext_resource type="Texture2D" uid="uid://d2x6kn2drrdf0" path="res://sprite/ship2.png" id="5_u3d60"]
+[ext_resource type="Script" uid="uid://cv2d0xe6s547h" path="res://script/tank.gd" id="1_u7tid"]
+[ext_resource type="Texture2D" uid="uid://rp3hgrim3h5u" path="res://sprite/invincible1.png" id="2_mu170"]
+[ext_resource type="Texture2D" uid="uid://8f60iey4rbuy" path="res://sprite/invincible2.png" id="3_d2mu2"]
+[ext_resource type="Texture2D" uid="uid://c3ox2fpya05b0" path="res://sprite/ship1.png" id="4_0xle1"]
+[ext_resource type="Texture2D" uid="uid://0i6rv5tnid2g" path="res://sprite/ship2.png" id="5_u3d60"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gy445"]
 size = Vector2(28, 28)

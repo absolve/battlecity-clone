@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cish8hcifvpii"]
 
-[ext_resource type="Script" path="res://script/splash.gd" id="1_j5qsy"]
+[ext_resource type="Script" uid="uid://ctsstwm10ljv2" path="res://script/splash.gd" id="1_j5qsy"]
 [ext_resource type="PackedScene" uid="uid://cwcvesg7003t2" path="res://scene/game.tscn" id="2_88t7b"]
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="2_oeutt"]
 
@@ -125,9 +125,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f2sl5"]
 _data = {
-"RESET": SubResource("Animation_lhltl"),
-"in": SubResource("Animation_37c0r"),
-"out": SubResource("Animation_elits")
+&"RESET": SubResource("Animation_lhltl"),
+&"in": SubResource("Animation_37c0r"),
+&"out": SubResource("Animation_elits")
 }
 
 [node name="splash" type="Node2D"]

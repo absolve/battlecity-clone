@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://jec0h4xyamj7"]
+
+[ext_resource type="Script" uid="uid://dgebsxlfuvra5" path="res://addons/inputbind4/event_dialog.gd" id="1_wov2y"]
+
+[node name="eventDialog" type="PopupPanel"]
+transparent_bg = false
+size = Vector2i(512, 172)
+visible = true
+transient_to_focused = true
+transparent = false
+script = ExtResource("1_wov2y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 508.0
+offset_bottom = 168.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+editable = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "device"
+
+[node name="name" type="Label" parent="VBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "name"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="deviceID" type="OptionButton" parent="VBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton2" type="OptionButton" parent="VBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ok" type="Button" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+text = "ok"
+
+[node name="cancel" type="Button" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+text = "cancel"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="popup_hide" from="." to="." method="_on_popup_hide"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer3/HBoxContainer/ok" to="." method="_on_ok_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer3/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]

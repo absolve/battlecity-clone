@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://k8ay1rldyevh"]
 
-[ext_resource type="Script" path="res://script/score_label.gd" id="1_fe3ku"]
-[ext_resource type="FontFile" uid="uid://b1bq4sppwr2nr" path="res://font/arialbd.ttf" id="2_bjtvx"]
+[ext_resource type="Script" uid="uid://dkdupcpxsds2y" path="res://script/score_label.gd" id="1_fe3ku"]
+[ext_resource type="FontFile" uid="uid://w6n6pfc1pymu" path="res://font/arialbd.ttf" id="2_bjtvx"]
 
 [node name="ScoreLabel" type="Node2D"]
 script = ExtResource("1_fe3ku")

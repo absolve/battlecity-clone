@@ -1,25 +1,25 @@
 [gd_scene load_steps=23 format=3 uid="uid://byy266digvt5g"]
 
 [ext_resource type="PackedScene" uid="uid://c7wxacaat6sif" path="res://scene/tank.tscn" id="1_8woun"]
-[ext_resource type="Script" path="res://script/player.gd" id="2_rftgp"]
-[ext_resource type="Texture2D" uid="uid://ckkh8qaks5epy" path="res://sprite/appear_1.png" id="3_lqvh3"]
-[ext_resource type="Shader" path="res://shader/enemyColor.gdshader" id="3_n1wfc"]
-[ext_resource type="Texture2D" uid="uid://15sn2vd0eify" path="res://sprite/appear_2.png" id="4_wka44"]
-[ext_resource type="Texture2D" uid="uid://m6vhp5ifsvb2" path="res://sprite/appear_3.png" id="5_igln5"]
-[ext_resource type="Texture2D" uid="uid://dw60wkodg86ao" path="res://sprite/appear_4.png" id="6_8by4h"]
-[ext_resource type="Texture2D" uid="uid://b7xs661lp0bf7" path="res://sprite/tank_main3.png" id="7_iul55"]
-[ext_resource type="Texture2D" uid="uid://b6n3hcxgdo2mb" path="res://sprite/tank_main5.png" id="7_mywm5"]
-[ext_resource type="Texture2D" uid="uid://bhviulwptr6ps" path="res://sprite/tank_main4.png" id="8_a1m04"]
-[ext_resource type="Texture2D" uid="uid://cau3uqrgqhtf7" path="res://sprite/tank_main6.png" id="8_bxs07"]
-[ext_resource type="Texture2D" uid="uid://dhmpxs1upfbvl" path="res://sprite/tank_main1.png" id="8_lmj6e"]
-[ext_resource type="Texture2D" uid="uid://c8one8cijcpaf" path="res://sprite/tank_main2.png" id="9_5x7qg"]
-[ext_resource type="Texture2D" uid="uid://d4efh6d13m6af" path="res://sprite/tank_main7.png" id="13_370p8"]
-[ext_resource type="Texture2D" uid="uid://ca45aj7q8ygxk" path="res://sprite/tank_main8.png" id="14_bkj5x"]
-[ext_resource type="AudioStream" uid="uid://b6njrrwxpnt87" path="res://sound/idle.wav" id="15_upwd4"]
-[ext_resource type="AudioStream" uid="uid://fc0tdh3u7lbf" path="res://sound/walk.wav" id="16_x4piy"]
-[ext_resource type="AudioStream" uid="uid://dj477eanmdtbv" path="res://sound/hit.ogg" id="17_ibr1t"]
-[ext_resource type="AudioStream" uid="uid://dq2gqeca3aibc" path="res://sound/bullet_shot.ogg" id="18_k5w60"]
-[ext_resource type="AudioStream" uid="uid://vhdqned633i3" path="res://sound/slide.wav" id="19_3hin4"]
+[ext_resource type="Script" uid="uid://dqlymahgfyyun" path="res://script/player.gd" id="2_rftgp"]
+[ext_resource type="Texture2D" uid="uid://br7cb28awh7j5" path="res://sprite/appear_1.png" id="3_lqvh3"]
+[ext_resource type="Shader" uid="uid://dd583rj4denh6" path="res://shader/enemyColor.gdshader" id="3_n1wfc"]
+[ext_resource type="Texture2D" uid="uid://bwynqfsyvgdme" path="res://sprite/appear_2.png" id="4_wka44"]
+[ext_resource type="Texture2D" uid="uid://dnikormqdyb6c" path="res://sprite/appear_3.png" id="5_igln5"]
+[ext_resource type="Texture2D" uid="uid://bt714nkj5sqbe" path="res://sprite/appear_4.png" id="6_8by4h"]
+[ext_resource type="Texture2D" uid="uid://cip5k1p3t5vmj" path="res://sprite/tank_main3.png" id="7_iul55"]
+[ext_resource type="Texture2D" uid="uid://c81ifrh7lxciq" path="res://sprite/tank_main5.png" id="7_mywm5"]
+[ext_resource type="Texture2D" uid="uid://cpw1kuxt24cwd" path="res://sprite/tank_main4.png" id="8_a1m04"]
+[ext_resource type="Texture2D" uid="uid://w7l85wpl6b6r" path="res://sprite/tank_main6.png" id="8_bxs07"]
+[ext_resource type="Texture2D" uid="uid://c7c6two083koj" path="res://sprite/tank_main1.png" id="8_lmj6e"]
+[ext_resource type="Texture2D" uid="uid://bgasm7tffcori" path="res://sprite/tank_main2.png" id="9_5x7qg"]
+[ext_resource type="Texture2D" uid="uid://d1gvoqsggmevy" path="res://sprite/tank_main7.png" id="13_370p8"]
+[ext_resource type="Texture2D" uid="uid://cfwfg2kjr8rns" path="res://sprite/tank_main8.png" id="14_bkj5x"]
+[ext_resource type="AudioStream" uid="uid://5e4elil567nk" path="res://sound/idle.wav" id="15_upwd4"]
+[ext_resource type="AudioStream" uid="uid://ddfiik1agx1lw" path="res://sound/walk.wav" id="16_x4piy"]
+[ext_resource type="AudioStream" uid="uid://82v23yxcx2mn" path="res://sound/hit.ogg" id="17_ibr1t"]
+[ext_resource type="AudioStream" uid="uid://cykxfwadoviy4" path="res://sound/bullet_shot.ogg" id="18_k5w60"]
+[ext_resource type="AudioStream" uid="uid://brp7mox5bj6fw" path="res://sound/slide.wav" id="19_3hin4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5c6r6"]
 resource_local_to_scene = true
@@ -154,24 +154,19 @@ collision_mask = 7
 [node name="idle" type="AudioStreamPlayer" parent="." index="11"]
 stream = ExtResource("15_upwd4")
 volume_db = -16.0
-bus = &"sfx"
 
 [node name="walk" type="AudioStreamPlayer" parent="." index="12"]
 stream = ExtResource("16_x4piy")
 volume_db = -16.0
-bus = &"sfx"
 
 [node name="hit" type="AudioStreamPlayer" parent="." index="13"]
 stream = ExtResource("17_ibr1t")
-bus = &"sfx"
 
 [node name="fire" type="AudioStreamPlayer" parent="." index="14"]
 stream = ExtResource("18_k5w60")
-bus = &"sfx"
 
 [node name="slide" type="AudioStreamPlayer" parent="." index="15"]
 stream = ExtResource("19_3hin4")
-bus = &"sfx"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="initTimer" to="." method="_on_init_timer_timeout"]

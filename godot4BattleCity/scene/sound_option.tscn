@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb45tokp7ldry"]
+
+[ext_resource type="Script" uid="uid://c34kvvo0npjdo" path="res://script/sound_option.gd" id="1_irgs4"]
+[ext_resource type="AudioStream" uid="uid://j3eapv234q3" path="res://sound/bullet_hit_1.ogg" id="2_jewax"]
+
+[node name="soundOption" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_irgs4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 2
+step = 10.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jewax")

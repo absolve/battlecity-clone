@@ -1,0 +1,145 @@
+[gd_scene load_steps=20 format=3 uid="uid://b7tj5oya5x0ih"]
+
+[ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="1_4vlko"]
+[ext_resource type="Script" uid="uid://dfhmswdpuqyra" path="res://script/info.gd" id="1_5aso6"]
+[ext_resource type="PackedScene" uid="uid://burxrgnd7041g" path="res://scene/item_info.tscn" id="2_giixo"]
+[ext_resource type="Texture2D" uid="uid://d10j13qbpb7x3" path="res://sprite/bonus_grenade.png" id="3_qokwo"]
+[ext_resource type="Texture2D" uid="uid://dgerb1jfm5o5h" path="res://sprite/bonus_helmet.png" id="4_v21fv"]
+[ext_resource type="Texture2D" uid="uid://dc4ocix4fc0t5" path="res://sprite/bonus_clock.png" id="5_v21fv"]
+[ext_resource type="Texture2D" uid="uid://54r1rv1cywf8" path="res://sprite/bonus_shovel.png" id="6_wx4br"]
+[ext_resource type="Texture2D" uid="uid://bhflsdjs44q1p" path="res://sprite/bonus_tank.png" id="7_1lij7"]
+[ext_resource type="Texture2D" uid="uid://cooiueux7blrw" path="res://sprite/bonus_star.png" id="8_fxrko"]
+[ext_resource type="Texture2D" uid="uid://du040pr07ejwl" path="res://sprite/bonus_boat.png" id="9_dlme6"]
+[ext_resource type="Texture2D" uid="uid://yeodrxqupixv" path="res://sprite/enemy_a.png" id="10_d7nv0"]
+[ext_resource type="Texture2D" uid="uid://c1ijecf3ccx1q" path="res://sprite/enemy_b.png" id="11_4cnc3"]
+[ext_resource type="Texture2D" uid="uid://daimxst4d6o18" path="res://sprite/enemy_c.png" id="12_4tgte"]
+[ext_resource type="Texture2D" uid="uid://bo3dn3dq3xim5" path="res://sprite/enemy_d.png" id="13_imjue"]
+[ext_resource type="Texture2D" uid="uid://balbxjt3egp28" path="res://sprite/brick.png" id="14_myhfc"]
+[ext_resource type="Texture2D" uid="uid://cnoxroo0j7x2b" path="res://sprite/stone.png" id="15_4vlko"]
+[ext_resource type="Texture2D" uid="uid://dkimp4lhyu7bd" path="res://sprite/bush.png" id="16_wkm2a"]
+[ext_resource type="Texture2D" uid="uid://bs6hwi8pulect" path="res://sprite/water.png" id="17_4oro0"]
+[ext_resource type="Texture2D" uid="uid://cfw1ypljyk80h" path="res://sprite/ice.png" id="18_ld10y"]
+
+[node name="info" type="VBoxContainer"]
+offset_right = 496.0
+offset_bottom = 280.0
+theme = ExtResource("1_4vlko")
+script = ExtResource("1_5aso6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "The game was completed on 
+March 25, 2021.
+Remake with 2025.
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="itemInfo" parent="ScrollContainer/VBoxContainer/MarginContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+text = "BONUS ITEMS"
+
+[node name="itemInfo" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("3_qokwo")
+text = "ALL ENEMIES ARE DESTROYED"
+
+[node name="itemInfo2" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("4_v21fv")
+text = "ACTIVE PLAYER SHIELD FOR 10 SECONDS"
+
+[node name="itemInfo3" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("5_v21fv")
+text = "FREEZE ALL ENEMIES FOR 8 SECONDS"
+
+[node name="itemInfo4" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("6_wx4br")
+text = "CREATE STONE WALL AROUND EAGLE FOR 15 SECONDS"
+
+[node name="itemInfo5" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("7_1lij7")
+text = "INCREASE PLAYER LIVES COUNT"
+
+[node name="itemInfo6" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("8_fxrko")
+text = "INCREASE PLAYER SPEED, EACH NEXT ONE INCREASE MAX BULLETS COUNT"
+
+[node name="itemInfo7" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("9_dlme6")
+text = "ALLOWS TO MOVE ON THE WATER"
+
+[node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="itemInfo" parent="ScrollContainer/VBoxContainer/MarginContainer2" instance=ExtResource("2_giixo")]
+layout_mode = 2
+text = "ENEMY TYPES"
+
+[node name="itemInfo8" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("10_d7nv0")
+text = "SPEED: NORMAL ARMOR: NORMAL"
+
+[node name="itemInfo9" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("11_4cnc3")
+text = "SPEED: FAST ARMOR: NORMAL"
+
+[node name="itemInfo10" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("12_4tgte")
+text = "NORMAL ARMOR: NORMAL"
+
+[node name="itemInfo11" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("13_imjue")
+text = "SPEED: NORMAL ARMOR: NORMAL+1"
+
+[node name="MarginContainer3" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="itemInfo" parent="ScrollContainer/VBoxContainer/MarginContainer3" instance=ExtResource("2_giixo")]
+layout_mode = 2
+text = "LEVEL"
+
+[node name="itemInfo12" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("14_myhfc")
+text = "IT CAN BE DESTROYED WITH TWO BULLETS OR ONE IF YOU COLLECT THREE STARS OR GUN"
+
+[node name="itemInfo13" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("15_4vlko")
+text = "IT CAN BE DESTROYED ONLY IF YOU COLLECT THREE STARS OR GUN BONUS"
+
+[node name="itemInfo14" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("16_wkm2a")
+text = "GRASS CAN BE WALKED THROUGH"
+
+[node name="itemInfo15" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("17_4oro0")
+text = "IT IS NATURAL OBSTACLE UNLESS YOU COLLECT BOAT BONUS"
+
+[node name="itemInfo16" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_giixo")]
+layout_mode = 2
+img = ExtResource("18_ld10y")
+text = "TANKS ARE SLIPPING ON IT"

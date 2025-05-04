@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://byal30nbvyuaj"]
 
-[ext_resource type="Script" path="res://script/brick.gd" id="1_6vugh"]
-[ext_resource type="Shader" path="res://shader/texture.gdshader" id="2_xk4d0"]
-[ext_resource type="Texture2D" uid="uid://dh5c586cqxsgp" path="res://sprite/brick.png" id="2_yey8w"]
-[ext_resource type="Texture2D" uid="uid://whvokkscjyur" path="res://sprite/stone.png" id="3_uwn2w"]
-[ext_resource type="Texture2D" uid="uid://cg1f1au3t8a85" path="res://sprite/water1.png" id="4_ch0qi"]
-[ext_resource type="Texture2D" uid="uid://dw7w1ben57q6y" path="res://sprite/water2.png" id="5_m8kj2"]
-[ext_resource type="Texture2D" uid="uid://cgw7quqbe5i7p" path="res://sprite/bush.png" id="6_oxgxv"]
-[ext_resource type="Texture2D" uid="uid://dtydmnmlend2s" path="res://sprite/ice.png" id="7_2m3rl"]
+[ext_resource type="Script" uid="uid://b5kq6wp25r66y" path="res://script/brick.gd" id="1_6vugh"]
+[ext_resource type="Shader" uid="uid://w7v2qwcs2s7a" path="res://shader/texture.gdshader" id="2_xk4d0"]
+[ext_resource type="Texture2D" uid="uid://balbxjt3egp28" path="res://sprite/brick.png" id="2_yey8w"]
+[ext_resource type="Texture2D" uid="uid://cnoxroo0j7x2b" path="res://sprite/stone.png" id="3_uwn2w"]
+[ext_resource type="Texture2D" uid="uid://dp12u8wwbteo0" path="res://sprite/water1.png" id="4_ch0qi"]
+[ext_resource type="Texture2D" uid="uid://dcennukumfytm" path="res://sprite/water2.png" id="5_m8kj2"]
+[ext_resource type="Texture2D" uid="uid://dkimp4lhyu7bd" path="res://sprite/bush.png" id="6_oxgxv"]
+[ext_resource type="Texture2D" uid="uid://cfw1ypljyk80h" path="res://sprite/ice.png" id="7_2m3rl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fi0a"]
 size = Vector2(16, 16)

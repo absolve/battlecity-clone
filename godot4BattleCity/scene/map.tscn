@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://pn880e5ss888"]
 
-[ext_resource type="Script" path="res://script/map.gd" id="1_y6klf"]
+[ext_resource type="Script" uid="uid://csg2vhikj3aa1" path="res://script/map.gd" id="1_y6klf"]
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="2_t5lf4"]
-[ext_resource type="Texture2D" uid="uid://dy8ymvjc0yjyo" path="res://sprite/lives.png" id="3_us57j"]
-[ext_resource type="Texture2D" uid="uid://cva7s04c6r75v" path="res://sprite/flag.png" id="4_i01vf"]
+[ext_resource type="Texture2D" uid="uid://dy54jfuldiims" path="res://sprite/lives.png" id="3_us57j"]
+[ext_resource type="Texture2D" uid="uid://bcw5r2a1ywc4v" path="res://sprite/flag.png" id="4_i01vf"]
 
 [node name="map" type="Node2D"]
 script = ExtResource("1_y6klf")

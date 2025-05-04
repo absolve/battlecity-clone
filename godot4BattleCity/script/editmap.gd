@@ -66,6 +66,8 @@ func addBaseBrick():
 
 #载入文件
 func loadMap(filePath:String):
+	for i in childNode.get_children():
+		childNode.remove_child(i)
 	var file = FileAccess.open(filePath, FileAccess.READ)
 	if file:
 		var json=JSON.new()
@@ -76,8 +78,8 @@ func loadMap(filePath:String):
 		for i in currentLevel['data']:
 			if int(i['type']) in [0,1,2,3,4]:
 				var temp=tile.instantiate()
-				temp.position.x=int(i['x'])*cellSize+cellSize/2
-				temp.position.y=int(i['y'])*cellSize+cellSize/2
+				temp.position.x=int(i['x'])*cellSize+cellSize/2+offset.x
+				temp.position.y=int(i['y'])*cellSize+cellSize/2+offset.y
 				temp.type=int(i['type'])
 				temp.mapPos=Vector2(int(i['x']),int(i['y']))
 				childNode.add_child(temp)
@@ -102,7 +104,7 @@ func addItem(pos):
 			continue
 		if i['y']+indexY<0||i['y']+indexY>25:
 			continue
-		var temp=tile.instance()
+		var temp=tile.instantiate()
 		temp.position.x=(i['x']+indexX)*cellSize+cellSize/2+offset.x
 		temp.position.y=(i['y']+indexY)*cellSize+cellSize/2+offset.y
 		temp.type=i.type
@@ -176,16 +178,43 @@ func _draw():
 
 
 func _on_load_pressed():
-	pass # Replace with function body.
+	var baseDir=OS.get_executable_path().get_base_dir()
+	loadDialog.current_dir=baseDir
+	loadDialog.popup_centered()
 
 
 func _on_save_pressed():
-	pass # Replace with function body.
+	var baseDir=OS.get_executable_path().get_base_dir()
+	fileDialog.current_dir=baseDir
+	fileDialog.current_file="2025.json"
+	fileDialog.popup_centered()
 
 
 func _on_clear_pressed():
-	pass # Replace with function body.
+	for i in childNode.get_children():
+		i.queue_free()
+	addBaseBrick()
 
 
 func _on_return_pressed():
-	pass # Replace with function body.
+	Game.changeScene("res://scene/welcome.tscn")
+
+
+func _on_item_list_item_selected(index: int) -> void:
+	currentItem=itemList.get_item_metadata(index)
+
+
+func _on_file_dialog_file_selected(path: String) -> void:
+	if fileDialog.current_file:
+		save2File(fileDialog.current_path)
+
+
+func _on_file_dialog_confirmed() -> void:
+	var path=fileDialog.current_dir	
+	print(fileDialog.current_path)
+	if fileDialog.current_file:
+		save2File(fileDialog.current_path)
+
+
+func _on_load_dialog_file_selected(path: String) -> void:
+	loadMap(path)

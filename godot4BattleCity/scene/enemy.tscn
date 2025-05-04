@@ -1,21 +1,21 @@
 [gd_scene load_steps=22 format=3 uid="uid://xvtsrf40h73y"]
 
 [ext_resource type="PackedScene" uid="uid://c7wxacaat6sif" path="res://scene/tank.tscn" id="1_gjwc5"]
-[ext_resource type="Script" path="res://script/enemy.gd" id="2_piya8"]
-[ext_resource type="Texture2D" uid="uid://dw60wkodg86ao" path="res://sprite/appear_4.png" id="3_8lrd7"]
-[ext_resource type="Shader" path="res://shader/enemyColor.gdshader" id="3_h8jsg"]
-[ext_resource type="Texture2D" uid="uid://m6vhp5ifsvb2" path="res://sprite/appear_3.png" id="4_uopqp"]
-[ext_resource type="Texture2D" uid="uid://15sn2vd0eify" path="res://sprite/appear_2.png" id="5_km5ns"]
-[ext_resource type="Texture2D" uid="uid://ckkh8qaks5epy" path="res://sprite/appear_1.png" id="6_j85kt"]
-[ext_resource type="AudioStream" uid="uid://dj477eanmdtbv" path="res://sound/hit.ogg" id="7_7rmxm"]
-[ext_resource type="Texture2D" uid="uid://dl32nq8utld0" path="res://sprite/tank_white_1-1.png" id="7_mbrmr"]
-[ext_resource type="Texture2D" uid="uid://coqf4b8wkq5lg" path="res://sprite/tank_white_1.png" id="8_irvxn"]
-[ext_resource type="Texture2D" uid="uid://nbb41mytdul5" path="res://sprite/tank_white_2-1.png" id="9_gjpiq"]
-[ext_resource type="Texture2D" uid="uid://bsccix0l0p6wp" path="res://sprite/tank_white_2.png" id="10_cjhqx"]
-[ext_resource type="Texture2D" uid="uid://cbsdlt8vhkgbn" path="res://sprite/tank_white_3-1.png" id="11_0p1pw"]
-[ext_resource type="Texture2D" uid="uid://d1cquda2mfay5" path="res://sprite/tank_white_3.png" id="12_ngefr"]
-[ext_resource type="Texture2D" uid="uid://cvuqjy8lineqp" path="res://sprite/tank_white_4-1.png" id="13_vosqg"]
-[ext_resource type="Texture2D" uid="uid://bpdy4hjf0sfvj" path="res://sprite/tank_white_41.png" id="14_20nqj"]
+[ext_resource type="Script" uid="uid://dmwhcf4t2x7uv" path="res://script/enemy.gd" id="2_piya8"]
+[ext_resource type="Texture2D" uid="uid://bt714nkj5sqbe" path="res://sprite/appear_4.png" id="3_8lrd7"]
+[ext_resource type="Shader" uid="uid://dd583rj4denh6" path="res://shader/enemyColor.gdshader" id="3_h8jsg"]
+[ext_resource type="Texture2D" uid="uid://dnikormqdyb6c" path="res://sprite/appear_3.png" id="4_uopqp"]
+[ext_resource type="Texture2D" uid="uid://bwynqfsyvgdme" path="res://sprite/appear_2.png" id="5_km5ns"]
+[ext_resource type="Texture2D" uid="uid://br7cb28awh7j5" path="res://sprite/appear_1.png" id="6_j85kt"]
+[ext_resource type="AudioStream" uid="uid://82v23yxcx2mn" path="res://sound/hit.ogg" id="7_7rmxm"]
+[ext_resource type="Texture2D" uid="uid://c2u7oeypofvgh" path="res://sprite/tank_white_1-1.png" id="7_mbrmr"]
+[ext_resource type="Texture2D" uid="uid://d4foktys2ejj5" path="res://sprite/tank_white_1.png" id="8_irvxn"]
+[ext_resource type="Texture2D" uid="uid://gcqah8mqi5tt" path="res://sprite/tank_white_2-1.png" id="9_gjpiq"]
+[ext_resource type="Texture2D" uid="uid://c66ilnss2cviq" path="res://sprite/tank_white_2.png" id="10_cjhqx"]
+[ext_resource type="Texture2D" uid="uid://c4lqgbwrj53u6" path="res://sprite/tank_white_3-1.png" id="11_0p1pw"]
+[ext_resource type="Texture2D" uid="uid://beyi28eth57u0" path="res://sprite/tank_white_3.png" id="12_ngefr"]
+[ext_resource type="Texture2D" uid="uid://bbfta7q2k57d4" path="res://sprite/tank_white_4-1.png" id="13_vosqg"]
+[ext_resource type="Texture2D" uid="uid://7etvb4diha6i" path="res://sprite/tank_white_41.png" id="14_20nqj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_svkeg"]
 resource_local_to_scene = true
@@ -161,8 +161,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_45f2i"]
 _data = {
-"RESET": SubResource("Animation_3rx1k"),
-"blink": SubResource("Animation_6axt4")
+&"RESET": SubResource("Animation_3rx1k"),
+&"blink": SubResource("Animation_6axt4")
 }
 
 [node name="tank" instance=ExtResource("1_gjwc5")]
@@ -191,11 +191,10 @@ collision_mask = 7
 
 [node name="hit" type="AudioStreamPlayer" parent="." index="11"]
 stream = ExtResource("7_7rmxm")
-bus = &"sfx"
 
 [node name="player" type="AnimationPlayer" parent="." index="12"]
 libraries = {
-"": SubResource("AnimationLibrary_45f2i")
+&"": SubResource("AnimationLibrary_45f2i")
 }
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
