@@ -7,6 +7,8 @@ Player 1:  arrows and J to fire
 Player 2:  WSAD and keypad 3 to fire  
 Select: ENTER  
 
+导出是需要将地图文件一起导出，就是json的那些文件  
+  
 todo  
 1.地图编辑器(Map editor)  
 2.地图查看(Map viewing)  
