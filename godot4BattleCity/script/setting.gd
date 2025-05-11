@@ -3,7 +3,7 @@ extends Control
 @onready var masterSliderNode=$TabContainer/General/MarginContainer3/vbox/master
 @onready var bgSliderNode=$TabContainer/General/MarginContainer3/vbox/vg
 @onready var sfxSliderNode=$TabContainer/General/MarginContainer3/vbox/sfx
-
+@onready var useExtensionMapNode=$TabContainer/General/MarginContainer/CheckButton
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color('#000')
@@ -18,7 +18,8 @@ func _ready() -> void:
 	masterSliderNode.slider.value_changed.connect(_on_master_value_changed)
 	bgSliderNode.slider.value_changed.connect(_on_bg_value_changed)
 	sfxSliderNode.slider.value_changed.connect(_on_sfx_value_changed)
-	
+	#print(Game.config.Base.useExtensionMap)
+	useExtensionMapNode.button_pressed=Game.config.Base.useExtensionMap
 	
 func _on_master_value_changed(value):
 	masterSliderNode.setVolume(value)

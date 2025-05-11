@@ -100,7 +100,7 @@ func _physics_process(delta):
 					continue	
 				isStop=true
 			if i.get('objType') in [Game.objType.ENEMY,Game.objType.PLAYER]:
-				if global_position.distance_to(i.global_position)<20:
+				if global_position.distance_to(i.global_position)<10:
 					continue
 				isStop=true
 					
