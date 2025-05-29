@@ -239,7 +239,7 @@ func addBonus():
 			
 	#不在基地和玩家附近
 	var pos = Vector2(randi()%25+1,randi()%25+1)
-	while pos in basePlacePos && pos in playerPos:
+	while pos in basePlacePos || pos in playerPos:
 		pos = Vector2(randi()%25+1,randi()%25+1)
 	var temp=bonus.instance()	
 	temp.position=pos*cellSize
