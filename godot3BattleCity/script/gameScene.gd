@@ -10,7 +10,7 @@ onready var shovelTimer=$shovelTimer
 onready var clockTimer=$clockTimer
 onready var player=$player
 
-var minEnemyCount=4		#最小同屏敌人数量 2人就6个
+var minEnemyCount=4	#最小同屏敌人数量 2人就6个
 var scoreLabel=preload("res://scene/scoreLabel.tscn")
 var hasShovel=false #有铲子
 var hasClock=false #时钟

@@ -64,7 +64,7 @@ func _physics_process(delta):
 #		if isStop:
 #			keepMoveTime-=15
 #			vec=Vector2.ZERO
-			
+		#敌人的主要目标是向基地出发	
 		if moveTime>keepMoveTime: #改变方向
 			moveTime=0
 			keepMoveTime=randi()%300+60
