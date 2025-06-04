@@ -242,7 +242,7 @@ focus_mode = 0
 text = "OK"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 15.0
 one_shot = true
 
 [connection signal="pressed" from="PopupPanel/VBoxContainer/Button" to="." method="_on_Button_pressed"]

@@ -40,6 +40,7 @@ onready var childNode=$child
 onready var itemList=$Control/ItemList
 onready var fileDialog=$Control/FileDialog
 onready var loadDialog=$Control/loadDialog
+onready var btnReturn=$Control/vbox/return
 
 func _ready():
 	VisualServer.set_default_clear_color('#000')
@@ -52,6 +53,7 @@ func _ready():
 	for i in range(itemMetadata.size()):
 		itemList.set_item_metadata(i,itemMetadata[i])
 	currentItem='del'
+	btnReturn.grab_focus()
 
 #添加基地周边的方块
 func addBaseBrick():

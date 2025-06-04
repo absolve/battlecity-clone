@@ -14,6 +14,7 @@ onready var miniMap3Name=$miniMap3/Label
 onready var miniMap4Name=$miniMap4/Label
 onready var miniMap5Name=$miniMap5/Label
 onready var miniMap6Name=$miniMap6/Label
+onready var btnClose=$Control/hbox/Button
 
 const mapDir="res://level"	#内置地图路径
 var page=0
@@ -28,6 +29,7 @@ func _ready():
 		pageNode.add_item(str(i))
 	mapCountNode.text='mapcount:%d'%Game.mapList.size()
 	showMap(0)
+	btnClose.grab_focus()
 	
 #设置地图	
 func showMap(page):
