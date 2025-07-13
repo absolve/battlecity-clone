@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://6ddgaxq5v8qr"]
 
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="1_n6dgq"]
-[ext_resource type="Script" uid="uid://d1u5hqqoluwuw" path="res://script/settlement.gd" id="1_urgip"]
-[ext_resource type="Texture2D" uid="uid://yeodrxqupixv" path="res://sprite/enemy_a.png" id="3_qmb3w"]
-[ext_resource type="Texture2D" uid="uid://c1ijecf3ccx1q" path="res://sprite/enemy_b.png" id="4_ijq0t"]
-[ext_resource type="Texture2D" uid="uid://daimxst4d6o18" path="res://sprite/enemy_c.png" id="5_02uoe"]
-[ext_resource type="Texture2D" uid="uid://bo3dn3dq3xim5" path="res://sprite/enemy_d.png" id="6_50e3j"]
-[ext_resource type="Texture2D" uid="uid://dsww503rv0g14" path="res://sprite/arrow.png" id="7_bgw13"]
+[ext_resource type="Script" uid="uid://c8l1fm2eec6fq" path="res://script/settlement.gd" id="1_urgip"]
+[ext_resource type="Texture2D" uid="uid://3e5y27hilkl5" path="res://sprite/enemy_a.png" id="3_qmb3w"]
+[ext_resource type="Texture2D" uid="uid://bhp1h6741iua6" path="res://sprite/enemy_b.png" id="4_ijq0t"]
+[ext_resource type="Texture2D" uid="uid://dute08r5qq7fi" path="res://sprite/enemy_c.png" id="5_02uoe"]
+[ext_resource type="Texture2D" uid="uid://00c85iajo0q4" path="res://sprite/enemy_d.png" id="6_50e3j"]
+[ext_resource type="Texture2D" uid="uid://c8lgeodpa2h4m" path="res://sprite/arrow.png" id="7_bgw13"]
 
 [node name="settlement" type="Control"]
 layout_mode = 3

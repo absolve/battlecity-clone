@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cd1casmt4d1do"]
 
-[ext_resource type="Script" uid="uid://cpom80m5b3cxn" path="res://script/editmap.gd" id="1_p8my0"]
+[ext_resource type="Script" uid="uid://d3tr6expn46p7" path="res://script/editmap.gd" id="1_p8my0"]
 
 [node name="editmap" type="Node2D"]
 script = ExtResource("1_p8my0")

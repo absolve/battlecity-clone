@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cepxemcve304x"]
 
-[ext_resource type="Script" uid="uid://cm3yni71mxs68" path="res://addons/inputbind4/action.gd" id="1_tk2wn"]
-[ext_resource type="Texture2D" uid="uid://bwd3n3rbu7wyy" path="res://addons/inputbind4/assets/add.svg" id="2_4ygdj"]
+[ext_resource type="Script" uid="uid://bck3ayetepl1w" path="res://addons/inputbind4/action.gd" id="1_tk2wn"]
+[ext_resource type="Texture2D" uid="uid://cy4q5rclskdki" path="res://addons/inputbind4/assets/add.svg" id="2_4ygdj"]
 
 [node name="action" type="VBoxContainer"]
 offset_right = 512.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://btodufmk06hk3"]
 
-[ext_resource type="Script" uid="uid://v5ltxki7byr5" path="res://addons/inputbind4/Inputscene.gd" id="1_vbjk0"]
+[ext_resource type="Script" uid="uid://dedofaucacbdy" path="res://addons/inputbind4/Inputscene.gd" id="1_vbjk0"]
 [ext_resource type="PackedScene" uid="uid://jec0h4xyamj7" path="res://addons/inputbind4/event_dialog.tscn" id="2_pherw"]
 
 [node name="control" type="VBoxContainer"]

@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://ddv6gbbnbw6vg"]
 
-[ext_resource type="Script" uid="uid://cduqwduiaim1o" path="res://script/welcome.gd" id="1_04a3m"]
+[ext_resource type="Script" uid="uid://df0jvmo4idrm" path="res://script/welcome.gd" id="1_04a3m"]
 [ext_resource type="Theme" uid="uid://bwtt6taomj0ql" path="res://theme/theme.tres" id="2_07xfm"]
-[ext_resource type="Texture2D" uid="uid://bdssgblvtuumc" path="res://sprite/battle_city.png" id="2_r5w1e"]
-[ext_resource type="Texture2D" uid="uid://c7c6two083koj" path="res://sprite/tank_main1.png" id="3_8enbu"]
-[ext_resource type="Texture2D" uid="uid://bgasm7tffcori" path="res://sprite/tank_main2.png" id="4_ap5kp"]
-[ext_resource type="FontFile" uid="uid://5ep0auqqu234" path="res://font/prstartk.ttf" id="6_si833"]
+[ext_resource type="Texture2D" uid="uid://c1w7k1u7i0q8y" path="res://sprite/battle_city.png" id="2_r5w1e"]
+[ext_resource type="Texture2D" uid="uid://didr4k777db1g" path="res://sprite/tank_main1.png" id="3_8enbu"]
+[ext_resource type="Texture2D" uid="uid://dwukf2fonspxf" path="res://sprite/tank_main2.png" id="4_ap5kp"]
+[ext_resource type="FontFile" uid="uid://dne4kfa5qmsu2" path="res://font/prstartk.ttf" id="6_si833"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0jgil"]
 animations = [{
