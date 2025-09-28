@@ -17,4 +17,5 @@ todo
   
 Screenshot  
 ![image](/1.gif)  
-![image](/2.png)
+![image](/2.png)  
+![image](/bg1.png)
